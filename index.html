@@ -49,6 +49,8 @@
   th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
   thead th { background: var(--surface); position: sticky; top: 0; }
   tbody th { font-weight: 600; width: 22%; }
+  table.glossary { min-width: 0; }
+  table.glossary th { width: 26%; }
   tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
   .y { color: var(--yes); font-weight: 600; }
   .n { color: var(--no); font-weight: 600; }
@@ -134,10 +136,11 @@
   </div>
   <div class="card" style="--c: var(--chatgpt)">
     <h3 class="tool-name"><span class="dot" style="background:var(--chatgpt)"></span>ChatGPT Mil</h3>
-    <p class="best">Best for: writing and rewriting documents.</p>
+    <p class="best">Best for: writing documents and building your own helper.</p>
     <ul>
+      <li>Custom GPTs: your own assistant, loaded with your files</li>
       <li>Projects keep files and chats together</li>
-      <li>Custom GPTs for tasks you repeat</li>
+      <li>Set its tone, add custom instructions, turn on memory</li>
     </ul>
     <p class="where">Where: GenAI.mil, since 31 Aug 2026</p>
   </div>
@@ -180,6 +183,9 @@
     <tr><th>Build your own assistant</th><td class="n">Not yet in DoD</td><td class="y">Custom GPTs</td><td class="y">Agent Designer</td><td class="y">Playbooks</td></tr>
     <tr><th>Keep work together</th><td>Recent chats and pages only</td><td class="y">Projects</td><td class="m">?</td><td class="y">Workspaces, projects</td></tr>
     <tr><th>Reasoning modes</th><td class="y">Quick response, or think deeper</td><td class="m">?</td><td class="m">?</td><td class="y">Auto, Fast, Expert</td></tr>
+    <tr><th>Memory across chats</th><td class="m">?</td><td class="y">Yes, new. You turn it on in settings</td><td class="m">?</td><td class="m">?</td></tr>
+    <tr><th>Custom instructions and tone</th><td class="m">?</td><td class="y">Yes: concise, warm, enthusiastic or formal, plus custom instructions</td><td class="m">?</td><td class="m">?</td></tr>
+    <tr><th>Training</th><td>Not on genai.mil</td><td class="y">Most courses, plus a help center and 8 long videos</td><td class="y">Live and on-demand</td><td class="y">Live and on-demand</td></tr>
     <tr><th>Starter prompts built in</th><td class="y">Yes, a prompt library</td><td class="m">?</td><td class="m">?</td><td class="m">?</td></tr>
     <tr><th>Underlying model named</th><td class="n">No</td><td class="y">GPT-5.4 Terra</td><td class="y">Gemini</td><td class="m">?</td></tr>
     <tr><th>Works inside Outlook, Word, Teams</th><td class="y">Yes, with full license</td><td class="n">No</td><td class="n">No</td><td class="n">No</td></tr>
@@ -189,6 +195,36 @@
 </table>
 </div>
 <p class="legend"><span class="y">Yes</span> = confirmed in public sources or seen on screen on 10 Nov 2026. <span class="m">?</span> = not confirmed yet; check on screen. Features change often.</p>
+
+<h2>Free training on genai.mil</h2>
+<p>Open the <b>Training</b> and <b>Events</b> tabs on genai.mil. You'll find live sessions and on-demand courses for all three tools: Gemini, ChatGPT Mil and Grok.</p>
+<ul>
+  <li><b>ChatGPT Mil has the most courses.</b> Its training page links to the ChatGPT Mil help center (help.openai.mil, on the government network only).</li>
+  <li>There are 8 long videos. Topics include getting started, chats, citations, files, personalization and memory, a quick start workshop for custom GPTs, and the ready-made Acquisition GPT.</li>
+  <li>Good first course: the custom GPT quick start workshop.</li>
+</ul>
+
+<h2>Words you'll hear, in plain English</h2>
+<div class="table-wrap">
+<table class="glossary">
+  <tbody>
+    <tr><th>AI model</th><td>The engine behind the chat box. Gemini, GPT and Grok are models from three different companies. Each one writes answers by predicting the most likely next words.</td></tr>
+    <tr><th>Prompt</th><td>What you type to the AI. Clear prompts get better answers: say who it's for, what you want, and the format.</td></tr>
+    <tr><th>GPT</th><td>Short for <b>Generative Pre-trained Transformer</b>. Generative means it creates new text. Pre-trained means it already learned from a huge amount of writing before you ever used it. Transformer is the type of design inside it. GPT is OpenAI's name, so it belongs to ChatGPT.</td></tr>
+    <tr><th>Custom GPT</th><td>Your own version of ChatGPT, set up for one job. You give it instructions and reference files once, and anyone you share it with can just ask it questions. On genai.mil, only ChatGPT Mil has these.</td></tr>
+    <tr><th>Agent</th><td>An assistant that can carry out several steps on its own, such as reading notes, sorting tasks and drafting a summary. Gemini's Agent Designer lets you build one in plain English.</td></tr>
+    <tr><th>Project or workspace</th><td>A folder that keeps related chats, files and instructions together, so you don't start from zero each time.</td></tr>
+    <tr><th>Playbook</th><td>Grok's saved, reusable set of steps you can run again with one prompt.</td></tr>
+    <tr><th>Custom instructions</th><td>Standing rules the AI follows in every chat, such as "always lead with the bottom line."</td></tr>
+    <tr><th>Memory</th><td>The AI remembers facts about you and your work between chats. Useful, but check what it has saved, and never let it store PII.</td></tr>
+    <tr><th>Connector</th><td>A link that lets the AI read another system, such as your email, calendar or file storage. Copilot's cloud files work this way.</td></tr>
+    <tr><th>Skill</th><td>A packaged set of instructions the AI loads for a type of task. It's common in commercial tools such as Claude, which is not on genai.mil.</td></tr>
+    <tr><th>Citation</th><td>A link to where the answer came from. Click it, and check that it says what the AI claims.</td></tr>
+    <tr><th>Hallucination</th><td>When the AI states something false with confidence. This is why a person checks every output.</td></tr>
+    <tr><th>CUI and IL5</th><td>CUI is Controlled Unclassified Information: sensitive but not classified. IL5 is the security level genai.mil is approved for, which covers CUI. It does not cover classified information.</td></tr>
+  </tbody>
+</table>
+</div>
 
 <h2>Seed prompts: try each tool on its strength</h2>
 <p>Every example is notional. Swap in your own unclassified details, never names or PII.</p>
@@ -210,6 +246,16 @@ Draft: Hey sir, wanted to touch base on the training schedule thing from last we
 <pre>You are a staff writer. Turn the notes below into a one-page information memo. Use a bottom line up front, then three to five numbered points, then a recommendation. Plain English, active voice, sentences under 25 words. If something is missing, list the questions I need to answer instead of guessing.
 
 Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confirm bus support by Monday. Company A needs 40 more sets of eye protection. Decision needed: land navigation refresher half day or full day.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>ChatGPT Mil: build a custom GPT for your work stream</b><span>Paste into the custom GPT's instructions box, then add your unclassified reference files.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>You are the go-to helper for a notional battalion S3 training section. Answer questions using the attached reference files first, and say which file each answer came from. If the files don't cover the question, say so plainly and don't guess. Keep answers short: a bottom line up front, then up to five bullets. When someone asks for a product, such as a training schedule or a memo, ask up to three questions before you draft it. Never store or repeat names, phone numbers or other personal information.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>ChatGPT Mil: set your custom instructions once</b><span>Settings, then Personalization, then Custom instructions.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>I am a staff officer. Write in plain English for busy leaders. Always start with a one or two sentence bottom line up front. Use short numbered points instead of long paragraphs. If you are not sure about something, tell me instead of guessing, and list what I should check.</pre>
 </div>
 
 <div class="prompt">
@@ -241,7 +287,7 @@ Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confir
 
 <footer>
   <p><b>Open-source summary as of 10 November 2026. Unofficial.</b> Verify against current local IT/G6 policy and official GenAI.mil guidance before use. Not affiliated with or endorsed by DoD or any vendor.</p>
-  <p>The genai.mil front page and Copilot details come from a hands-on walkthrough on 10 Nov 2026. Other sources: DoD CTO office, GenAI.mil launch (9 Dec 2025) and Agent Designer launch (Mar 2026); DefenseScoop, 10 Mar and 31 Aug 2026; Military Times, 31 Aug 2026; ExecutiveGov, 1 Sep 2026; Defense One, 23 Sep 2026; Microsoft Tech Community, "New AI capabilities available for Government environments" (2025).</p>
+  <p>The genai.mil front page, training and Copilot and ChatGPT Mil details come from a hands-on walkthrough on 10 Nov 2026. Other sources: DoD CTO office, GenAI.mil launch (9 Dec 2025) and Agent Designer launch (Mar 2026); DefenseScoop, 10 Mar and 31 Aug 2026; Military Times, 31 Aug 2026; ExecutiveGov, 1 Sep 2026; Defense One, 23 Sep 2026; Microsoft Tech Community, "New AI capabilities available for Government environments" (2025).</p>
 </footer>
 
 </main>
