@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GenAI Field Guide</title>
+<meta name="description" content="Which government AI tool to use for what: Copilot, ChatGPT Mil, Gemini and Grok on GenAI.mil, with seed prompts to try.">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f6f7f9;
+    --text: #16181d;
+    --muted: #5b616e;
+    --line: #d9dde4;
+    --accent: #1f4e8c;
+    --yes: #1d7a46;
+    --no: #a33a2b;
+    --maybe: #8a6200;
+    --copilot: #0f6cbd;
+    --chatgpt: #10a37f;
+    --gemini: #4f6bed;
+    --grok: #2b2b2b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121418; --surface: #1b1e24; --text: #eceef2; --muted: #a3a9b6;
+      --line: #2e333c; --accent: #8fb4ec; --yes: #5fcf8f; --no: #f08a7a; --maybe: #e6b84d;
+      --copilot: #64a8ec; --chatgpt: #4fd1ad; --gemini: #9aaaf7; --grok: #d4d4d4;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.5 -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  main { max-width: 1040px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); line-height: 1.15; margin: 0 0 8px; }
+  h2 { font-size: 1.35rem; margin: 40px 0 12px; }
+  h3 { margin: 0 0 6px; font-size: 1.15rem; }
+  p { margin: 0 0 12px; }
+  .lede { font-size: 1.1rem; color: var(--muted); max-width: 62ch; }
+  .rule {
+    border: 1px solid var(--line); border-left: 4px solid var(--accent);
+    background: var(--surface); padding: 12px 14px; border-radius: 6px; margin: 16px 0;
+  }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+  table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.95rem; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  thead th { background: var(--surface); position: sticky; top: 0; }
+  tbody th { font-weight: 600; width: 22%; }
+  tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+  .y { color: var(--yes); font-weight: 600; }
+  .n { color: var(--no); font-weight: 600; }
+  .m { color: var(--maybe); font-weight: 600; }
+  .legend { font-size: 0.9rem; color: var(--muted); margin-top: 8px; }
+  .tool-name { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+  .card {
+    border: 1px solid var(--line); border-top: 4px solid var(--c); border-radius: 8px;
+    padding: 16px; background: var(--bg); display: flex; flex-direction: column;
+  }
+  .card .best { font-weight: 600; margin-bottom: 8px; }
+  .card ul { margin: 0 0 12px; padding-left: 18px; }
+  .card .where { font-size: 0.9rem; color: var(--muted); margin-top: auto; }
+  .prompt {
+    border: 1px solid var(--line); border-radius: 8px; margin: 0 0 14px; overflow: hidden;
+  }
+  .prompt-head {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    padding: 10px 14px; background: var(--surface); border-bottom: 1px solid var(--line);
+  }
+  .prompt-head b { display: block; }
+  .prompt-head span { font-size: 0.9rem; color: var(--muted); }
+  pre {
+    margin: 0; padding: 14px; white-space: pre-wrap; word-wrap: break-word;
+    font: 0.92rem/1.5 ui-monospace, Consolas, "Courier New", monospace;
+  }
+  button.copy {
+    flex: none; border: 1px solid var(--line); background: var(--bg); color: var(--text);
+    border-radius: 6px; padding: 6px 12px; font: inherit; font-size: 0.9rem; cursor: pointer;
+  }
+  button.copy:hover { border-color: var(--accent); }
+  ol.steps { padding-left: 22px; }
+  ol.steps li { margin-bottom: 6px; }
+  footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--muted); }
+  footer a { color: var(--accent); }
+  @media print {
+    :root { --bg: #fff; --surface: #f3f3f3; --text: #000; --muted: #333; --line: #bbb; }
+    main { padding: 0; max-width: none; }
+    button.copy { display: none; }
+    .table-wrap { overflow: visible; border: 0; }
+    table { min-width: 0; font-size: 9pt; }
+    .card, .prompt { break-inside: avoid; }
+    h2 { break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Four AI tools on your government computer. Here's what each one is best at.</h1>
+<p class="lede">A one-page field guide to Microsoft Copilot, ChatGPT Mil, Gemini for Government and Grok for Government. Open the tool, copy a seed prompt, and try it yourself.</p>
+
+<div class="rule"><b>The one rule:</b> unclassified only. CUI is allowed on GenAI.mil. No PII, no health information, nothing classified. A person checks every output before it leaves the office.</div>
+
+<h2>Pick a tool in 10 seconds</h2>
+<div class="cards">
+  <div class="card" style="--c: var(--copilot)">
+    <h3 class="tool-name"><span class="dot" style="background:var(--copilot)"></span>Copilot</h3>
+    <p class="best">Best for: your own email, documents and Teams.</p>
+    <ul>
+      <li>Lives inside Microsoft 365 on your DoD account</li>
+      <li>Summarize threads, draft replies, catch up on meetings</li>
+    </ul>
+    <p class="where">Where: Microsoft 365 (DoD), not GenAI.mil</p>
+  </div>
+  <div class="card" style="--c: var(--chatgpt)">
+    <h3 class="tool-name"><span class="dot" style="background:var(--chatgpt)"></span>ChatGPT Mil</h3>
+    <p class="best">Best for: writing and rewriting documents.</p>
+    <ul>
+      <li>Projects keep files and chats together</li>
+      <li>Custom GPTs for tasks you repeat</li>
+    </ul>
+    <p class="where">Where: GenAI.mil, since 31 Aug 2026</p>
+  </div>
+  <div class="card" style="--c: var(--gemini)">
+    <h3 class="tool-name"><span class="dot" style="background:var(--gemini)"></span>Gemini</h3>
+    <p class="best">Best for: research and building agents.</p>
+    <ul>
+      <li>Answers grounded in Google Search</li>
+      <li>Agent Designer: build an assistant in plain English</li>
+    </ul>
+    <p class="where">Where: GenAI.mil, since 9 Dec 2025</p>
+  </div>
+  <div class="card" style="--c: var(--grok)">
+    <h3 class="tool-name"><span class="dot" style="background:var(--grok)"></span>Grok</h3>
+    <p class="best">Best for: thinking a problem through.</p>
+    <ul>
+      <li>Auto, Fast and Expert reasoning modes</li>
+      <li>Workspaces, projects and reusable playbooks</li>
+    </ul>
+    <p class="where">Where: GenAI.mil, since 31 Aug 2026</p>
+  </div>
+</div>
+
+<h2>Feature by feature</h2>
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th><span class="tool-name"><span class="dot" style="background:var(--copilot)"></span>Copilot</span></th>
+      <th><span class="tool-name"><span class="dot" style="background:var(--chatgpt)"></span>ChatGPT Mil</span></th>
+      <th><span class="tool-name"><span class="dot" style="background:var(--gemini)"></span>Gemini</span></th>
+      <th><span class="tool-name"><span class="dot" style="background:var(--grok)"></span>Grok</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><th>Chat</th><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td></tr>
+    <tr><th>Upload a file</th><td class="m">?</td><td class="y">Yes</td><td class="y">Yes, in agents</td><td class="m">?</td></tr>
+    <tr><th>Search the web</th><td class="n">Off by default</td><td><span class="m">Offline Search</span>, with citations</td><td class="y">Yes, Google Search</td><td class="m">?</td></tr>
+    <tr><th>Build your own assistant</th><td class="n">Not yet in DoD</td><td class="y">Custom GPTs</td><td class="y">Agent Designer</td><td class="y">Playbooks</td></tr>
+    <tr><th>Keep work together</th><td class="m">?</td><td class="y">Projects</td><td class="m">?</td><td class="y">Workspaces, projects</td></tr>
+    <tr><th>Reasoning modes</th><td class="m">?</td><td class="m">?</td><td class="m">?</td><td class="y">Auto, Fast, Expert</td></tr>
+    <tr><th>Works inside Outlook, Word, Teams</th><td class="y">Yes, with full license</td><td class="n">No</td><td class="n">No</td><td class="n">No</td></tr>
+    <tr><th>Data allowed</th><td>Unclassified, DoD 365 rules</td><td>Up to CUI (IL5)</td><td>Up to CUI (IL5)</td><td>Up to CUI (IL5)</td></tr>
+    <tr><th>Sign in</th><td>DoD 365 account</td><td colspan="3">genai.mil with your CAC</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="legend"><span class="y">Yes</span> = confirmed in public sources. <span class="m">?</span> = not confirmed publicly; check on screen. Features change often.</p>
+
+<h2>Seed prompts: try each tool on its strength</h2>
+<p>Every example is notional. Swap in your own unclassified details, never names or PII.</p>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Copilot: catch up on an email thread</b><span>Open the thread in Outlook, then ask Copilot.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Summarize this thread for a busy leader. Give me a two-sentence bottom line up front, then a list of every tasker with the owner's role and the due date. Flag anything that is still undecided. Keep it under 150 words.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>ChatGPT Mil: turn rough notes into a memo</b><span>Start a Project, paste your notes, run this.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>You are a staff writer. Turn the notes below into a one-page information memo. Use a bottom line up front, then three to five numbered points, then a recommendation. Plain English, active voice, sentences under 25 words. If something is missing, list the questions I need to answer instead of guessing.
+
+Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confirm bus support by Monday. Company A needs 40 more sets of eye protection. Decision needed: land navigation refresher half day or full day.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Gemini: research with sources</b><span>Use a public topic so the search can help.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Find the most recent public guidance on running effective after action reviews in a small unit. Summarize it in five bullets a new team leader can use tomorrow. Give the source and date for each bullet, and tell me which points you could not confirm.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Gemini: build your first agent</b><span>Paste into Agent Designer's description box.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Create an agent called "Meeting Notes to Action Items." It turns rough, unclassified meeting notes into a one-page summary: the meeting purpose in one sentence, decisions made, a table of tasks (task, owner by role, due date, status) and open questions. It uses only the notes provided, marks missing details as TBD, and never includes names or personal information.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Grok: think a decision through</b><span>Switch to Expert mode first.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Help me compare two options for a notional office move. Option A: move all at once over one weekend. Option B: move one section per week for four weeks. Build a short decision matrix on mission impact, cost, risk and workload. Then argue against your own recommendation in three sentences and tell me what information would change your answer.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>All four: same prompt, side by side</b><span>Run this in each tool and compare the answers.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>In 120 words or less, explain to a new staff officer what CUI is, what it is not, and one common mistake people make when handling it. End with one question I should ask my security manager.</pre>
+</div>
+
+<h2>Try it in 3 steps</h2>
+<ol class="steps">
+  <li>On your government computer, open the tool: genai.mil with your CAC, or Copilot in Microsoft 365.</li>
+  <li>Copy one seed prompt above and paste it in.</li>
+  <li>Check the answer. Fix one thing in the prompt and run it again.</li>
+</ol>
+
+<footer>
+  <p><b>Open-source summary as of 10 November 2026. Unofficial.</b> Verify against current local IT/G6 policy and official GenAI.mil guidance before use. Not affiliated with or endorsed by DoD or any vendor.</p>
+  <p>Sources: DoD CTO office, GenAI.mil launch (9 Dec 2025) and Agent Designer launch (Mar 2026); DefenseScoop, 10 Mar and 31 Aug 2026; Military Times, 31 Aug 2026; ExecutiveGov, 1 Sep 2026; Defense One, 23 Sep 2026; Microsoft Tech Community, "New AI capabilities available for Government environments" (2025).</p>
+</footer>
+
+</main>
+<script>
+  document.querySelectorAll('button.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.closest('.prompt').querySelector('pre').innerText;
+      function done() { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1500); }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else { fallback(); }
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+</script>
+</body>
+</html>
