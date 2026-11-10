@@ -150,7 +150,7 @@
 <p class="lede">What each tool on your government computer does, the rules I follow, and prompts you can try today: Microsoft Copilot, ChatGPT Mil, Gemini for Government and Grok for Government.</p>
 <p class="byline">By MAJ Hungate, Army Enterprise Marketing Office. The views here are my own and are not those of the Army or DoD.</p>
 <div class="actions"><a class="btn" href="#rules">My rules &rarr;</a><a class="btn" href="#features">Compare the tools &rarr;</a><a class="btn" href="#prompts">Get the prompts &rarr;</a></div>
-<div class="rule"><b>The one rule:</b> unclassified only. CUI is allowed on GenAI.mil. No PII, no health information, nothing classified. A person checks every output before it leaves the office.</div>
+<div class="rule"><b>Before you paste anything:</b> GenAI.mil is approved for unclassified work, up to and including CUI. Never put in classified information, PII or health information. Copilot follows your DoD 365 rules. And a person checks every output before it leaves the office.</div>
 </section>
 
 <section>
@@ -164,13 +164,13 @@
 </ol>
 
 <h2 id="rules">My rules</h2>
-<p>I adapted these from Ruben Hassid's <a href="https://ruben.substack.com/p/claude-101">"Claude 101"</a> (How to AI, 10 Nov 2026) and rewrote them for the tools on genai.mil.</p>
+<p>I adapted these from Ruben Hassid's <a href="https://ruben.substack.com/p/claude-101">"Claude 101"</a> (How to AI) and rewrote them for the tools on genai.mil.</p>
 <ol class="rules">
   <li><b>One goal per prompt.</b> Give it the goal and the context, then tell it to ask you questions before it starts.</li>
   <li><b>Say what "done" looks like.</b> Length, format and audience. Otherwise it guesses.</li>
   <li><b>Fix the prompt, not the answer.</b> If an answer misses, edit your prompt and run it again. Don't argue with it in the chat.</li>
   <li><b>Don't lead the witness.</b> Ask neutral questions. If you ask "this is right, isn't it?", it will usually agree.</li>
-  <li><b>Ask for twenty ideas.</b> Include a few unlikely ones, then pick the best two.</li>
+  <li><b>Ask for twenty ideas, and make it rank them.</b> The first five will be the obvious ones every AI gives. Have it put a percentage on each idea: how likely a typical AI would be to suggest it. Then look hard at the low-percentage ones. That&rsquo;s where the new thinking is. <a href="#twenty">Use this prompt.</a></li>
   <li><b>Ask for the real file.</b> If you need a deck or a spreadsheet, have Grok build it, not describe it.</li>
   <li><b>One project per line of effort.</b> Keep memory short and accurate, and never let it store PII.</li>
   <li><b>Start fresh when it drifts.</b> When a long chat gets worse, ask for a summary and paste it into a new chat.</li>
@@ -428,6 +428,11 @@ Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confir
 <div class="prompt">
   <div class="prompt-head"><div><b>Grok: think a decision through</b><span>Switch to Expert mode first.</span></div><button class="copy" type="button">Copy</button></div>
 <pre>Help me compare two options for a notional office move. Option A: move all at once over one weekend. Option B: move one section per week for four weeks. Build a short decision matrix on mission impact, cost, risk and workload. Then argue against your own recommendation in three sentences and tell me what information would change your answer.</pre>
+</div>
+
+<div class="prompt" id="twenty">
+  <div class="prompt-head"><div><b>All four: twenty ideas, ranked by how obvious they are</b><span>Works in any tool. Replace the bracket with your problem.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Give me 20 ideas for [your problem, for example: getting more junior leaders to use our office's AI tools]. For each idea, estimate the percent chance that a typical AI assistant would suggest it, from 0 to 100 percent. Sort the list from most likely to least likely. At least eight ideas should be under 10 percent. Then pick the two low-percentage ideas you think are most worth trying, and tell me in one sentence each why.</pre>
 </div>
 
 <div class="prompt">
