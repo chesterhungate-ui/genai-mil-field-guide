@@ -7,109 +7,145 @@
 <meta name="description" content="Which government AI tool to use for what: Copilot, ChatGPT Mil, Gemini and Grok on GenAI.mil, with seed prompts to try.">
 <style>
   :root {
-    --bg: #ffffff;
-    --surface: #f6f7f9;
-    --text: #16181d;
-    --muted: #5b616e;
-    --line: #d9dde4;
-    --accent: #1f4e8c;
-    --yes: #1d7a46;
-    --no: #a33a2b;
-    --maybe: #8a6200;
-    --copilot: #0f6cbd;
-    --chatgpt: #10a37f;
-    --gemini: #4f6bed;
-    --grok: #2b2b2b;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #121418; --surface: #1b1e24; --text: #eceef2; --muted: #a3a9b6;
-      --line: #2e333c; --accent: #8fb4ec; --yes: #5fcf8f; --no: #f08a7a; --maybe: #e6b84d;
-      --copilot: #64a8ec; --chatgpt: #4fd1ad; --gemini: #9aaaf7; --grok: #d4d4d4;
-    }
+    --bg: #221f20;
+    --surface: #2c2829;
+    --deep: #191617;
+    --text: #f3f0e8;
+    --muted: #bdb5a4;
+    --tan: #d6ceb5;
+    --line: #463f3d;
+    --gold: #ffcc01;
+    --accent: #ffcc01;
+    --yes: #8fdca6;
+    --no: #ff9a85;
+    --maybe: #f2b84b;
+    --copilot: #6db3ff;
+    --chatgpt: #4fd8ae;
+    --gemini: #a7b3ff;
+    --grok: #e8e3d6;
+    --head: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", "Liberation Sans Narrow", Arial, sans-serif;
   }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
   body {
     margin: 0; background: var(--bg); color: var(--text);
-    font: 16px/1.5 -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font: 17px/1.55 Arial, "Helvetica Neue", "Segoe UI", sans-serif;
   }
-  main { max-width: 1040px; margin: 0 auto; padding: 24px 16px 48px; }
-  h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); line-height: 1.15; margin: 0 0 8px; }
-  h2 { font-size: 1.35rem; margin: 40px 0 12px; }
-  h3 { margin: 0 0 6px; font-size: 1.15rem; }
+  .topbar {
+    background: var(--deep); border-bottom: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    padding: 12px 16px; font-family: var(--head); text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .topbar .brand { color: var(--gold); font-weight: 700; font-size: 1.05rem; }
+  .topbar .tag { color: var(--tan); font-size: 0.8rem; text-align: right; }
+  main { max-width: 1080px; margin: 0 auto; padding: 0 16px 56px; }
+  .hero { padding: 48px 0 32px; border-bottom: 1px solid var(--line); }
+  .eyebrow {
+    display: block; font-family: var(--head); text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--tan); font-size: 0.85rem; font-weight: 700; margin: 0 0 10px;
+  }
+  h1, h2, h3 { font-family: var(--head); text-transform: uppercase; font-weight: 700; color: var(--gold); letter-spacing: 0.01em; }
+  h1 { font-size: clamp(2.2rem, 7vw, 4.4rem); line-height: 1; margin: 0 0 18px; }
+  h2 { font-size: clamp(1.6rem, 4vw, 2.3rem); line-height: 1.05; margin: 56px 0 16px; }
+  h3 { margin: 0 0 8px; font-size: 1.25rem; color: var(--text); }
   p { margin: 0 0 12px; }
-  .lede { font-size: 1.1rem; color: var(--muted); max-width: 62ch; }
+  b { color: #fff; }
+  .lede { font-size: 1.15rem; color: var(--tan); max-width: 60ch; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px;
+    border: 1.5px solid var(--gold); color: var(--text); text-decoration: none;
+    font-family: var(--head); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; font-size: 0.9rem;
+  }
+  .btn:hover, .btn:focus-visible { background: var(--gold); color: var(--deep); }
   .rule {
-    border: 1px solid var(--line); border-left: 4px solid var(--accent);
-    background: var(--surface); padding: 12px 14px; border-radius: 6px; margin: 16px 0;
+    border-left: 4px solid var(--gold); background: var(--surface);
+    padding: 14px 16px; margin: 28px 0 0;
   }
-  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
-  table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.95rem; }
-  th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
-  thead th { background: var(--surface); position: sticky; top: 0; }
-  tbody th { font-weight: 600; width: 22%; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); }
+  table { border-collapse: collapse; width: 100%; min-width: 680px; font-size: 0.93rem; background: var(--surface); }
+  th, td { padding: 11px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  thead th {
+    background: var(--deep); color: var(--tan); position: sticky; top: 0;
+    font-family: var(--head); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.85rem;
+  }
+  tbody th { font-weight: 700; width: 22%; color: var(--text); }
   table.glossary { min-width: 0; }
-  table.glossary th { width: 26%; }
+  table.glossary th { width: 26%; color: var(--gold); }
   tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
-  .y { color: var(--yes); font-weight: 600; }
-  .n { color: var(--no); font-weight: 600; }
-  .m { color: var(--maybe); font-weight: 600; }
-  .legend { font-size: 0.9rem; color: var(--muted); margin-top: 8px; }
-  .tool-name { display: inline-flex; align-items: center; gap: 6px; }
+  .y { color: var(--yes); font-weight: 700; }
+  .n { color: var(--no); font-weight: 700; }
+  .m { color: var(--maybe); font-weight: 700; }
+  .legend { font-size: 0.9rem; color: var(--muted); margin-top: 10px; }
+  .tool-name { display: inline-flex; align-items: center; gap: 7px; }
   .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
   .card {
-    border: 1px solid var(--line); border-top: 4px solid var(--c); border-radius: 8px;
-    padding: 16px; background: var(--bg); display: flex; flex-direction: column;
+    border: 1px solid var(--line); border-top: 4px solid var(--c); background: var(--surface);
+    padding: 18px; display: flex; flex-direction: column;
   }
-  .card .best { font-weight: 600; margin-bottom: 8px; }
-  .card ul { margin: 0 0 12px; padding-left: 18px; }
-  .card .where { font-size: 0.9rem; color: var(--muted); margin-top: auto; }
-  .prompt {
-    border: 1px solid var(--line); border-radius: 8px; margin: 0 0 14px; overflow: hidden;
-  }
+  .card .best { font-weight: 700; color: #fff; margin-bottom: 10px; }
+  .card ul { margin: 0 0 14px; padding-left: 18px; }
+  .card li { margin-bottom: 4px; }
+  .card .where { font-size: 0.88rem; color: var(--muted); margin-top: auto; }
+  ul, ol { padding-left: 22px; }
+  .prompt { border: 1px solid var(--line); background: var(--surface); margin: 0 0 16px; }
   .prompt-head {
     display: flex; justify-content: space-between; align-items: center; gap: 12px;
-    padding: 10px 14px; background: var(--surface); border-bottom: 1px solid var(--line);
+    padding: 12px 16px; border-bottom: 1px solid var(--line);
   }
-  .prompt-head b { display: block; }
-  .prompt-head span { font-size: 0.9rem; color: var(--muted); }
+  .prompt-head b { display: block; font-family: var(--head); text-transform: uppercase; letter-spacing: 0.04em; font-size: 1.02rem; }
+  .prompt-head span { font-size: 0.88rem; color: var(--tan); }
+  .prompt > p { color: var(--tan); font-size: 0.92rem; }
   pre {
-    margin: 0; padding: 14px; white-space: pre-wrap; word-wrap: break-word;
-    font: 0.92rem/1.5 ui-monospace, Consolas, "Courier New", monospace;
+    margin: 0; padding: 16px; white-space: pre-wrap; word-wrap: break-word; background: var(--deep); color: var(--text);
+    font: 0.92rem/1.55 ui-monospace, Consolas, "Courier New", monospace;
   }
   button.copy {
-    flex: none; border: 1px solid var(--line); background: var(--bg); color: var(--text);
-    border-radius: 6px; padding: 6px 12px; font: inherit; font-size: 0.9rem; cursor: pointer;
+    flex: none; border: 1.5px solid var(--gold); background: transparent; color: var(--text);
+    padding: 7px 14px; font-family: var(--head); text-transform: uppercase; letter-spacing: 0.08em;
+    font-weight: 700; font-size: 0.82rem; cursor: pointer;
   }
-  button.copy:hover { border-color: var(--accent); }
-  ol.steps { padding-left: 22px; }
-  ol.steps li { margin-bottom: 6px; }
-  footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--muted); }
-  footer a { color: var(--accent); }
+  button.copy:hover, button.copy:focus-visible { background: var(--gold); color: var(--deep); }
+  ol.steps li { margin-bottom: 8px; }
+  a { color: var(--gold); }
+  footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--muted); }
+  footer b { color: var(--tan); }
+  @media (max-width: 560px) {
+    .topbar { flex-direction: column; align-items: flex-start; gap: 2px; }
+    .topbar .tag { text-align: left; }
+    .hero { padding-top: 32px; }
+  }
   @media print {
-    :root { --bg: #fff; --surface: #f3f3f3; --text: #000; --muted: #333; --line: #bbb; }
+    :root { --bg: #fff; --surface: #fff; --deep: #f2f2f2; --text: #000; --muted: #333; --tan: #333; --line: #bbb; --gold: #000;
+      --yes: #1d6b3a; --no: #9a2f20; --maybe: #7a5600; --copilot: #0f6cbd; --chatgpt: #0b7d5f; --gemini: #3f55c8; --grok: #444; }
+    b { color: #000; }
+    .card .best { color: #000; }
     main { padding: 0; max-width: none; }
-    button.copy { display: none; }
+    .actions, button.copy { display: none; }
     .table-wrap { overflow: visible; border: 0; }
     table { min-width: 0; font-size: 9pt; }
     .card, .prompt { break-inside: avoid; }
-    h2 { break-after: avoid; }
+    h2 { break-after: avoid; margin-top: 28px; }
+    .hero { padding-top: 0; }
   }
 </style>
 </head>
 <body>
+<div class="topbar"><span class="brand">GenAI Field Guide</span><span class="tag">Unofficial · Open-source · Not a DoD or Army site</span></div>
 <main>
 
-<h1>Four AI tools on your government computer. Here's what each one is best at.</h1>
-<p class="lede">A one-page field guide to Microsoft Copilot, ChatGPT Mil, Gemini for Government and Grok for Government. Open the tool, copy a seed prompt, and try it yourself.</p>
-
+<section class="hero">
+<span class="eyebrow">Leader professional development</span>
+<h1>Four AI tools. One page. Know which to use.</h1>
+<p class="lede">A field guide to Microsoft Copilot, ChatGPT Mil, Gemini for Government and Grok for Government. Open the tool, copy a seed prompt, and try it yourself.</p>
+<div class="actions"><a class="btn" href="#features">See the features &rarr;</a><a class="btn" href="#prompts">Get the seed prompts &rarr;</a></div>
 <div class="rule"><b>The one rule:</b> unclassified only. CUI is allowed on GenAI.mil. No PII, no health information, nothing classified. A person checks every output before it leaves the office.</div>
+</section>
 
 <h2>Where to find them</h2>
 <div class="cards">
-  <div class="card" style="--c: var(--accent)">
+  <div class="card" style="--c: var(--gold)">
     <h3>genai.mil</h3>
     <p>Open genai.mil on your government computer and sign in with your CAC. This one page is where you pick <b>Gemini</b>, <b>ChatGPT Mil</b> or <b>Grok</b>.</p>
     <p>The menu across the top has About, Training, Events and Resources. Start with Training.</p>
@@ -167,7 +203,7 @@
   </div>
 </div>
 
-<h2>Feature by feature</h2>
+<h2 id="features">Feature by feature</h2>
 <div class="table-wrap">
 <table>
   <thead>
@@ -240,7 +276,7 @@
 </table>
 </div>
 
-<h2>Seed prompts: try each tool on its strength</h2>
+<h2 id="prompts">Seed prompts: try each tool on its strength</h2>
 <p>Every example is notional. Swap in your own unclassified details, never names or PII.</p>
 
 <div class="prompt">
