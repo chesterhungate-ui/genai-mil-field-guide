@@ -139,8 +139,9 @@
     <p class="best">Best for: writing documents and building your own helper.</p>
     <ul>
       <li>Custom GPTs: your own assistant, loaded with your files</li>
-      <li>Projects keep files and chats together</li>
-      <li>Set its tone, add custom instructions, turn on memory</li>
+      <li>Browse GPTs others built in Explore GPTs</li>
+      <li>Projects keep files and chats together, and take whole folders</li>
+      <li>Choose how hard it thinks: Instant, Low, Medium or High</li>
     </ul>
     <p class="where">Where: GenAI.mil, since 31 Aug 2026</p>
   </div>
@@ -178,16 +179,18 @@
   </thead>
   <tbody>
     <tr><th>Chat</th><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td></tr>
-    <tr><th>Upload a file</th><td class="y">Yes: work files, images, and cloud files from Teams and OneDrive</td><td class="y">Yes</td><td class="y">Yes, in agents</td><td class="m">?</td></tr>
-    <tr><th>Search the web</th><td class="n">Off by default</td><td><span class="m">Offline Search</span>, with citations</td><td class="y">Yes, Google Search</td><td class="m">?</td></tr>
-    <tr><th>Build your own assistant</th><td class="n">Not yet in DoD</td><td class="y">Custom GPTs</td><td class="y">Agent Designer</td><td class="y">Playbooks</td></tr>
+    <tr><th>Upload a file</th><td class="y">Yes: work files, images, and cloud files from Teams and OneDrive</td><td class="y">Yes: single files in chat, whole folders in Projects</td><td class="y">Yes, in agents</td><td class="m">?</td></tr>
+    <tr><th>Search the web</th><td class="n">Off by default</td><td class="y">Yes: click + in the chat box, then Web search. Gives citations</td><td class="y">Yes, Google Search</td><td class="m">?</td></tr>
+    <tr><th>Build your own assistant</th><td class="n">Not yet in DoD</td><td class="y">Custom GPTs, with starter prompts, files and web search</td><td class="y">Agent Designer</td><td class="y">Playbooks</td></tr>
+    <tr><th>Share what you build</th><td class="m">?</td><td class="y">Only me, or Everyone can chat. Browse others in Explore GPTs</td><td class="y">Yes, with your team</td><td class="m">?</td></tr>
     <tr><th>Keep work together</th><td>Recent chats and pages only</td><td class="y">Projects</td><td class="m">?</td><td class="y">Workspaces, projects</td></tr>
-    <tr><th>Reasoning modes</th><td class="y">Quick response, or think deeper</td><td class="m">?</td><td class="m">?</td><td class="y">Auto, Fast, Expert</td></tr>
+    <tr><th>Reasoning modes</th><td class="y">Quick response, or think deeper</td><td class="y">Instant, Low, Medium, High</td><td class="m">?</td><td class="y">Auto, Fast, Expert</td></tr>
     <tr><th>Memory across chats</th><td class="m">?</td><td class="y">Yes, new. You turn it on in settings</td><td class="m">?</td><td class="m">?</td></tr>
     <tr><th>Custom instructions and tone</th><td class="m">?</td><td class="y">Yes: concise, warm, enthusiastic or formal, plus custom instructions</td><td class="m">?</td><td class="m">?</td></tr>
     <tr><th>Training</th><td>Not on genai.mil</td><td class="y">Most courses, plus a help center and 8 long videos</td><td class="y">Live and on-demand</td><td class="y">Live and on-demand</td></tr>
     <tr><th>Starter prompts built in</th><td class="y">Yes, a prompt library</td><td class="m">?</td><td class="m">?</td><td class="m">?</td></tr>
-    <tr><th>Underlying model named</th><td class="n">No</td><td class="y">GPT-5.4 Terra</td><td class="y">Gemini</td><td class="m">?</td></tr>
+    <tr><th>Underlying model named</th><td class="n">No</td><td class="y">GPT-5.4 in chat. Custom GPTs can also use GPT-5.6 Terra</td><td class="y">Gemini</td><td class="m">?</td></tr>
+    <tr><th>Not available yet</th><td class="m">?</td><td class="n">Image generation, deep research, voice, writing or debugging code, downloadable files</td><td class="m">?</td><td class="m">?</td></tr>
     <tr><th>Works inside Outlook, Word, Teams</th><td class="y">Yes, with full license</td><td class="n">No</td><td class="n">No</td><td class="n">No</td></tr>
     <tr><th>Data allowed</th><td>Unclassified, DoD 365 rules</td><td>Up to CUI (IL5)</td><td>Up to CUI (IL5)</td><td>Up to CUI (IL5)</td></tr>
     <tr><th>Sign in</th><td>DoD 365 account</td><td colspan="3">genai.mil with your CAC</td></tr>
@@ -212,6 +215,8 @@
     <tr><th>Prompt</th><td>What you type to the AI. Clear prompts get better answers: say who it's for, what you want, and the format.</td></tr>
     <tr><th>GPT</th><td>Short for <b>Generative Pre-trained Transformer</b>. Generative means it creates new text. Pre-trained means it already learned from a huge amount of writing before you ever used it. Transformer is the type of design inside it. GPT is OpenAI's name, so it belongs to ChatGPT.</td></tr>
     <tr><th>Custom GPT</th><td>Your own version of ChatGPT, set up for one job. You give it instructions and reference files once, and anyone you share it with can just ask it questions. On genai.mil, only ChatGPT Mil has these.</td></tr>
+    <tr><th>Everyone can chat</th><td>A ChatGPT Mil sharing setting. It most likely lets anyone on ChatGPT Mil find and use your custom GPT, but not edit it. Before you pick it, remove any file that not everyone should see.</td></tr>
+    <tr><th>Reasoning effort</th><td>How hard the AI thinks before it answers. In ChatGPT Mil: Instant, Low, Medium or High. Higher is slower but more careful, so use it for analysis rather than quick rewrites.</td></tr>
     <tr><th>Agent</th><td>An assistant that can carry out several steps on its own, such as reading notes, sorting tasks and drafting a summary. Gemini's Agent Designer lets you build one in plain English.</td></tr>
     <tr><th>Project or workspace</th><td>A folder that keeps related chats, files and instructions together, so you don't start from zero each time.</td></tr>
     <tr><th>Playbook</th><td>Grok's saved, reusable set of steps you can run again with one prompt.</td></tr>
@@ -250,12 +255,18 @@ Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confir
 
 <div class="prompt">
   <div class="prompt-head"><div><b>ChatGPT Mil: build a custom GPT for your work stream</b><span>Paste into the custom GPT's instructions box, then add your unclassified reference files.</span></div><button class="copy" type="button">Copy</button></div>
+<p style="margin:12px 14px 0">Tip: add two or three starter prompts for questions your team asks every week, and turn on web search if the answers need current information. Keep it on "Only me" until you've removed anything not everyone should see.</p>
 <pre>You are the go-to helper for a notional battalion S3 training section. Answer questions using the attached reference files first, and say which file each answer came from. If the files don't cover the question, say so plainly and don't guess. Keep answers short: a bottom line up front, then up to five bullets. When someone asks for a product, such as a training schedule or a memo, ask up to three questions before you draft it. Never store or repeat names, phone numbers or other personal information.</pre>
 </div>
 
 <div class="prompt">
   <div class="prompt-head"><div><b>ChatGPT Mil: set your custom instructions once</b><span>Settings, then Personalization, then Custom instructions.</span></div><button class="copy" type="button">Copy</button></div>
 <pre>I am a staff officer. Write in plain English for busy leaders. Always start with a one or two sentence bottom line up front. Use short numbered points instead of long paragraphs. If you are not sure about something, tell me instead of guessing, and list what I should check.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>ChatGPT Mil: shape an idea into a one-page concept</b><span>Set reasoning to High first. Good for early concepts and requirements, not code.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Help me turn a rough idea into a one-page concept for my boss. The idea: a shared, unclassified tracker so every section can see upcoming training, room bookings and vehicle requests in one place. Write it with these headings: Problem, Proposed solution, Who uses it, What success looks like in 90 days, Risks, and Decisions needed. Ask me up to three questions first if something important is missing.</pre>
 </div>
 
 <div class="prompt">
