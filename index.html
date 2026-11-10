@@ -105,16 +105,32 @@
 
 <div class="rule"><b>The one rule:</b> unclassified only. CUI is allowed on GenAI.mil. No PII, no health information, nothing classified. A person checks every output before it leaves the office.</div>
 
+<h2>Where to find them</h2>
+<div class="cards">
+  <div class="card" style="--c: var(--accent)">
+    <h3>genai.mil</h3>
+    <p>Open genai.mil on your government computer and sign in with your CAC. This one page is where you pick <b>Gemini</b>, <b>ChatGPT Mil</b> or <b>Grok</b>.</p>
+    <p>The menu across the top has About, Training, Events and Resources. Start with Training.</p>
+    <p class="where">You'll also see an API key setting. That is for approved developers only, and you don't need it to use the tools.</p>
+  </div>
+  <div class="card" style="--c: var(--copilot)">
+    <h3>Copilot</h3>
+    <p>Copilot is not on genai.mil. In <b>Teams</b>, click the Copilot tab on the far left. It is also in <b>Outlook</b>.</p>
+    <p>It opens as a simple chat. You can start new chats, go back to recent ones, and change settings.</p>
+  </div>
+</div>
+
 <h2>Pick a tool in 10 seconds</h2>
 <div class="cards">
   <div class="card" style="--c: var(--copilot)">
     <h3 class="tool-name"><span class="dot" style="background:var(--copilot)"></span>Copilot</h3>
-    <p class="best">Best for: your own email, documents and Teams.</p>
+    <p class="best">Best for: quick edits to emails and Teams messages.</p>
     <ul>
-      <li>Lives inside Microsoft 365 on your DoD account</li>
-      <li>Summarize threads, draft replies, catch up on meetings</li>
+      <li>Fast answers without leaving Teams or Outlook</li>
+      <li>Can read your own cloud files from Teams and OneDrive</li>
+      <li>Built for short tasks, not deep thinking or building</li>
     </ul>
-    <p class="where">Where: Microsoft 365 (DoD), not GenAI.mil</p>
+    <p class="where">Where: the Copilot tab on the left side of Teams, or in Outlook. Not on GenAI.mil.</p>
   </div>
   <div class="card" style="--c: var(--chatgpt)">
     <h3 class="tool-name"><span class="dot" style="background:var(--chatgpt)"></span>ChatGPT Mil</h3>
@@ -159,25 +175,34 @@
   </thead>
   <tbody>
     <tr><th>Chat</th><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td></tr>
-    <tr><th>Upload a file</th><td class="m">?</td><td class="y">Yes</td><td class="y">Yes, in agents</td><td class="m">?</td></tr>
+    <tr><th>Upload a file</th><td class="y">Yes: work files, images, and cloud files from Teams and OneDrive</td><td class="y">Yes</td><td class="y">Yes, in agents</td><td class="m">?</td></tr>
     <tr><th>Search the web</th><td class="n">Off by default</td><td><span class="m">Offline Search</span>, with citations</td><td class="y">Yes, Google Search</td><td class="m">?</td></tr>
     <tr><th>Build your own assistant</th><td class="n">Not yet in DoD</td><td class="y">Custom GPTs</td><td class="y">Agent Designer</td><td class="y">Playbooks</td></tr>
-    <tr><th>Keep work together</th><td class="m">?</td><td class="y">Projects</td><td class="m">?</td><td class="y">Workspaces, projects</td></tr>
-    <tr><th>Reasoning modes</th><td class="m">?</td><td class="m">?</td><td class="m">?</td><td class="y">Auto, Fast, Expert</td></tr>
+    <tr><th>Keep work together</th><td>Recent chats and pages only</td><td class="y">Projects</td><td class="m">?</td><td class="y">Workspaces, projects</td></tr>
+    <tr><th>Reasoning modes</th><td class="y">Quick response, or think deeper</td><td class="m">?</td><td class="m">?</td><td class="y">Auto, Fast, Expert</td></tr>
+    <tr><th>Starter prompts built in</th><td class="y">Yes, a prompt library</td><td class="m">?</td><td class="m">?</td><td class="m">?</td></tr>
+    <tr><th>Underlying model named</th><td class="n">No</td><td class="y">GPT-5.4 Terra</td><td class="y">Gemini</td><td class="m">?</td></tr>
     <tr><th>Works inside Outlook, Word, Teams</th><td class="y">Yes, with full license</td><td class="n">No</td><td class="n">No</td><td class="n">No</td></tr>
     <tr><th>Data allowed</th><td>Unclassified, DoD 365 rules</td><td>Up to CUI (IL5)</td><td>Up to CUI (IL5)</td><td>Up to CUI (IL5)</td></tr>
     <tr><th>Sign in</th><td>DoD 365 account</td><td colspan="3">genai.mil with your CAC</td></tr>
   </tbody>
 </table>
 </div>
-<p class="legend"><span class="y">Yes</span> = confirmed in public sources. <span class="m">?</span> = not confirmed publicly; check on screen. Features change often.</p>
+<p class="legend"><span class="y">Yes</span> = confirmed in public sources or seen on screen on 10 Nov 2026. <span class="m">?</span> = not confirmed yet; check on screen. Features change often.</p>
 
 <h2>Seed prompts: try each tool on its strength</h2>
 <p>Every example is notional. Swap in your own unclassified details, never names or PII.</p>
 
 <div class="prompt">
-  <div class="prompt-head"><div><b>Copilot: catch up on an email thread</b><span>Open the thread in Outlook, then ask Copilot.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>Summarize this thread for a busy leader. Give me a two-sentence bottom line up front, then a list of every tasker with the owner's role and the due date. Flag anything that is still undecided. Keep it under 150 words.</pre>
+  <div class="prompt-head"><div><b>Copilot: tighten a Teams message or email</b><span>Paste your draft into the Copilot tab in Teams.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Rewrite my draft below so it is shorter and clearer for a senior leader. Put the ask in the first sentence. Keep it professional and under 80 words. Give me two versions: one formal, one casual for a Teams chat.
+
+Draft: Hey sir, wanted to touch base on the training schedule thing from last week, we still need a decision on whether land nav is a half day or a full day because S4 needs to lock in buses by Monday and I think a half day is probably fine but wanted your thoughts.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Copilot: pull taskers from a file in your cloud</b><span>Add the file as a source first: a cloud file from Teams or OneDrive.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>From the attached file, list every tasker with the owner's role and the due date, in a table. Then give me a two-sentence bottom line for my boss. Flag anything with no owner or no date.</pre>
 </div>
 
 <div class="prompt">
@@ -209,14 +234,14 @@ Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confir
 
 <h2>Try it in 3 steps</h2>
 <ol class="steps">
-  <li>On your government computer, open the tool: genai.mil with your CAC, or Copilot in Microsoft 365.</li>
+  <li>On your government computer, open the tool: genai.mil with your CAC, or the Copilot tab in Teams.</li>
   <li>Copy one seed prompt above and paste it in.</li>
   <li>Check the answer. Fix one thing in the prompt and run it again.</li>
 </ol>
 
 <footer>
   <p><b>Open-source summary as of 10 November 2026. Unofficial.</b> Verify against current local IT/G6 policy and official GenAI.mil guidance before use. Not affiliated with or endorsed by DoD or any vendor.</p>
-  <p>Sources: DoD CTO office, GenAI.mil launch (9 Dec 2025) and Agent Designer launch (Mar 2026); DefenseScoop, 10 Mar and 31 Aug 2026; Military Times, 31 Aug 2026; ExecutiveGov, 1 Sep 2026; Defense One, 23 Sep 2026; Microsoft Tech Community, "New AI capabilities available for Government environments" (2025).</p>
+  <p>The genai.mil front page and Copilot details come from a hands-on walkthrough on 10 Nov 2026. Other sources: DoD CTO office, GenAI.mil launch (9 Dec 2025) and Agent Designer launch (Mar 2026); DefenseScoop, 10 Mar and 31 Aug 2026; Military Times, 31 Aug 2026; ExecutiveGov, 1 Sep 2026; Defense One, 23 Sep 2026; Microsoft Tech Community, "New AI capabilities available for Government environments" (2025).</p>
 </footer>
 
 </main>
