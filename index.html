@@ -88,6 +88,11 @@
   .legend { font-size: 0.9rem; color: var(--muted); margin-top: 10px; }
   .tool-name { display: inline-flex; align-items: center; gap: 7px; }
   .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .logo-wrap { display: inline-flex; width: 22px; height: 22px; flex: none; }
+  .logo-wrap .logo { width: 100%; height: 100%; }
+  thead .logo-wrap { width: 16px; height: 16px; }
+  .cards.quad { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (max-width: 640px) { .cards.quad { grid-template-columns: 1fr; } }
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
   .card {
     border: 1px solid var(--line); border-top: 4px solid var(--c); background: var(--surface);
@@ -206,9 +211,9 @@
 </div>
 
 <h2>Pick a tool in 10 seconds</h2>
-<div class="cards">
+<div class="cards quad">
   <div class="card" style="--c: var(--copilot)">
-    <h3 class="tool-name"><span class="dot" style="background:var(--copilot)"></span>Copilot</h3>
+    <h3 class="tool-name"><span class="logo-wrap" style="color:var(--copilot)"><svg class="logo" viewBox="0 0 1322.9 1147.5" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="m711.19 265.2c-27.333 0-46.933 3.07-58.8 9.33 27.067-80.267 47.6-210.13 168-210.13 114.93 0 108.4 138.27 157.87 200.8zm107.33 112.93c-35.467 125.2-70 251.2-110.13 375.33-12.133 36.4-45.733 61.6-84 61.6h-136.27c9.3333-14 16.8-28.933 21.467-45.733 35.467-125.07 70-251.07 110.13-375.33 12.133-36.4 45.733-61.6 84-61.6h136.27c-9.3333 14-16.8 28.934-21.467 45.734m-316.13 704.8c-114.93 0-108.4-138.13-157.87-200.67h267.07c27.467 0 47.067-3.07 58.8-9.33-27.067 80.266-47.6 210-168 210m777.47-758.93h0.93c-32.667-38.266-82.267-57.866-146.67-57.866h-36.4c-34.533-2.8-65.333-26.134-76.533-58.8l-36.4-103.6c-21.463-61.737-80.263-103.74-145.73-103.74h-475.07c-175.6 0-251.2 225.07-292.27 361.33-38.267 127.07-126 341.73-24.267 462.13 46.667 55.067 116.67 57.867 183.07 57.867 34.533 2.8 65.333 26.133 76.533 58.8l36.4 103.6c21.467 61.733 80.267 103.73 145.6 103.73h475.2c175.47 0 251.07-225.07 292.27-361.33 30.8-100.8 68.133-224.93 66.267-324.8 0-50.534-11.2-100-42.933-137.33"/></svg></span>Copilot</h3>
     <p class="best">Best for: quick edits, and summarizing your own meetings, chats and email.</p>
     <ul>
       <li>Summarizes Teams meetings, chats, emails and documents, and pulls out action items</li>
@@ -219,7 +224,7 @@
     <p class="where">Where: the Copilot tab on the left side of Teams, or in Outlook. Not on GenAI.mil.</p>
   </div>
   <div class="card" style="--c: var(--chatgpt)">
-    <h3 class="tool-name"><span class="dot" style="background:var(--chatgpt)"></span>ChatGPT Mil</h3>
+    <h3 class="tool-name"><span class="logo-wrap" style="color:var(--chatgpt)"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg></span>ChatGPT Mil</h3>
     <p class="best">Best for: writing documents and building your own helper.</p>
     <ul>
       <li>Custom GPTs: your own assistant, loaded with your files</li>
@@ -232,7 +237,7 @@
     <p class="where">Where: GenAI.mil, since 31 Aug 2026</p>
   </div>
   <div class="card" style="--c: var(--gemini)">
-    <h3 class="tool-name"><span class="dot" style="background:var(--gemini)"></span>Gemini</h3>
+    <h3 class="tool-name"><span class="logo-wrap" style="color:var(--gemini)"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg></span>Gemini</h3>
     <p class="best">Best for: long research, big stacks of documents, and building agents.</p>
     <ul>
       <li>Reads documents, spreadsheets, images, audio and video, even scanned handwritten notes</li>
@@ -244,7 +249,7 @@
     <p class="where">Where: GenAI.mil, since 9 Dec 2025</p>
   </div>
   <div class="card" style="--c: var(--grok)">
-    <h3 class="tool-name"><span class="dot" style="background:var(--grok)"></span>Grok</h3>
+    <h3 class="tool-name"><span class="logo-wrap" style="color:var(--grok)"><svg class="logo" viewBox="0 0 512 509.641" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M213.235 306.019l178.976-180.002v.169l51.695-51.763c-.924 1.32-1.86 2.605-2.785 3.89-39.281 54.164-58.46 80.649-43.07 146.922l-.09-.101c10.61 45.11-.744 95.137-37.398 131.836-46.216 46.306-120.167 56.611-181.063 14.928l42.462-19.675c38.863 15.278 81.392 8.57 111.947-22.03 30.566-30.6 37.432-75.159 22.065-112.252-2.92-7.025-11.67-8.795-17.792-4.263l-124.947 92.341zm-25.786 22.437l-.033.034L68.094 435.217c7.565-10.429 16.957-20.294 26.327-30.149 26.428-27.803 52.653-55.359 36.654-94.302-21.422-52.112-8.952-113.177 30.724-152.898 41.243-41.254 101.98-51.661 152.706-30.758 11.23 4.172 21.016 10.114 28.638 15.639l-42.359 19.584c-39.44-16.563-84.629-5.299-112.207 22.313-37.298 37.308-44.84 102.003-1.128 143.81z"/></svg></span>Grok</h3>
     <p class="best">Best for: making real files and running tasks on a schedule.</p>
     <ul>
       <li>Skills make Word, PDF, PowerPoint and Excel files</li>
@@ -264,10 +269,10 @@
   <thead>
     <tr>
       <th>Feature</th>
-      <th><span class="tool-name"><span class="dot" style="background:var(--copilot)"></span>Copilot</span></th>
-      <th><span class="tool-name"><span class="dot" style="background:var(--chatgpt)"></span>ChatGPT Mil</span></th>
-      <th><span class="tool-name"><span class="dot" style="background:var(--gemini)"></span>Gemini</span></th>
-      <th><span class="tool-name"><span class="dot" style="background:var(--grok)"></span>Grok</span></th>
+      <th><span class="tool-name"><span class="logo-wrap" style="color:var(--copilot)"><svg class="logo" viewBox="0 0 1322.9 1147.5" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="m711.19 265.2c-27.333 0-46.933 3.07-58.8 9.33 27.067-80.267 47.6-210.13 168-210.13 114.93 0 108.4 138.27 157.87 200.8zm107.33 112.93c-35.467 125.2-70 251.2-110.13 375.33-12.133 36.4-45.733 61.6-84 61.6h-136.27c9.3333-14 16.8-28.933 21.467-45.733 35.467-125.07 70-251.07 110.13-375.33 12.133-36.4 45.733-61.6 84-61.6h136.27c-9.3333 14-16.8 28.934-21.467 45.734m-316.13 704.8c-114.93 0-108.4-138.13-157.87-200.67h267.07c27.467 0 47.067-3.07 58.8-9.33-27.067 80.266-47.6 210-168 210m777.47-758.93h0.93c-32.667-38.266-82.267-57.866-146.67-57.866h-36.4c-34.533-2.8-65.333-26.134-76.533-58.8l-36.4-103.6c-21.463-61.737-80.263-103.74-145.73-103.74h-475.07c-175.6 0-251.2 225.07-292.27 361.33-38.267 127.07-126 341.73-24.267 462.13 46.667 55.067 116.67 57.867 183.07 57.867 34.533 2.8 65.333 26.133 76.533 58.8l36.4 103.6c21.467 61.733 80.267 103.73 145.6 103.73h475.2c175.47 0 251.07-225.07 292.27-361.33 30.8-100.8 68.133-224.93 66.267-324.8 0-50.534-11.2-100-42.933-137.33"/></svg></span>Copilot</span></th>
+      <th><span class="tool-name"><span class="logo-wrap" style="color:var(--chatgpt)"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg></span>ChatGPT Mil</span></th>
+      <th><span class="tool-name"><span class="logo-wrap" style="color:var(--gemini)"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg></span>Gemini</span></th>
+      <th><span class="tool-name"><span class="logo-wrap" style="color:var(--grok)"><svg class="logo" viewBox="0 0 512 509.641" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M213.235 306.019l178.976-180.002v.169l51.695-51.763c-.924 1.32-1.86 2.605-2.785 3.89-39.281 54.164-58.46 80.649-43.07 146.922l-.09-.101c10.61 45.11-.744 95.137-37.398 131.836-46.216 46.306-120.167 56.611-181.063 14.928l42.462-19.675c38.863 15.278 81.392 8.57 111.947-22.03 30.566-30.6 37.432-75.159 22.065-112.252-2.92-7.025-11.67-8.795-17.792-4.263l-124.947 92.341zm-25.786 22.437l-.033.034L68.094 435.217c7.565-10.429 16.957-20.294 26.327-30.149 26.428-27.803 52.653-55.359 36.654-94.302-21.422-52.112-8.952-113.177 30.724-152.898 41.243-41.254 101.98-51.661 152.706-30.758 11.23 4.172 21.016 10.114 28.638 15.639l-42.359 19.584c-39.44-16.563-84.629-5.299-112.207 22.313-37.298 37.308-44.84 102.003-1.128 143.81z"/></svg></span>Grok</span></th>
     </tr>
   </thead>
   <tbody>
@@ -276,41 +281,39 @@
     <tr><th>Search the web</th><td class="n">No. The government version can't reach the internet</td><td class="y">Yes: click + in the chat box, then Web search. Gives citations. It searches a copy of the web kept inside the government cloud, so it can be a few hours behind</td><td class="y">Yes: a private copy of Google Search inside the secure environment, so it can be a few hours behind. You can't point it at one website yet</td><td class="y">Yes: a Web switch that searches a secure copy of the web and shows citations. Off means it only knows its training data, which runs to about January 2024</td></tr>
     <tr><th>Make Word, PDF, PowerPoint or Excel files</th><td class="m">Only with the right license: drafts in Word, PowerPoint outlines, Excel analysis. Many offices don't have it</td><td class="n">Not yet. Export to Word and PDF is coming</td><td class="y">Yes: downloadable Word documents and reports. Editable Google Slides decks exist in commercial Gemini but aren't confirmed here</td><td class="y">Yes: Word, PDF, PowerPoint, Excel and more, with built-in skills</td></tr>
     <tr><th>Build your own assistant</th><td class="n">Limited. Power Platform agents are restricted</td><td class="y">Custom GPTs, with starter prompts, files and web search</td><td class="y">Agent Designer, no coding. A manager agent can hand work to sub-agents. Flow, Schedule and Preview tabs</td><td class="y">Agents, plus skills you build by chatting with Skill creator</td></tr>
-    <tr><th>Run tasks on a schedule</th><td class="m">?</td><td class="m">?</td><td class="y">Yes: an agent's Schedule tab, such as every day at 0700 with a starting prompt</td><td class="y">Yes: automations inside a project, daily or weekly</td></tr>
+    <tr><th>Run tasks on a schedule</th><td class="m">? Not covered in the training I watched</td><td class="m">? Not covered in the training I watched</td><td class="y">Yes: an agent's Schedule tab, such as every day at 0700 with a starting prompt</td><td class="y">Yes: automations inside a project, daily or weekly</td></tr>
     <tr><th>Connectors</th><td class="y">Built in: searches your files, emails, chats and people across Microsoft 365. No outside plugins or add-ons</td><td class="n">Not yet. Office 365 and SharePoint are coming</td><td class="n">Not yet. Planned: Office 365, SharePoint, Outlook, OneDrive, GAMECHANGER and Advana</td><td class="n">Admins only for now</td></tr>
-    <tr><th>Share what you build</th><td class="m">?</td><td class="y">Share chats and GPTs by link. Links only work for people with GenAI.mil access, and you can turn a link off. Browse others' GPTs in Explore GPTs</td><td class="y">Share agents with named people by email. A few agents are shared across the whole enterprise</td><td class="y">Team spaces share projects and skills. Shared links work for team members with access</td></tr>
+    <tr><th>Share what you build</th><td class="m">? Not covered in the training I watched</td><td class="y">Share chats and GPTs by link. Links only work for people with GenAI.mil access, and you can turn a link off. Browse others' GPTs in Explore GPTs</td><td class="y">Share agents with named people by email. A few agents are shared across the whole enterprise</td><td class="y">Team spaces share projects and skills. Shared links work for team members with access</td></tr>
     <tr><th>Keep work together</th><td>Recent chats and pages only</td><td class="y">Projects: instructions, files and chats in one workspace that remembers across its chats</td><td class="y">Knowledge files you attach to chats and agents, such as doctrine, SOPs, PDFs and CSVs</td><td class="y">Projects with instructions, files, skills and automations. Think of a project as an agent lite</td></tr>
     <tr><th>Reasoning modes</th><td class="y">Quick response, or think deeper</td><td class="y">Instant, Low, Medium, High</td><td class="y">Pick a model: Flash is faster, Pro thinks harder</td><td class="y">Fast for light tasks, Expert for heavy reasoning and documents, or Auto to choose. Expert can be slow</td></tr>
-    <tr><th>Run code and analyze data</th><td class="m">?</td><td class="n">Not yet, coming</td><td class="m">?</td><td class="y">Yes: Expert mode runs Python in a sandbox for heavy analysis and file building</td></tr>
-    <tr><th>Deep research (long report with sources)</th><td class="m">?</td><td class="n">Not yet</td><td class="y">Yes: Deep Research, including on files you upload</td><td class="m">?</td></tr>
-    <tr><th>Make images</th><td class="n">No</td><td class="n">Not yet, coming</td><td class="y">Yes: a separate image option you select. Seen on screen Nov 2026</td><td class="m">?</td></tr>
-    <tr><th>How much it can read at once</th><td class="m">?</td><td class="m">?</td><td class="y">About 1 million tokens, roughly a few thousand pages</td><td class="m">?</td></tr>
-    <tr><th>Memory across chats</th><td class="m">?</td><td class="y">Yes, new. You turn it on in settings. Projects have their own memory. Memory doesn't apply inside custom GPTs</td><td class="m">Not confirmed here. In commercial Gemini, memory is for personal accounts only</td><td class="y">Personal memory, under data controls</td></tr>
-    <tr><th>Custom instructions and tone</th><td class="m">?</td><td class="y">Yes: concise, warm, enthusiastic or formal, plus custom instructions. Projects take their own instructions too</td><td class="m">Not confirmed here. Commercial work accounts get instructions</td><td class="y">Yes: concise, formal, tutor, comprehensive or custom</td></tr>
+    <tr><th>Run code and analyze data</th><td class="m">? Not covered in the training I watched</td><td class="n">Not yet, coming</td><td class="m">? Not covered in the training I watched</td><td class="y">Yes: Expert mode runs Python in a sandbox for heavy analysis and file building</td></tr>
+    <tr><th>Deep research (long report with sources)</th><td class="m">? Not covered in the training I watched</td><td class="n">Not yet</td><td class="y">Yes: Deep Research, including on files you upload</td><td class="m">? Not covered in the training I watched</td></tr>
+    <tr><th>Make images</th><td class="n">No</td><td class="n">Not yet, coming</td><td class="y">Yes: a separate image option you select. Seen on screen Nov 2026</td><td class="m">? Not covered in the training I watched</td></tr>
+    <tr><th>How much it can read at once</th><td class="m">? Not covered in the training I watched</td><td class="m">? Not covered in the training I watched</td><td class="y">About 1 million tokens, roughly a few thousand pages</td><td class="m">? Not covered in the training I watched</td></tr>
+    <tr><th>Memory across chats</th><td class="m">? Not covered in the training I watched</td><td class="y">Yes, new. You turn it on in settings. Projects have their own memory. Memory doesn't apply inside custom GPTs</td><td class="m">Not confirmed here. In commercial Gemini, memory is for personal accounts only</td><td class="y">Personal memory, under data controls</td></tr>
+    <tr><th>Custom instructions and tone</th><td class="m">? Not covered in the training I watched</td><td class="y">Yes: concise, warm, enthusiastic or formal, plus custom instructions. Projects take their own instructions too</td><td class="m">Not confirmed here. Commercial work accounts get instructions</td><td class="y">Yes: concise, formal, tutor, comprehensive or custom</td></tr>
     <tr><th>Training</th><td>Not on genai.mil</td><td class="y">Most courses: a help center, 8 long videos, prompt packs, workshops and quick references</td><td class="y">Self-paced courses, live workshops, office hours and agent-building training</td><td class="y">Live and on-demand, plus a help center and a user guide PDF</td></tr>
-    <tr><th>Starter prompts built in</th><td class="y">Yes, a prompt library</td><td class="y">Prompt packs by role, plus helper GPTs that pick the right feature and coach your prompts</td><td class="y">Ready-made agents for AARs, information papers, meeting summaries and staff estimates</td><td class="m">?</td></tr>
+    <tr><th>Starter prompts built in</th><td class="y">Yes, a prompt library</td><td class="y">Prompt packs by role, plus helper GPTs that pick the right feature and coach your prompts</td><td class="y">Ready-made agents for AARs, information papers, meeting summaries and staff estimates</td><td class="m">? Not covered in the training I watched</td></tr>
     <tr><th>Underlying model named</th><td class="n">No</td><td class="y">GPT-5.4 in chat. Custom GPTs can also use GPT-5.6 Terra</td><td class="y">Gemini 2.5 Flash and 2.5 Pro. Gemini 3 Flash and 3.1 Pro in preview</td><td class="y">Fast is Grok 4.3. Expert is Grok 4.5. Grok 4.6 is in beta</td></tr>
     <tr><th>Not available yet</th><td class="n">No web search, images, outside plugins, Bing or third-party add-ons. GitHub Copilot chat and Power Platform agents are restricted</td><td class="n">Coming: data analysis and running code, export to Word and PDF, Office 365 and SharePoint connectors, image generation, more admin controls for sharing. Also no deep research or voice</td><td class="n">Coming: connectors, NotebookLM, voice. Can't search one chosen website yet</td><td class="n">Adding your own connectors. Planned: email, SharePoint, GAMECHANGER and other data sources, triggers based on events, teams of agents, and a coding tool</td></tr>
     <tr><th>Works inside Outlook, Word, Teams</th><td class="y">Yes in Teams and Outlook. Word, PowerPoint and Excel depend on your office's license</td><td class="n">No</td><td class="n">No</td><td class="n">No</td></tr>
-    <tr><th>Your data used to train the AI</th><td class="m">? It logs chats for auditing and stays inside DoD 365 rules</td><td class="y">No. OpenAI says prompts, outputs and files aren't used for training or reviewed unless you share them for troubleshooting. The data stays U.S. government property</td><td class="m">?</td><td class="m">?</td></tr>
+    <tr><th>Your data used to train the AI</th><td class="m">? It logs chats for auditing and stays inside DoD 365 rules</td><td class="y">No. OpenAI says prompts, outputs and files aren't used for training or reviewed unless you share them for troubleshooting. The data stays U.S. government property</td><td class="m">? Not covered in the training I watched</td><td class="m">? Not covered in the training I watched</td></tr>
     <tr><th>Data allowed</th><td>Unclassified, DoD 365 rules</td><td>Up to CUI (IL5)</td><td>Up to CUI (IL5)</td><td>Up to CUI (IL5)</td></tr>
-    <tr><th>Sign in</th><td>DoD 365 account</td><td colspan="3">genai.mil with your CAC</td></tr>
+    <tr><th>Sign in</th><td>DoD 365 account</td><td>genai.mil with your CAC</td><td>genai.mil with your CAC</td><td>genai.mil with your CAC</td></tr>
   </tbody>
 </table>
 </div>
-<p class="legend"><span class="y">Yes</span> = confirmed in public sources or seen on screen on 10 Nov 2026. <span class="m">?</span> = not confirmed yet; check on screen. Features change often.</p>
+<p class="legend"><span class="y">Yes</span> = confirmed in public sources or seen on screen on 10 Nov 2026. <span class="m">?</span> = not shown in my walkthrough or the training videos I watched. It may exist, so check on screen. Features change often.</p>
 
 <h2>Free training on genai.mil</h2>
-<p>Open the <b>Training</b> and <b>Events</b> tabs on genai.mil. You'll find live sessions and on-demand courses for all three tools: Gemini, ChatGPT Mil and Grok.</p>
-<ul>
-  <li><b>ChatGPT Mil has the most courses.</b> Its training page links to the ChatGPT Mil help center (help.openai.mil, on the government network only).</li>
-  <li>There are 8 long videos. Topics include getting started, chats, citations, files, personalization and memory, a quick start workshop for custom GPTs, and the ready-made Acquisition GPT.</li>
-  <li>It also has prompt packs for different roles, short workshops, quick reference sheets, how-to guides, and the recordings, slides and prompts from past sessions.</li>
-  <li>Good first course: the custom GPT quick start workshop.</li>
-  <li><b>Grok has its own help center</b> (docs.grok.genai.mil, on the government network only). It covers getting started, chat, creating documents, skills, automations, projects, attachments, settings and policies, and it has a user guide PDF.</li>
-  <li><b>Gemini</b> has self-paced courses, live workshops, office hours and training on building agents. Start with an agent-building session.</li>
-  <li>In Grok, the Help menu also has a <b>Feedback</b> button that goes to the genai.mil team. Use it when something breaks or is missing.</li>
-</ul>
+<p>There's free training for all three genai.mil tools: Gemini, ChatGPT Mil and Grok. It takes a few clicks to find.</p>
+<ol class="steps">
+  <li>Open genai.mil and sign in with your CAC.</li>
+  <li>Click <b>Training</b> in the top menu. Pick a tool to see its self-paced courses, videos and quick references.</li>
+  <li>Use the links there to each tool's own help pages, such as help.openai.mil for ChatGPT Mil and docs.grok.genai.mil for Grok. They only open on the government network.</li>
+  <li>Click <b>Events</b> to register for a live workshop or office hours for more hands-on practice.</li>
+  <li>Spend ten minutes clicking around. Most of what's on this page, you'll find there too.</li>
+</ol>
 
 <h2>Words you'll hear, in plain English</h2>
 <div class="table-wrap">
@@ -325,6 +328,7 @@
     <tr><th>Agent</th><td>An assistant that can carry out several steps on its own, such as reading notes, sorting tasks and drafting a summary. Gemini's Agent Designer lets you build one in plain English.</td></tr>
     <tr><th>Manager agent</th><td>In Gemini's Agent Designer, an agent that splits a job and hands the pieces to other agents (sub-agents), like a project manager assigning tasks to specialists. For example, one researches, one analyzes and one summarizes.</td></tr>
     <tr><th>Knowledge file</th><td>A file you attach to a chat or agent so it answers from your material, such as an SOP, doctrine or a spreadsheet. In Gemini agents the whole file is placed in front of the AI, so keep knowledge files short and on topic.</td></tr>
+    <tr><th>RAG (retrieval-augmented generation)</th><td>A way for the AI to look things up in your files before it answers, instead of relying only on what it learned in training. It finds the most relevant passages, then writes the answer from them, often with citations. Think of an open-book test. Grok uses this with your uploaded files and projects. Gemini agents currently load the whole knowledge file instead.</td></tr>
     <tr><th>Deep research</th><td>A mode where the AI spends several minutes searching and reading, then writes a long report with citations. Use it for a full picture, not a quick answer.</td></tr>
     <tr><th>Multimodal</th><td>The AI can take in more than text: pictures, scans, audio and video. Gemini can read a photo of handwritten notes and turn it into a summary.</td></tr>
     <tr><th>Project or workspace</th><td>A folder that keeps related chats, files and instructions together, so you don't start from zero each time.</td></tr>
