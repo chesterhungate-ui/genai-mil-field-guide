@@ -51,6 +51,15 @@
   p { margin: 0 0 12px; }
   b { color: #fff; }
   .lede { font-size: 1.15rem; color: var(--tan); max-width: 60ch; }
+  .byline { color: var(--muted); font-size: 0.92rem; margin-top: 14px; }
+  ol.take, ol.rules { max-width: 75ch; }
+  ol.take li, ol.rules li { margin-bottom: 12px; }
+  ol.rules { counter-reset: r; list-style: none; padding-left: 0; }
+  ol.rules li { counter-increment: r; position: relative; padding-left: 52px; min-height: 40px; }
+  ol.rules li::before {
+    content: counter(r, decimal-leading-zero); position: absolute; left: 0; top: -2px;
+    font-family: var(--head); font-weight: 700; font-size: 1.6rem; color: var(--gold); line-height: 1;
+  }
   .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
   .btn {
     display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px;
@@ -136,11 +145,36 @@
 <main>
 
 <section class="hero">
-<span class="eyebrow">Leader professional development</span>
-<h1>Four AI tools. One page. Know which to use.</h1>
-<p class="lede">A field guide to Microsoft Copilot, ChatGPT Mil, Gemini for Government and Grok for Government. Open the tool, copy a seed prompt, and try it yourself.</p>
-<div class="actions"><a class="btn" href="#features">See the features &rarr;</a><a class="btn" href="#prompts">Get the seed prompts &rarr;</a></div>
+<span class="eyebrow">12 November 2026 &middot; AEMO &middot; Leader Professional Development</span>
+<h1>The one-stop guide to AI at work.</h1>
+<p class="lede">What each tool on your government computer does, the rules I follow, and prompts you can try today: Microsoft Copilot, ChatGPT Mil, Gemini for Government and Grok for Government.</p>
+<p class="byline">By MAJ Hungate, Army Enterprise Marketing Office. The views here are my own and are not those of the Army or DoD.</p>
+<div class="actions"><a class="btn" href="#rules">My rules &rarr;</a><a class="btn" href="#features">Compare the tools &rarr;</a><a class="btn" href="#prompts">Get the prompts &rarr;</a></div>
 <div class="rule"><b>The one rule:</b> unclassified only. CUI is allowed on GenAI.mil. No PII, no health information, nothing classified. A person checks every output before it leaves the office.</div>
+</section>
+
+<section>
+<h2 id="take">My take</h2>
+<p>Most of us open these tools, type a question and stop there. We're leaving the most useful parts unused.</p>
+<ol class="take">
+  <li><b>Grok's skills and automations are the most underused feature we have.</b> Grok can produce a finished Word document, PDF, slide deck or spreadsheet, and it can run a task every morning before you arrive. Most people never click the + button to find them.</li>
+  <li><b>One person can build a tool the whole office uses.</b> A custom GPT or a Gemini agent turns your section's know-how into something anyone can ask. That's also the risk: whoever gets the share link gets what you loaded into it.</li>
+  <li><b>Match the tool to the job.</b> Copilot is for quick edits inside Teams and Outlook. Go to genai.mil when you need to think, research or build.</li>
+  <li><b>Know when it's guessing.</b> With web search off, the AI only knows what it learned up to its training date. Turn search on for anything current, and check every citation.</li>
+</ol>
+
+<h2 id="rules">My rules</h2>
+<p>I adapted these from Ruben Hassid's <a href="https://ruben.substack.com/p/claude-101">"Claude 101"</a> (How to AI, 10 Nov 2026) and rewrote them for the tools on genai.mil.</p>
+<ol class="rules">
+  <li><b>One goal per prompt.</b> Give it the goal and the context, then tell it to ask you questions before it starts.</li>
+  <li><b>Say what "done" looks like.</b> Length, format and audience. Otherwise it guesses.</li>
+  <li><b>Fix the prompt, not the answer.</b> If an answer misses, edit your prompt and run it again. Don't argue with it in the chat.</li>
+  <li><b>Don't lead the witness.</b> Ask neutral questions. If you ask "this is right, isn't it?", it will usually agree.</li>
+  <li><b>Ask for twenty ideas.</b> Include a few unlikely ones, then pick the best two.</li>
+  <li><b>Ask for the real file.</b> If you need a deck or a spreadsheet, have Grok build it, not describe it.</li>
+  <li><b>One project per line of effort.</b> Keep memory short and accurate, and never let it store PII.</li>
+  <li><b>Start fresh when it drifts.</b> When a long chat gets worse, ask for a summary and paste it into a new chat.</li>
+</ol>
 </section>
 
 <h2>Where to find them</h2>
