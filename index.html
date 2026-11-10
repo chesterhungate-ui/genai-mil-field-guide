@@ -158,7 +158,7 @@
 <p>Most of us open these tools, type a question and stop there. We're leaving the most useful parts unused.</p>
 <ol class="take">
   <li><b>Grok's skills and automations are the most underused feature we have.</b> Grok can produce a finished Word document, PDF, slide deck or spreadsheet, and it can run a task every morning before you arrive. Most people never click the + button to find them.</li>
-  <li><b>One person can build a tool the whole office uses.</b> A custom GPT or a Gemini agent turns your section's know-how into something anyone can ask. That's also the risk: anyone on GenAI.mil who gets the share link gets what you loaded into it, so check the files first. You can turn a link off later.</li>
+  <li><b>One person can build a tool the whole office uses.</b> A custom GPT or a Gemini agent turns your section's know-how into something anyone can ask. In Gemini, a manager agent can even split the work among specialist agents: one researches, one analyzes, one writes the summary. That's also the risk: anyone on GenAI.mil who gets the share link gets what you loaded into it, so check the files first. You can turn a link off later.</li>
   <li><b>Match the tool to the job.</b> Copilot is for quick edits inside Teams and Outlook. Go to genai.mil when you need to think, research or build.</li>
   <li><b>Know when it's guessing.</b> With web search off, the AI only knows what it learned up to its training date. Turn search on for anything current, and check every citation.</li>
 </ol>
@@ -219,10 +219,13 @@
   </div>
   <div class="card" style="--c: var(--gemini)">
     <h3 class="tool-name"><span class="dot" style="background:var(--gemini)"></span>Gemini</h3>
-    <p class="best">Best for: research and building agents.</p>
+    <p class="best">Best for: long research, big stacks of documents, and building agents.</p>
     <ul>
-      <li>Answers grounded in Google Search</li>
-      <li>Agent Designer: build an assistant in plain English</li>
+      <li>Reads documents, spreadsheets, images, audio and video, even scanned handwritten notes</li>
+      <li>Holds about 1 million tokens at once, so it can take a very large pile of files</li>
+      <li>Deep Research writes long reports with citations you can check</li>
+      <li>Agent Designer: build an agent in plain English, run it on a schedule, and let a manager agent hand work to other agents</li>
+      <li>Ready-made agents for AARs, information papers, meeting summaries and staff estimates</li>
     </ul>
     <p class="where">Where: GenAI.mil, since 9 Dec 2025</p>
   </div>
@@ -253,21 +256,24 @@
   </thead>
   <tbody>
     <tr><th>Chat</th><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td></tr>
-    <tr><th>Upload a file</th><td class="y">Yes: work files, images, and cloud files from Teams and OneDrive</td><td class="y">Yes: single files in chat, whole folders in Projects. GPTs and Projects hold up to 2 GB of source files</td><td class="y">Yes, in agents</td><td class="y">Yes: files, whole folders, or recent files</td></tr>
-    <tr><th>Search the web</th><td class="n">Off by default</td><td class="y">Yes: click + in the chat box, then Web search. Gives citations. It searches a copy of the web kept inside the government cloud, so it can be a few hours behind</td><td class="y">Yes, Google Search</td><td class="y">Yes: a Web switch. Off means it only knows its training data</td></tr>
-    <tr><th>Make Word, PDF, PowerPoint or Excel files</th><td class="m">?</td><td class="n">Not yet. Export to Word and PDF is coming</td><td class="m">?</td><td class="y">Yes, with built-in skills</td></tr>
-    <tr><th>Build your own assistant</th><td class="n">Not yet in DoD</td><td class="y">Custom GPTs, with starter prompts, files and web search</td><td class="y">Agent Designer</td><td class="y">Agents, plus skills you build by chatting with Skill creator</td></tr>
-    <tr><th>Run tasks on a schedule</th><td class="m">?</td><td class="m">?</td><td class="m">?</td><td class="y">Yes: automations inside a project</td></tr>
-    <tr><th>Connectors</th><td class="y">Your Teams and OneDrive files</td><td class="n">Not yet. Office 365 and SharePoint are coming</td><td class="m">?</td><td class="n">Admins only for now</td></tr>
-    <tr><th>Share what you build</th><td class="m">?</td><td class="y">Share chats and GPTs by link. Links only work for people with GenAI.mil access, and you can turn a link off. Browse others' GPTs in Explore GPTs</td><td class="y">Yes, with your team</td><td class="y">Team spaces share projects and skills. Shared links work for team members with access</td></tr>
-    <tr><th>Keep work together</th><td>Recent chats and pages only</td><td class="y">Projects: instructions, files and chats in one workspace that remembers across its chats</td><td class="m">?</td><td class="y">Projects with instructions, files and automations</td></tr>
-    <tr><th>Reasoning modes</th><td class="y">Quick response, or think deeper</td><td class="y">Instant, Low, Medium, High</td><td class="m">?</td><td class="y">Auto, which picks Fast or Expert</td></tr>
+    <tr><th>Upload a file</th><td class="y">Yes: work files, images, and cloud files from Teams and OneDrive</td><td class="y">Yes: single files in chat, whole folders in Projects. GPTs and Projects hold up to 2 GB of source files</td><td class="y">Yes: documents, CSVs, images, audio and video. It can read scanned and handwritten notes</td><td class="y">Yes: files, whole folders, or recent files</td></tr>
+    <tr><th>Search the web</th><td class="n">Off by default</td><td class="y">Yes: click + in the chat box, then Web search. Gives citations. It searches a copy of the web kept inside the government cloud, so it can be a few hours behind</td><td class="y">Yes: a private copy of Google Search inside the secure environment, so it can be a few hours behind. You can't point it at one website yet</td><td class="y">Yes: a Web switch. Off means it only knows its training data</td></tr>
+    <tr><th>Make Word, PDF, PowerPoint or Excel files</th><td class="m">?</td><td class="n">Not yet. Export to Word and PDF is coming</td><td class="y">Yes: downloadable Word documents, reports and presentations</td><td class="y">Yes, with built-in skills</td></tr>
+    <tr><th>Build your own assistant</th><td class="n">Not yet in DoD</td><td class="y">Custom GPTs, with starter prompts, files and web search</td><td class="y">Agent Designer, no coding. A manager agent can hand work to sub-agents. Flow, Schedule and Preview tabs</td><td class="y">Agents, plus skills you build by chatting with Skill creator</td></tr>
+    <tr><th>Run tasks on a schedule</th><td class="m">?</td><td class="m">?</td><td class="y">Yes: an agent's Schedule tab, such as every day at 0700 with a starting prompt</td><td class="y">Yes: automations inside a project</td></tr>
+    <tr><th>Connectors</th><td class="y">Your Teams and OneDrive files</td><td class="n">Not yet. Office 365 and SharePoint are coming</td><td class="n">Not yet. Planned: Office 365, SharePoint, Outlook, OneDrive, GAMECHANGER and Advana</td><td class="n">Admins only for now</td></tr>
+    <tr><th>Share what you build</th><td class="m">?</td><td class="y">Share chats and GPTs by link. Links only work for people with GenAI.mil access, and you can turn a link off. Browse others' GPTs in Explore GPTs</td><td class="y">Share agents with named people by email. A few agents are shared across the whole enterprise</td><td class="y">Team spaces share projects and skills. Shared links work for team members with access</td></tr>
+    <tr><th>Keep work together</th><td>Recent chats and pages only</td><td class="y">Projects: instructions, files and chats in one workspace that remembers across its chats</td><td class="y">Knowledge files you attach to chats and agents, such as doctrine, SOPs, PDFs and CSVs</td><td class="y">Projects with instructions, files and automations</td></tr>
+    <tr><th>Reasoning modes</th><td class="y">Quick response, or think deeper</td><td class="y">Instant, Low, Medium, High</td><td class="y">Pick a model: Flash is faster, Pro thinks harder</td><td class="y">Auto, which picks Fast or Expert</td></tr>
+    <tr><th>Deep research (long report with sources)</th><td class="m">?</td><td class="n">Not yet</td><td class="y">Yes: Deep Research, including on files you upload</td><td class="m">?</td></tr>
+    <tr><th>Make images</th><td class="m">?</td><td class="n">Not yet, coming</td><td class="y">Yes, seen on screen Nov 2026</td><td class="m">?</td></tr>
+    <tr><th>How much it can read at once</th><td class="m">?</td><td class="m">?</td><td class="y">About 1 million tokens, roughly a few thousand pages</td><td class="m">?</td></tr>
     <tr><th>Memory across chats</th><td class="m">?</td><td class="y">Yes, new. You turn it on in settings. Projects also have their own memory</td><td class="m">?</td><td class="y">Personal memory, under data controls</td></tr>
     <tr><th>Custom instructions and tone</th><td class="m">?</td><td class="y">Yes: concise, warm, enthusiastic or formal, plus custom instructions</td><td class="m">?</td><td class="y">Yes: concise, formal, tutor, comprehensive or custom</td></tr>
-    <tr><th>Training</th><td>Not on genai.mil</td><td class="y">Most courses: a help center, 8 long videos, prompt packs, workshops and quick references</td><td class="y">Live and on-demand</td><td class="y">Live and on-demand, plus a help center and a user guide PDF</td></tr>
-    <tr><th>Starter prompts built in</th><td class="y">Yes, a prompt library</td><td class="y">Prompt packs by role, plus helper GPTs that pick the right feature and coach your prompts</td><td class="m">?</td><td class="m">?</td></tr>
-    <tr><th>Underlying model named</th><td class="n">No</td><td class="y">GPT-5.4 in chat. Custom GPTs can also use GPT-5.6 Terra</td><td class="y">Gemini</td><td class="y">Fast is Grok 4.3. Expert is Grok 4.5</td></tr>
-    <tr><th>Not available yet</th><td class="m">?</td><td class="n">Coming: data analysis and running code, export to Word and PDF, Office 365 and SharePoint connectors, image generation, more admin controls for sharing. Also no deep research or voice</td><td class="m">?</td><td class="n">Adding your own connectors</td></tr>
+    <tr><th>Training</th><td>Not on genai.mil</td><td class="y">Most courses: a help center, 8 long videos, prompt packs, workshops and quick references</td><td class="y">Self-paced courses, live workshops, office hours and agent-building training</td><td class="y">Live and on-demand, plus a help center and a user guide PDF</td></tr>
+    <tr><th>Starter prompts built in</th><td class="y">Yes, a prompt library</td><td class="y">Prompt packs by role, plus helper GPTs that pick the right feature and coach your prompts</td><td class="y">Ready-made agents for AARs, information papers, meeting summaries and staff estimates</td><td class="m">?</td></tr>
+    <tr><th>Underlying model named</th><td class="n">No</td><td class="y">GPT-5.4 in chat. Custom GPTs can also use GPT-5.6 Terra</td><td class="y">Gemini 2.5 Flash and 2.5 Pro. Gemini 3 Flash and 3.1 Pro in preview</td><td class="y">Fast is Grok 4.3. Expert is Grok 4.5</td></tr>
+    <tr><th>Not available yet</th><td class="m">?</td><td class="n">Coming: data analysis and running code, export to Word and PDF, Office 365 and SharePoint connectors, image generation, more admin controls for sharing. Also no deep research or voice</td><td class="n">Coming: connectors, NotebookLM, voice. Can't search one chosen website yet</td><td class="n">Adding your own connectors</td></tr>
     <tr><th>Works inside Outlook, Word, Teams</th><td class="y">Yes, with full license</td><td class="n">No</td><td class="n">No</td><td class="n">No</td></tr>
     <tr><th>Your data used to train the AI</th><td class="m">?</td><td class="y">No. OpenAI says prompts, outputs and files aren't used for training or reviewed unless you share them for troubleshooting. The data stays U.S. government property</td><td class="m">?</td><td class="m">?</td></tr>
     <tr><th>Data allowed</th><td>Unclassified, DoD 365 rules</td><td>Up to CUI (IL5)</td><td>Up to CUI (IL5)</td><td>Up to CUI (IL5)</td></tr>
@@ -285,6 +291,7 @@
   <li>It also has prompt packs for different roles, short workshops, quick reference sheets, how-to guides, and the recordings, slides and prompts from past sessions.</li>
   <li>Good first course: the custom GPT quick start workshop.</li>
   <li><b>Grok has its own help center</b> (docs.grok.genai.mil, on the government network only). It covers getting started, chat, creating documents, skills, automations, projects, attachments, settings and policies, and it has a user guide PDF.</li>
+  <li><b>Gemini</b> has self-paced courses, live workshops, office hours and training on building agents. Start with an agent-building session.</li>
   <li>In Grok, the Help menu also has a <b>Feedback</b> button that goes to the genai.mil team. Use it when something breaks or is missing.</li>
 </ul>
 
@@ -299,6 +306,10 @@
     <tr><th>Everyone can chat</th><td>A ChatGPT Mil sharing setting. It creates a link to your custom GPT that you send to people yourself. Anyone with GenAI.mil access who has the link can chat with it, and you can turn the link off. Before you share, remove any file that not everyone with the link should see.</td></tr>
     <tr><th>Reasoning effort</th><td>How hard the AI thinks before it answers. In ChatGPT Mil: Instant, Low, Medium or High. In Grok: Fast or Expert, or Auto to let it choose. Higher is slower but more careful, so save it for analysis rather than quick rewrites.</td></tr>
     <tr><th>Agent</th><td>An assistant that can carry out several steps on its own, such as reading notes, sorting tasks and drafting a summary. Gemini's Agent Designer lets you build one in plain English.</td></tr>
+    <tr><th>Manager agent</th><td>In Gemini's Agent Designer, an agent that splits a job and hands the pieces to other agents (sub-agents), like a project manager assigning tasks to specialists. For example, one researches, one analyzes and one summarizes.</td></tr>
+    <tr><th>Knowledge file</th><td>A file you attach to a chat or agent so it answers from your material, such as an SOP, doctrine or a spreadsheet. In Gemini agents the whole file is placed in front of the AI, so keep knowledge files short and on topic.</td></tr>
+    <tr><th>Deep research</th><td>A mode where the AI spends several minutes searching and reading, then writes a long report with citations. Use it for a full picture, not a quick answer.</td></tr>
+    <tr><th>Multimodal</th><td>The AI can take in more than text: pictures, scans, audio and video. Gemini can read a photo of handwritten notes and turn it into a summary.</td></tr>
     <tr><th>Project or workspace</th><td>A folder that keeps related chats, files and instructions together, so you don't start from zero each time.</td></tr>
     <tr><th>Team space</th><td>A shared area in Grok that colleagues invite you to. Everyone in it can use the same projects and skills. Switch between your personal space and your teams by clicking your name.</td></tr>
     <tr><th>Automation</th><td>A task the AI runs by itself on a schedule, such as every weekday at 0700. In Grok you set one up inside a project. For example, a daily roundup of public news on a topic you track.</td></tr>
@@ -306,8 +317,9 @@
     <tr><th>Memory</th><td>The AI remembers facts about you and your work between chats. Useful, but check what it has saved, and never let it store PII.</td></tr>
     <tr><th>Connector</th><td>A plug that lets the AI reach outside the chat into a system you already use, such as email, a calendar or a shared drive, and read from it for you. Without one, the AI only knows what you type or upload. Copilot's cloud files work this way. In Grok, only admins can add connectors for now.</td></tr>
     <tr><th>Skill</th><td>A saved recipe for one kind of job, such as "make a PowerPoint" or "write an executive summary." Turn it on in a chat and the AI follows that recipe every time. Grok comes with skills for Word, PDF, PowerPoint, Excel and video files, and you can build your own just by describing it to Skill creator. Teams can share their skills with each other.</td></tr>
+    <tr><th>Token and context window</th><td>A token is a small piece of a word. The context window is how many tokens the AI can keep in mind at once. Gemini's is about 1 million tokens, enough for a few thousand pages, so you can give it a big stack of files in one go.</td></tr>
     <tr><th>Training cutoff</th><td>The date the AI stopped learning. Without web search it doesn't know anything newer, so it may give an old answer about current events. Turn web search on for anything recent.</td></tr>
-    <tr><th>Web search index</th><td>The copy of the internet a tool searches. ChatGPT Mil searches a copy kept inside the government cloud instead of the live web, so very recent news may be a few hours behind.</td></tr>
+    <tr><th>Web search index</th><td>The copy of the internet a tool searches. ChatGPT Mil and Gemini both search a copy kept inside the secure government environment instead of the live web, so very recent news may be a few hours behind.</td></tr>
     <tr><th>Citation</th><td>A link to where the answer came from. Click it, and check that it says what the AI claims.</td></tr>
     <tr><th>Hallucination</th><td>When the AI states something false with confidence. This is why a person checks every output.</td></tr>
     <tr><th>CUI and IL5</th><td>CUI is Controlled Unclassified Information: sensitive but not classified. IL5 is the security level genai.mil is approved for, which covers CUI. It does not cover classified information.</td></tr>
@@ -364,6 +376,21 @@ Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confir
 </div>
 
 <div class="prompt">
+  <div class="prompt-head"><div><b>Gemini: turn messy notes into a trip report</b><span>Upload your notes. A photo of handwritten notes works too.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Turn the attached notes into a trip report I can download as a Word document. Use these headings: purpose, key engagements, observations, decisions, action items (a table with task, owner by role and due date) and follow-ups. Use only what is in my notes, mark anything missing as TBD, and leave out names and personal information.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Gemini: deep research on your own files</b><span>Choose Deep Research, attach several unclassified documents, then run this.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Read all the attached documents and write a report on what they agree on, where they conflict, and what is missing. Cite the document and section for every point, so I can check it. End with three questions I should ask before making a decision.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Gemini: a manager agent with a small team</b><span>Agent Designer. Then use the Preview tab to test it before you share it.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Create a manager agent called "Staff Product Builder." When I give it a topic and unclassified source files, it assigns the work to three sub-agents: a researcher that pulls the key facts from the files, an analyst that lists options with pros, cons and risks, and a writer that turns the result into a one-page information paper with a bottom line up front. The manager checks that every fact traces back to a source file and flags anything it can't confirm.</pre>
+</div>
+
+<div class="prompt">
   <div class="prompt-head"><div><b>Grok: see why web search matters</b><span>Ask this twice: once with the Web switch off, then on. Compare the answers.</span></div><button class="copy" type="button">Copy</button></div>
 <pre>What is today's date, who is the current President of the United States, and what is the most recent date your information covers?</pre>
 </div>
@@ -402,7 +429,7 @@ Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confir
 
 <footer>
   <p><b>Open-source summary as of 10 November 2026. Unofficial.</b> Verify against current local IT/G6 policy and official GenAI.mil guidance before use. Not affiliated with or endorsed by DoD or any vendor.</p>
-  <p>The genai.mil front page, training, and the Copilot, ChatGPT Mil and Grok details come from a hands-on walkthrough on 10 Nov 2026. More ChatGPT Mil details (data handling, sharing, web search, what's coming) come from a ChatGPT Mil training session in Nov 2026 and OpenAI's description of ChatGPT on GenAI.mil. Other sources: DoD CTO office, GenAI.mil launch (9 Dec 2025) and Agent Designer launch (Mar 2026); DefenseScoop, 10 Mar and 31 Aug 2026; Military Times, 31 Aug 2026; ExecutiveGov, 1 Sep 2026; Defense One, 23 Sep 2026; Microsoft Tech Community, "New AI capabilities available for Government environments" (2025).</p>
+  <p>The genai.mil front page, training, and the Copilot, ChatGPT Mil and Grok details come from a hands-on walkthrough on 10 Nov 2026. More ChatGPT Mil details (data handling, sharing, web search, what's coming) come from a ChatGPT Mil training session in Nov 2026 and OpenAI's description of ChatGPT on GenAI.mil. Gemini details (models, Deep Research, Agent Designer, connectors) come from a GenAI.mil Gemini training video viewed Nov 2026; image generation was seen on screen. Other sources: DoD CTO office, GenAI.mil launch (9 Dec 2025) and Agent Designer launch (Mar 2026); DefenseScoop, 10 Mar and 31 Aug 2026; Military Times, 31 Aug 2026; ExecutiveGov, 1 Sep 2026; Defense One, 23 Sep 2026; Microsoft Tech Community, "New AI capabilities available for Government environments" (2025).</p>
 </footer>
 
 </main>
