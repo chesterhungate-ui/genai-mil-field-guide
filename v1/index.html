@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>genai.mil Field Guide</title>
+<meta name="description" content="Which government AI tool to use for what: Copilot, ChatGPT Mil, Gemini and Grok on GenAI.mil, with seed prompts to try.">
+<style>
+  :root {
+    --bg: #221f20;
+    --surface: #2c2829;
+    --deep: #191617;
+    --text: #f3f0e8;
+    --muted: #bdb5a4;
+    --tan: #d6ceb5;
+    --line: #463f3d;
+    --gold: #ffcc01;
+    --accent: #ffcc01;
+    --yes: #8fdca6;
+    --no: #ff9a85;
+    --maybe: #f2b84b;
+    --copilot: #6db3ff;
+    --chatgpt: #4fd8ae;
+    --gemini: #a7b3ff;
+    --grok: #e8e3d6;
+    --head: "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed", "Liberation Sans Narrow", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.55 Arial, "Helvetica Neue", "Segoe UI", sans-serif;
+  }
+  .topbar {
+    background: var(--deep); border-bottom: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    padding: 12px 16px; font-family: var(--head); text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .topbar .brand { color: var(--gold); font-weight: 700; font-size: 1.05rem; }
+  .topbar .tag { color: var(--tan); font-size: 0.8rem; text-align: right; }
+  main { max-width: 1080px; margin: 0 auto; padding: 0 16px 56px; }
+  .hero { padding: 48px 0 32px; border-bottom: 1px solid var(--line); }
+  .eyebrow {
+    display: block; font-family: var(--head); text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--tan); font-size: 0.85rem; font-weight: 700; margin: 0 0 10px;
+  }
+  h1, h2, h3 { font-family: var(--head); text-transform: uppercase; font-weight: 700; color: var(--gold); letter-spacing: 0.01em; }
+  h1 { font-size: clamp(2.2rem, 7vw, 4.4rem); line-height: 1; margin: 0 0 18px; }
+  h2 { font-size: clamp(1.6rem, 4vw, 2.3rem); line-height: 1.05; margin: 56px 0 16px; }
+  h3 { margin: 0 0 8px; font-size: 1.25rem; color: var(--text); }
+  p { margin: 0 0 12px; }
+  b { color: #fff; }
+  .lede { font-size: 1.15rem; color: var(--tan); max-width: 60ch; }
+  .byline { color: var(--muted); font-size: 0.92rem; margin-top: 14px; }
+  ol.take, ol.rules { max-width: 75ch; }
+  ol.take li, ol.rules li { margin-bottom: 12px; }
+  ol.rules { counter-reset: r; list-style: none; padding-left: 0; }
+  ol.rules li { counter-increment: r; position: relative; padding-left: 52px; min-height: 40px; }
+  ol.rules li::before {
+    content: counter(r, decimal-leading-zero); position: absolute; left: 0; top: -2px;
+    font-family: var(--head); font-weight: 700; font-size: 1.6rem; color: var(--gold); line-height: 1;
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px;
+    border: 1.5px solid var(--gold); color: var(--text); text-decoration: none;
+    font-family: var(--head); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; font-size: 0.9rem;
+  }
+  .btn:hover, .btn:focus-visible { background: var(--gold); color: var(--deep); }
+  .rule {
+    border-left: 4px solid var(--gold); background: var(--surface);
+    padding: 14px 16px; margin: 28px 0 0;
+  }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); }
+  table { border-collapse: collapse; width: 100%; min-width: 680px; font-size: 0.93rem; background: var(--surface); }
+  th, td { padding: 11px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  thead th {
+    background: var(--deep); color: var(--tan); position: sticky; top: 0;
+    font-family: var(--head); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.85rem;
+  }
+  tbody th { font-weight: 700; width: 22%; color: var(--text); }
+  table.glossary { min-width: 0; }
+  table.glossary th { width: 26%; color: var(--gold); }
+  tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+  .y { color: var(--yes); font-weight: 700; }
+  .n { color: var(--no); font-weight: 700; }
+  .m { color: var(--maybe); font-weight: 700; }
+  .legend { font-size: 0.9rem; color: var(--muted); margin-top: 10px; }
+  .tool-name { display: inline-flex; align-items: center; gap: 7px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .logo-wrap { display: inline-flex; width: 22px; height: 22px; flex: none; }
+  .logo-wrap .logo { width: 100%; height: 100%; }
+  thead .logo-wrap { width: 16px; height: 16px; }
+  .cards.quad { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  [id] { scroll-margin-top: 72px; }
+  .drawer-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin: 36px 0 12px; color: var(--muted); }
+  .drawer-bar p { margin: 0; }
+  button.toggle-all {
+    border: 1.5px solid var(--line); background: transparent; color: var(--tan); padding: 7px 14px; cursor: pointer;
+    font-family: var(--head); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; font-size: 0.82rem;
+  }
+  button.toggle-all:hover, button.toggle-all:focus-visible { border-color: var(--gold); color: var(--gold); }
+  details.drawer { border: 1px solid var(--line); border-left: 4px solid var(--line); background: var(--surface); margin: 0 0 10px; transition: border-color .15s; }
+  details.drawer:hover, details.drawer[open] { border-left-color: var(--gold); }
+  details.drawer > summary {
+    list-style: none; cursor: pointer; display: flex; align-items: center; gap: 14px; padding: 16px 18px;
+  }
+  details.drawer > summary::-webkit-details-marker { display: none; }
+  details.drawer > summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .drawer-text { flex: 1; min-width: 0; }
+  details.drawer > summary h2 { margin: 0 0 4px; font-size: clamp(1.35rem, 3.4vw, 1.9rem); }
+  .teaser { display: block; color: var(--tan); font-size: 0.98rem; }
+  .chip {
+    flex: none; border: 1px solid var(--line); color: var(--muted); padding: 3px 9px; white-space: nowrap;
+    font-family: var(--head); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.78rem; font-weight: 700;
+  }
+  .dcaret { flex: none; width: 12px; height: 12px; border-right: 2.5px solid var(--gold); border-bottom: 2.5px solid var(--gold); transform: rotate(45deg) translate(-3px, -3px); transition: transform .2s; }
+  details.drawer[open] > summary .dcaret { transform: rotate(225deg) translate(-3px, -3px); }
+  details.drawer[open] > summary { border-bottom: 1px solid var(--line); }
+  .drawer-body { padding: 4px 18px 22px; }
+  .drawer-body > h3.group:first-child, .drawer-body > p:first-child { margin-top: 16px; }
+  @media (max-width: 560px) {
+    details.drawer > summary { padding: 14px 12px; gap: 10px; }
+    .drawer-body { padding: 4px 12px 18px; }
+    .chip { display: none; }
+  }
+  .toolbar {
+    position: sticky; top: 0; z-index: 20; background: var(--deep); border-bottom: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; padding: 6px 12px;
+  }
+  .tb-item { position: relative; }
+  .tb-btn {
+    display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--text);
+    border: 0; border-bottom: 3px solid transparent; padding: 9px 14px 7px; cursor: pointer;
+    font-family: var(--head); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; font-size: 0.95rem;
+  }
+  .tb-btn .logo-wrap { color: var(--c); width: 18px; height: 18px; }
+  .tb-btn .caret { color: var(--muted); font-size: 0.75em; }
+  .tb-btn:hover, .tb-btn:focus-visible, .tb-btn[aria-expanded="true"] { border-bottom-color: var(--c); background: var(--surface); }
+  .tb-menu {
+    position: absolute; left: 0; top: 100%; min-width: 230px; background: var(--surface);
+    border: 1px solid var(--line); border-top: 3px solid var(--c); box-shadow: 0 10px 24px rgba(0,0,0,0.45);
+    padding: 6px 0; display: flex; flex-direction: column;
+  }
+  .tb-menu[hidden] { display: none; }
+  .tb-item.right .tb-menu { left: auto; right: 0; }
+  .tb-menu .tb-best { padding: 8px 16px 10px; font-size: 0.88rem; color: var(--tan); border-bottom: 1px solid var(--line); margin-bottom: 4px; }
+  .tb-menu a { color: var(--text); text-decoration: none; padding: 9px 16px; font-family: var(--head); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; font-size: 0.88rem; }
+  .tb-menu a:hover, .tb-menu a:focus-visible { background: var(--deep); color: var(--gold); }
+  h3.group { display: flex; align-items: center; gap: 10px; margin: 34px 0 12px; font-size: 1.35rem; color: var(--gold); }
+  h3.group .logo-wrap { color: var(--c); }
+  .prompt.featured { border: 2px solid var(--gold); }
+  .prompt.featured .prompt-head b::before { content: "New \00b7 "; color: var(--gold); }
+  @media (max-width: 560px) {
+    .toolbar { justify-content: flex-start; padding: 4px 8px; }
+    .tb-btn { padding: 8px 9px 6px; font-size: 0.85rem; gap: 6px; }
+    .tb-item { position: static; }
+    [id] { scroll-margin-top: 100px; }
+    .tb-menu, .tb-item.right .tb-menu { left: 8px; right: 8px; min-width: 0; }
+  }
+  @media (max-width: 640px) { .cards.quad { grid-template-columns: 1fr; } }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .card {
+    border: 1px solid var(--line); border-top: 4px solid var(--c); background: var(--surface);
+    padding: 18px; display: flex; flex-direction: column;
+  }
+  .card .best { font-weight: 700; color: #fff; margin-bottom: 10px; }
+  .card ul { margin: 0 0 14px; padding-left: 18px; }
+  .card li { margin-bottom: 4px; }
+  .card .where { font-size: 0.88rem; color: var(--muted); margin-top: auto; }
+  ul, ol { padding-left: 22px; }
+  .prompt { border: 1px solid var(--line); background: var(--surface); margin: 0 0 16px; }
+  .prompt-head {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    padding: 12px 16px; border-bottom: 1px solid var(--line);
+  }
+  .prompt-head b { display: block; font-family: var(--head); text-transform: uppercase; letter-spacing: 0.04em; font-size: 1.02rem; }
+  .prompt-head span { font-size: 0.88rem; color: var(--tan); }
+  .prompt > p { color: var(--tan); font-size: 0.92rem; }
+  pre {
+    margin: 0; padding: 16px; white-space: pre-wrap; word-wrap: break-word; background: var(--deep); color: var(--text);
+    font: 0.92rem/1.55 ui-monospace, Consolas, "Courier New", monospace;
+  }
+  button.copy {
+    flex: none; border: 1.5px solid var(--gold); background: transparent; color: var(--text);
+    padding: 7px 14px; font-family: var(--head); text-transform: uppercase; letter-spacing: 0.08em;
+    font-weight: 700; font-size: 0.82rem; cursor: pointer;
+  }
+  button.copy:hover, button.copy:focus-visible { background: var(--gold); color: var(--deep); }
+  ol.steps li { margin-bottom: 8px; }
+  ul.gist { list-style: none; padding-left: 4px; margin: 8px 0; }
+  ul.gist li { margin-bottom: 4px; }
+  ul.gist li b:first-child { color: var(--gold); font-family: var(--head); font-size: 1.15em; }
+  a { color: var(--gold); }
+  footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--muted); }
+  footer b { color: var(--tan); }
+  @media (max-width: 560px) {
+    .topbar { flex-direction: column; align-items: flex-start; gap: 2px; }
+    .topbar .tag { text-align: left; }
+    .hero { padding-top: 32px; }
+  }
+  @media print {
+    :root { --bg: #fff; --surface: #fff; --deep: #f2f2f2; --text: #000; --muted: #333; --tan: #333; --line: #bbb; --gold: #000;
+      --yes: #1d6b3a; --no: #9a2f20; --maybe: #7a5600; --copilot: #0f6cbd; --chatgpt: #0b7d5f; --gemini: #3f55c8; --grok: #444; }
+    b { color: #000; }
+    .card .best { color: #000; }
+    main { padding: 0; max-width: none; }
+    .actions, button.copy, .toolbar, .drawer-bar, .dcaret, .chip { display: none; }
+    details.drawer { border: 0; }
+    details.drawer > summary { padding: 0; }
+    .drawer-body { padding: 0; }
+    .table-wrap { overflow: visible; border: 0; }
+    table { min-width: 0; font-size: 9pt; }
+    .card, .prompt { break-inside: avoid; }
+    h2 { break-after: avoid; margin-top: 28px; }
+    .hero { padding-top: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar"><span class="brand">genai.mil Field Guide</span><span class="tag">Unofficial · Open-source · Not a DoD or Army site</span></div>
+<nav class="toolbar" aria-label="Jump to a tool">
+  <div class="tb-item"><button class="tb-btn" type="button" aria-expanded="false" aria-controls="m-guide" style="--c:var(--gold)">Guide<span class="caret" aria-hidden="true">&#9662;</span></button>
+    <div class="tb-menu" id="m-guide" style="--c:var(--gold)" hidden><a href="#take">My take</a><a href="#rules">My rules</a><a href="#prompts">Seed prompts</a><a href="#features">Compare features</a><a href="#training">Free training</a><a href="#glossary">Words you&rsquo;ll hear</a></div></div>
+  <div class="tb-item"><button class="tb-btn" type="button" aria-expanded="false" aria-controls="m-copilot" style="--c:var(--copilot)"><span class="logo-wrap"><svg class="logo" viewBox="0 0 1322.9 1147.5" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="m711.19 265.2c-27.333 0-46.933 3.07-58.8 9.33 27.067-80.267 47.6-210.13 168-210.13 114.93 0 108.4 138.27 157.87 200.8zm107.33 112.93c-35.467 125.2-70 251.2-110.13 375.33-12.133 36.4-45.733 61.6-84 61.6h-136.27c9.3333-14 16.8-28.933 21.467-45.733 35.467-125.07 70-251.07 110.13-375.33 12.133-36.4 45.733-61.6 84-61.6h136.27c-9.3333 14-16.8 28.934-21.467 45.734m-316.13 704.8c-114.93 0-108.4-138.13-157.87-200.67h267.07c27.467 0 47.067-3.07 58.8-9.33-27.067 80.266-47.6 210-168 210m777.47-758.93h0.93c-32.667-38.266-82.267-57.866-146.67-57.866h-36.4c-34.533-2.8-65.333-26.134-76.533-58.8l-36.4-103.6c-21.463-61.737-80.263-103.74-145.73-103.74h-475.07c-175.6 0-251.2 225.07-292.27 361.33-38.267 127.07-126 341.73-24.267 462.13 46.667 55.067 116.67 57.867 183.07 57.867 34.533 2.8 65.333 26.133 76.533 58.8l36.4 103.6c21.467 61.733 80.267 103.73 145.6 103.73h475.2c175.47 0 251.07-225.07 292.27-361.33 30.8-100.8 68.133-224.93 66.267-324.8 0-50.534-11.2-100-42.933-137.33"/></svg></span>Copilot<span class="caret" aria-hidden="true">&#9662;</span></button>
+    <div class="tb-menu" id="m-copilot" style="--c:var(--copilot)" hidden><p class="tb-best">Best for quick edits and summarizing your own meetings, chats and email.</p><a href="#pick-copilot">What it does</a><a href="#p-copilot">Seed prompts</a><a href="#where">Where to find it</a></div></div>
+  <div class="tb-item"><button class="tb-btn" type="button" aria-expanded="false" aria-controls="m-gemini" style="--c:var(--gemini)"><span class="logo-wrap"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg></span>Gemini<span class="caret" aria-hidden="true">&#9662;</span></button>
+    <div class="tb-menu" id="m-gemini" style="--c:var(--gemini)" hidden><p class="tb-best">Best for big piles of files, research and building agents.</p><a href="#pick-gemini">What it does</a><a href="#p-gemini">Seed prompts</a><a href="#where">Where to find it</a></div></div>
+  <div class="tb-item right"><button class="tb-btn" type="button" aria-expanded="false" aria-controls="m-grok" style="--c:var(--grok)"><span class="logo-wrap"><svg class="logo" viewBox="0 0 512 509.641" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M213.235 306.019l178.976-180.002v.169l51.695-51.763c-.924 1.32-1.86 2.605-2.785 3.89-39.281 54.164-58.46 80.649-43.07 146.922l-.09-.101c10.61 45.11-.744 95.137-37.398 131.836-46.216 46.306-120.167 56.611-181.063 14.928l42.462-19.675c38.863 15.278 81.392 8.57 111.947-22.03 30.566-30.6 37.432-75.159 22.065-112.252-2.92-7.025-11.67-8.795-17.792-4.263l-124.947 92.341zm-25.786 22.437l-.033.034L68.094 435.217c7.565-10.429 16.957-20.294 26.327-30.149 26.428-27.803 52.653-55.359 36.654-94.302-21.422-52.112-8.952-113.177 30.724-152.898 41.243-41.254 101.98-51.661 152.706-30.758 11.23 4.172 21.016 10.114 28.638 15.639l-42.359 19.584c-39.44-16.563-84.629-5.299-112.207 22.313-37.298 37.308-44.84 102.003-1.128 143.81z"/></svg></span>Grok<span class="caret" aria-hidden="true">&#9662;</span></button>
+    <div class="tb-menu" id="m-grok" style="--c:var(--grok)" hidden><p class="tb-best">Best for finished files, skills and automations.</p><a href="#pick-grok">What it does</a><a href="#gistcheck">GIST Check skill</a><a href="#p-grok">Seed prompts</a><a href="#where">Where to find it</a></div></div>
+  <div class="tb-item right"><button class="tb-btn" type="button" aria-expanded="false" aria-controls="m-chatgpt" style="--c:var(--chatgpt)"><span class="logo-wrap"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg></span>ChatGPT<span class="caret" aria-hidden="true">&#9662;</span></button>
+    <div class="tb-menu" id="m-chatgpt" style="--c:var(--chatgpt)" hidden><p class="tb-best">Best for writing, and building a custom GPT your team can share.</p><a href="#pick-chatgpt">What it does</a><a href="#p-chatgpt">Seed prompts</a><a href="#where">Where to find it</a></div></div>
+</nav>
+<main>
+
+<section class="hero">
+<span class="eyebrow">LPD field guide &middot; AEMO &middot; 12 November 2026 &middot; For leaders new to AI</span>
+<h1>Your AI toolkit.</h1>
+<p class="lede">A starting point for the AI tools on your government computer: Microsoft Copilot, Gemini for Government, Grok for Government and ChatGPT Mil. Like an OPORD shell, it gives you the structure. You fill in your own work. See what each tool does, follow a few simple rules, and try a prompt today.</p>
+<p class="byline">By MAJ Hungate, Army Enterprise Marketing Office. The views here are the author&rsquo;s own and are not those of the Army or DoD.</p>
+<div class="actions"><a class="btn" href="#rules">My rules &rarr;</a><a class="btn" href="#features">Compare the tools &rarr;</a><a class="btn" href="#prompts">Get the prompts &rarr;</a></div>
+<div class="rule"><b>Before you paste anything:</b> GenAI.mil is approved for unclassified work, up to and including CUI. Never put in classified information, PII or health information. Copilot follows your DoD 365 rules. And a person checks every output before it leaves the office.</div>
+</section>
+
+<div class="drawer-bar"><p>Open the part you need. Each one stands on its own.</p><button type="button" class="toggle-all" aria-pressed="false">Open all</button></div>
+<details class="drawer" id="take">
+<summary><span class="drawer-text"><h2>My take</h2><span class="teaser">How to get more out of these tools than quick answers, and why it&rsquo;s worth the risk of trying.</span></span><span class="chip">7 ideas</span><span class="dcaret" aria-hidden="true"></span></summary>
+<div class="drawer-body">
+<p>Anything new is a risk. Changing how you already work takes effort, and you don&rsquo;t know how it will turn out. There are more AI tools, courses and tips out there than anyone can use, and almost none of them are built for a specialized office like ours. This guide narrows it down to the tools we can actually open and what each one is good at.</p>
+<p>It won&rsquo;t answer every question in one swing, and nobody gets this right in a day. Treat it as a starting point. Expect to try, adjust and try again, and keep a positive outlook while you do. Most of us open these tools, type a question and stop there. Here&rsquo;s what I&rsquo;d do instead.</p>
+<ol class="take">
+  <li><b>The AI proposes. You approve.</b> I believe that within 30 years, AI will handle most of our day-to-day thinking. What stays human is judgment and skill. So build the habit now: a person checks the work before anything that is expensive, public, permanent or about a person.</li>
+  <li><b>Grok's skills and automations are the most underused feature we have.</b> Grok can produce a finished Word document, PDF, slide deck or spreadsheet, and it can run a task every morning before you arrive. Most people never find these features, because they&rsquo;re behind the + button in the chat box.</li>
+  <li><b>Hand it the whole job, not just a question.</b> You get a finished draft back, not just advice, and you spend your time reviewing instead of building. A chat is like calling a consultant: you get an opinion, then you still do the work. A project or agent is like an analyst at your desk: it opens your files and builds the draft for you. Sign you&rsquo;re ready: you keep re-pasting the same background, or copying answers from one chat into the next.</li>
+  <li><b>One person can build a tool the whole office uses.</b> Do the job once by hand. When it works, save it as a custom GPT, a Gemini agent or a Grok skill so it runs the same way for everyone. Put it on a schedule only after it has run cleanly at least twice. The risk: anyone on GenAI.mil who gets the share link gets what you loaded into it, so check the files first.</li>
+  <li><b>Give it the GIST.</b> GIST is the four things every prompt needs. If you give the AI the gist, it can do the job:
+    <ul class="gist">
+      <li><b>G</b>oal: what you want done, in one sentence.</li>
+      <li><b>I</b>nfo: the background it needs, such as who it&rsquo;s for and why.</li>
+      <li><b>S</b>hape: what the finished product should look like, such as a one-page memo, a table or five slides.</li>
+      <li><b>T</b>raps: what to avoid, such as jargon, guessing, or going over 200 words.</li>
+    </ul>
+    Even a good prompt usually gets you about halfway on the first try. Read the answer and ask: is it right, is it clear, can I use it, and did it answer my question? Then fix the prompt and run it again.
+    <br><b>Let the AI check your GIST for you.</b> Build a <a href="#gistcheck">GIST Check skill</a> in Grok once: copy the prompt and paste it into Skill creator. From then on, add the words &ldquo;GIST check&rdquo; to any prompt. Before Grok writes anything, it checks your prompt for all four parts, tells you what&rsquo;s missing (such as who it&rsquo;s for, or how long it should be) and asks you to fill the gaps. Once your prompt has everything, it does the job. You don&rsquo;t have to memorize a checklist.</li>
+  <li><b>Show it, don't describe it.</b> Upload the actual spreadsheet, slide or memo instead of retyping it. Every time you put a file into your own words, detail gets lost.</li>
+  <li><b>Know when it's guessing.</b> With web search off, the AI only knows what it learned up to its training date. Turn search on for anything current, and check every citation.</li>
+</ol>
+</div>
+</details>
+
+<details class="drawer" id="rules">
+<summary><span class="drawer-text"><h2>My rules</h2><span class="teaser">Short rules for prompts that get a better answer the first time.</span></span><span class="chip">8 rules</span><span class="dcaret" aria-hidden="true"></span></summary>
+<div class="drawer-body">
+<p>I adapted these from Ruben Hassid's <a href="https://ruben.substack.com/p/claude-101">"Claude 101"</a> (How to AI) and rewrote them for the tools on genai.mil.</p>
+<ol class="rules">
+  <li><b>One goal per prompt.</b> Give it the goal and the context, then tell it to ask you questions before it starts.</li>
+  <li><b>Say what "done" looks like.</b> Length, format and audience. Otherwise it guesses.</li>
+  <li><b>Fix the prompt, not the answer.</b> A better prompt improves every answer after it. Arguing in the chat just piles on confusion. So if an answer misses, edit your prompt and run it again.</li>
+  <li><b>Don't lead the witness.</b> Ask neutral questions. If you ask "this is right, isn't it?", it will usually agree.</li>
+  <li><b>Ask for twenty ideas, and make it rank them.</b> The first five will be the obvious ones every AI gives. Have it put a percentage on each idea: how likely a typical AI would be to suggest it. Then look hard at the low-percentage ones. That&rsquo;s where the new thinking is. <a href="#twenty">Use this prompt.</a></li>
+  <li><b>Ask for the real file.</b> If you need a deck or a spreadsheet, have Grok build it, not describe it.</li>
+  <li><b>One project per line of effort.</b> Keep memory short and accurate, and never let it store PII.</li>
+  <li><b>Start fresh when it drifts.</b> When a long chat gets worse, ask for a summary and paste it into a new chat.</li>
+</ol>
+</div>
+</details>
+
+<details class="drawer" id="prompts">
+<summary><span class="drawer-text"><h2>Seed prompts: try each tool on its strength</h2><span class="teaser">Copy, paste, run. Includes the GIST Check skill that checks your prompts for you.</span></span><span class="chip">21 prompts</span><span class="dcaret" aria-hidden="true"></span></summary>
+<div class="drawer-body">
+<p>Here are the rules in practice. Every example is notional. Swap in your own unclassified details, never names or PII.</p>
+
+<h3 class="group" id="p-copilot" style="--c:var(--copilot)"><span class="logo-wrap"><svg class="logo" viewBox="0 0 1322.9 1147.5" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="m711.19 265.2c-27.333 0-46.933 3.07-58.8 9.33 27.067-80.267 47.6-210.13 168-210.13 114.93 0 108.4 138.27 157.87 200.8zm107.33 112.93c-35.467 125.2-70 251.2-110.13 375.33-12.133 36.4-45.733 61.6-84 61.6h-136.27c9.3333-14 16.8-28.933 21.467-45.733 35.467-125.07 70-251.07 110.13-375.33 12.133-36.4 45.733-61.6 84-61.6h136.27c-9.3333 14-16.8 28.934-21.467 45.734m-316.13 704.8c-114.93 0-108.4-138.13-157.87-200.67h267.07c27.467 0 47.067-3.07 58.8-9.33-27.067 80.266-47.6 210-168 210m777.47-758.93h0.93c-32.667-38.266-82.267-57.866-146.67-57.866h-36.4c-34.533-2.8-65.333-26.134-76.533-58.8l-36.4-103.6c-21.463-61.737-80.263-103.74-145.73-103.74h-475.07c-175.6 0-251.2 225.07-292.27 361.33-38.267 127.07-126 341.73-24.267 462.13 46.667 55.067 116.67 57.867 183.07 57.867 34.533 2.8 65.333 26.133 76.533 58.8l36.4 103.6c21.467 61.733 80.267 103.73 145.6 103.73h475.2c175.47 0 251.07-225.07 292.27-361.33 30.8-100.8 68.133-224.93 66.267-324.8 0-50.534-11.2-100-42.933-137.33"/></svg></span>Copilot</h3>
+<div class="prompt">
+  <div class="prompt-head"><div><b>Copilot: tighten a Teams message or email</b><span>Paste your draft into the Copilot tab in Teams.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Rewrite my draft below so it is shorter and clearer for a senior leader. Put the ask in the first sentence. Keep it professional and under 80 words. Give me two versions: one formal, one casual for a Teams chat.
+
+Draft: Hey sir, wanted to touch base on the training schedule thing from last week, we still need a decision on whether land nav is a half day or a full day because S4 needs to lock in buses by Monday and I think a half day is probably fine but wanted your thoughts.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Copilot: pull taskers from a file in your cloud</b><span>Add the file as a source first: a cloud file from Teams or OneDrive.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>From the attached file, list every tasker with the owner's role and the due date, in a table. Then give me a two-sentence bottom line for my boss. Flag anything with no owner or no date.</pre>
+</div>
+
+<h3 class="group" id="p-chatgpt" style="--c:var(--chatgpt)"><span class="logo-wrap"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg></span>ChatGPT Mil</h3>
+<div class="prompt">
+  <div class="prompt-head"><div><b>ChatGPT Mil: turn rough notes into a memo</b><span>Start a Project, paste your notes, run this.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>You are a staff writer. Turn the notes below into a one-page information memo. Use a bottom line up front, then three to five numbered points, then a recommendation. Plain English, active voice, sentences under 25 words. If something is missing, list the questions I need to answer instead of guessing.
+
+Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confirm bus support by Monday. Company A needs 40 more sets of eye protection. Decision needed: land navigation refresher half day or full day.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>ChatGPT Mil: build a custom GPT for your work stream</b><span>Paste into the custom GPT's instructions box, then add your unclassified reference files.</span></div><button class="copy" type="button">Copy</button></div>
+<p style="margin:12px 14px 0">Tip: add two or three starter prompts for questions your team asks every week, and turn on web search if the answers need current information. Keep it on "Only me" until you've removed anything not everyone should see.</p>
+<pre>You are the go-to helper for a notional battalion S3 training section. Answer questions using the attached reference files first, and say which file each answer came from. If the files don't cover the question, say so plainly and don't guess. Keep answers short: a bottom line up front, then up to five bullets. When someone asks for a product, such as a training schedule or a memo, ask up to three questions before you draft it. Never store or repeat names, phone numbers or other personal information.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>ChatGPT Mil: set your custom instructions once</b><span>Settings, then Personalization, then Custom instructions.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>I am a staff officer. Write in plain English for busy leaders. Always start with a one or two sentence bottom line up front. Use short numbered points instead of long paragraphs. If you are not sure about something, tell me instead of guessing, and list what I should check.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>ChatGPT Mil: shape an idea into a one-page concept</b><span>Set reasoning to High first. Good for early concepts and requirements, not code.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Help me turn a rough idea into a one-page concept for my boss. The idea: a shared, unclassified tracker so every section can see upcoming training, room bookings and vehicle requests in one place. Write it with these headings: Problem, Proposed solution, Who uses it, What success looks like in 90 days, Risks, and Decisions needed. Ask me up to three questions first if something important is missing.</pre>
+</div>
+
+<h3 class="group" id="p-gemini" style="--c:var(--gemini)"><span class="logo-wrap"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg></span>Gemini</h3>
+<div class="prompt">
+  <div class="prompt-head"><div><b>Gemini: research with sources</b><span>Use a public topic so the search can help.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Find the most recent public guidance on running effective after action reviews in a small unit. Summarize it in five bullets a new team leader can use tomorrow. Give the source and date for each bullet, and tell me which points you could not confirm.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Gemini: build your first agent</b><span>Paste into Agent Designer's description box.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Create an agent called "Meeting Notes to Action Items." It turns rough, unclassified meeting notes into a one-page summary: the meeting purpose in one sentence, decisions made, a table of tasks (task, owner by role, due date, status) and open questions. It uses only the notes provided, marks missing details as TBD, and never includes names or personal information.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Gemini: turn messy notes into a trip report</b><span>Upload your notes. A photo of handwritten notes works too.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Turn the attached notes into a trip report I can download as a Word document. Use these headings: purpose, key engagements, observations, decisions, action items (a table with task, owner by role and due date) and follow-ups. Use only what is in my notes, mark anything missing as TBD, and leave out names and personal information.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Gemini: deep research on your own files</b><span>Choose Deep Research, attach several unclassified documents, then run this.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Read all the attached documents and write a report on what they agree on, where they conflict, and what is missing. Cite the document and section for every point, so I can check it. End with three questions I should ask before making a decision.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Gemini: a manager agent with a small team</b><span>Agent Designer. Then use the Preview tab to test it before you share it.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Create a manager agent called "Staff Product Builder." When I give it a topic and unclassified source files, it assigns the work to three sub-agents: a researcher that pulls the key facts from the files, an analyst that lists options with pros, cons and risks, and a writer that turns the result into a one-page information paper with a bottom line up front. The manager checks that every fact traces back to a source file and flags anything it can't confirm.</pre>
+</div>
+
+<h3 class="group" id="p-grok" style="--c:var(--grok)"><span class="logo-wrap"><svg class="logo" viewBox="0 0 512 509.641" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M213.235 306.019l178.976-180.002v.169l51.695-51.763c-.924 1.32-1.86 2.605-2.785 3.89-39.281 54.164-58.46 80.649-43.07 146.922l-.09-.101c10.61 45.11-.744 95.137-37.398 131.836-46.216 46.306-120.167 56.611-181.063 14.928l42.462-19.675c38.863 15.278 81.392 8.57 111.947-22.03 30.566-30.6 37.432-75.159 22.065-112.252-2.92-7.025-11.67-8.795-17.792-4.263l-124.947 92.341zm-25.786 22.437l-.033.034L68.094 435.217c7.565-10.429 16.957-20.294 26.327-30.149 26.428-27.803 52.653-55.359 36.654-94.302-21.422-52.112-8.952-113.177 30.724-152.898 41.243-41.254 101.98-51.661 152.706-30.758 11.23 4.172 21.016 10.114 28.638 15.639l-42.359 19.584c-39.44-16.563-84.629-5.299-112.207 22.313-37.298 37.308-44.84 102.003-1.128 143.81z"/></svg></span>Grok</h3>
+<div class="prompt featured" id="gistcheck">
+  <div class="prompt-head"><div><b>Grok: build a GIST Check skill</b><span>Turn on Skill creator and paste this. After that, end any prompt with &ldquo;GIST check.&rdquo; In ChatGPT Mil, you can paste it into Custom instructions instead.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Help me build a skill called "GIST Check." Use it whenever my prompt includes the words "GIST check." Before doing any work, check my prompt for four parts: Goal (what exactly I want done), Info (the background, including who it's for), Shape (the format and length, such as one page, a table or five slides) and Traps (what to avoid). Reply first with a short table that lists each part as Clear or Missing, with one line on what's missing, such as "no audience" or "no length." Then ask me up to three questions to fill the gaps, and show a better version of my prompt with the gaps marked [like this]. Don't start the task until I answer or say "go." If all four parts are clear, say "GIST complete" and do the task. Ask me any questions you need before you build it.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Grok: see why web search matters</b><span>Ask this twice: once with the Web switch off, then on. Compare the answers.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>What is today's date, who is the current President of the United States, and what is the most recent date your information covers?</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Grok: make a real slide deck</b><span>Click + in the chat box, add the PowerPoint skill, then run this.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Make a five-slide PowerPoint for a 10-minute leader brief on a notional office move. Slide 1: title and bottom line. Slide 2: why we're moving. Slide 3: the timeline as a simple table. Slide 4: risks and how we reduce them. Slide 5: decisions needed from the commander. Plain style, large text, no more than four bullets a slide.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Grok: set up a daily automation</b><span>Open a project, choose Automations, and use this as the task.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Every weekday at 0700, search the web for public news from the last 24 hours about [a public topic your section tracks]. Write a half-page roundup: a two-sentence bottom line, then up to five bullets, each with its source and date. End with one line on anything that may need a leader's attention. Use public sources only.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Grok: build your own skill</b><span>Turn on Skill creator, then describe the skill you want.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Help me build a skill called "Executive Summary." When I give it a document, it writes a summary of no more than 200 words for a senior leader: a bottom line up front, three key points, and the decision or action needed. It uses plain English, avoids jargon and filler phrases, and flags anything in the document that looks out of date. Ask me any questions you need before you build it.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Grok: teach it your format once</b><span>Skill creator. Attach one good, unclassified example of the product first.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Help me build a skill called "Our Memo Format." Use the attached example as the template: copy its headings, order, length and tone exactly. When I give it rough notes, it fills in that format, keeps every fact from my notes, marks anything missing as TBD, and adds nothing I didn't provide. Ask me any questions you need before you build it.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Grok: analyze a spreadsheet</b><span>Switch to Expert mode and upload an unclassified Excel or CSV file. It may take a few minutes.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Analyze the attached spreadsheet. Tell me in three sentences what it shows, then list the three biggest trends or outliers with the numbers behind them. Build one chart that shows the most important trend, and give me a cleaned-up Excel file I can download. Tell me any data problems you found, such as blanks or duplicates.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Grok: think a decision through</b><span>Switch to Expert mode first.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Help me compare two options for a notional office move. Option A: move all at once over one weekend. Option B: move one section per week for four weeks. Build a short decision matrix on mission impact, cost, risk and workload. Then argue against your own recommendation in three sentences and tell me what information would change your answer.</pre>
+</div>
+
+<h3 class="group" id="p-all" style="--c:var(--gold)">All four tools</h3>
+<div class="prompt" id="twenty">
+  <div class="prompt-head"><div><b>All four: twenty ideas, ranked by how obvious they are</b><span>Works in any tool. Replace the bracket with your problem.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Give me 20 ideas for [your problem, for example: getting more junior leaders to use our office's AI tools]. For each idea, estimate the percent chance that a typical AI assistant would suggest it, from 0 to 100 percent. Sort the list from most likely to least likely. At least eight ideas should be under 10 percent. Then pick the two low-percentage ideas you think are most worth trying, and tell me in one sentence each why.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>All four: same prompt, side by side</b><span>Run this in each tool and compare the answers.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>In 120 words or less, explain to a new staff officer what CUI is, what it is not, and one common mistake people make when handling it. End with one question I should ask my security manager.</pre>
+</div>
+</div>
+</details>
+
+<details class="drawer" id="where">
+<summary><span class="drawer-text"><h2>Where to find them</h2><span class="teaser">genai.mil for Gemini, Grok and ChatGPT Mil. Teams and Outlook for Copilot.</span></span><span class="chip">2 places</span><span class="dcaret" aria-hidden="true"></span></summary>
+<div class="drawer-body">
+<div class="cards">
+  <div class="card" style="--c: var(--gold)">
+    <h3>genai.mil</h3>
+    <p>Open genai.mil on your government computer and sign in with your CAC. This one page is where you pick <b>Gemini</b>, <b>ChatGPT Mil</b> or <b>Grok</b>.</p>
+    <p>The menu across the top has About, Training, Events and Resources. Start with Training.</p>
+    <p class="where">You'll also see an API key setting. That is for approved developers only, and you don't need it to use the tools.</p>
+  </div>
+  <div class="card" style="--c: var(--copilot)">
+    <h3>Copilot</h3>
+    <p>Copilot is not on genai.mil. In <b>Teams</b>, click the Copilot tab on the far left. It is also in <b>Outlook</b>.</p>
+    <p>It opens as a simple chat. You can start new chats, go back to recent ones, and change settings.</p>
+  </div>
+</div>
+</div>
+</details>
+
+<details class="drawer" id="pick">
+<summary><span class="drawer-text"><h2>Pick a tool in 10 seconds</h2><span class="teaser">What each tool is best at, on one card each.</span></span><span class="chip">4 cards</span><span class="dcaret" aria-hidden="true"></span></summary>
+<div class="drawer-body">
+<div class="cards quad">
+  <div class="card" id="pick-copilot" style="--c: var(--copilot)">
+    <h3 class="tool-name"><span class="logo-wrap" style="color:var(--copilot)"><svg class="logo" viewBox="0 0 1322.9 1147.5" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="m711.19 265.2c-27.333 0-46.933 3.07-58.8 9.33 27.067-80.267 47.6-210.13 168-210.13 114.93 0 108.4 138.27 157.87 200.8zm107.33 112.93c-35.467 125.2-70 251.2-110.13 375.33-12.133 36.4-45.733 61.6-84 61.6h-136.27c9.3333-14 16.8-28.933 21.467-45.733 35.467-125.07 70-251.07 110.13-375.33 12.133-36.4 45.733-61.6 84-61.6h136.27c-9.3333 14-16.8 28.934-21.467 45.734m-316.13 704.8c-114.93 0-108.4-138.13-157.87-200.67h267.07c27.467 0 47.067-3.07 58.8-9.33-27.067 80.266-47.6 210-168 210m777.47-758.93h0.93c-32.667-38.266-82.267-57.866-146.67-57.866h-36.4c-34.533-2.8-65.333-26.134-76.533-58.8l-36.4-103.6c-21.463-61.737-80.263-103.74-145.73-103.74h-475.07c-175.6 0-251.2 225.07-292.27 361.33-38.267 127.07-126 341.73-24.267 462.13 46.667 55.067 116.67 57.867 183.07 57.867 34.533 2.8 65.333 26.133 76.533 58.8l36.4 103.6c21.467 61.733 80.267 103.73 145.6 103.73h475.2c175.47 0 251.07-225.07 292.27-361.33 30.8-100.8 68.133-224.93 66.267-324.8 0-50.534-11.2-100-42.933-137.33"/></svg></span>Copilot</h3>
+    <p class="best">Best for: quick edits, and summarizing your own meetings, chats and email.</p>
+    <ul>
+      <li>Summarizes your Teams meetings, chats, email and documents</li>
+      <li>Finds files and people you already have access to</li>
+      <li>Pulls out action items and key points</li>
+      <li>No internet and no images in the government version</li>
+    </ul>
+    <p class="where">Where: the Copilot tab on the left side of Teams, or in Outlook. Not on GenAI.mil.</p>
+  </div>
+  <div class="card" id="pick-chatgpt" style="--c: var(--chatgpt)">
+    <h3 class="tool-name"><span class="logo-wrap" style="color:var(--chatgpt)"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg></span>ChatGPT Mil</h3>
+    <p class="best">Best for: writing documents and building your own helper.</p>
+    <ul>
+      <li>Custom GPTs: your own assistant, loaded with your files</li>
+      <li>Explore GPTs to use what others built</li>
+      <li>Projects keep files, chats and memory together</li>
+      <li>Helper GPTs coach your prompts</li>
+    </ul>
+    <p class="where">Where: GenAI.mil, since 31 Aug 2026</p>
+  </div>
+  <div class="card" id="pick-gemini" style="--c: var(--gemini)">
+    <h3 class="tool-name"><span class="logo-wrap" style="color:var(--gemini)"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg></span>Gemini</h3>
+    <p class="best">Best for: long research, big stacks of documents, and building agents.</p>
+    <ul>
+      <li>Reads documents, images, audio, video and handwritten notes</li>
+      <li>Takes a huge pile of files at once</li>
+      <li>Deep Research writes long reports with citations</li>
+      <li>Agent Designer, with manager agents and schedules</li>
+    </ul>
+    <p class="where">Where: GenAI.mil, since 9 Dec 2025</p>
+  </div>
+  <div class="card" id="pick-grok" style="--c: var(--grok)">
+    <h3 class="tool-name"><span class="logo-wrap" style="color:var(--grok)"><svg class="logo" viewBox="0 0 512 509.641" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M213.235 306.019l178.976-180.002v.169l51.695-51.763c-.924 1.32-1.86 2.605-2.785 3.89-39.281 54.164-58.46 80.649-43.07 146.922l-.09-.101c10.61 45.11-.744 95.137-37.398 131.836-46.216 46.306-120.167 56.611-181.063 14.928l42.462-19.675c38.863 15.278 81.392 8.57 111.947-22.03 30.566-30.6 37.432-75.159 22.065-112.252-2.92-7.025-11.67-8.795-17.792-4.263l-124.947 92.341zm-25.786 22.437l-.033.034L68.094 435.217c7.565-10.429 16.957-20.294 26.327-30.149 26.428-27.803 52.653-55.359 36.654-94.302-21.422-52.112-8.952-113.177 30.724-152.898 41.243-41.254 101.98-51.661 152.706-30.758 11.23 4.172 21.016 10.114 28.638 15.639l-42.359 19.584c-39.44-16.563-84.629-5.299-112.207 22.313-37.298 37.308-44.84 102.003-1.128 143.81z"/></svg></span>Grok</h3>
+    <p class="best">Best for: making real files and running tasks on a schedule.</p>
+    <ul>
+      <li>Skills make Word, PDF, PowerPoint and Excel files</li>
+      <li>Automations run tasks daily or weekly</li>
+      <li>Team spaces share projects and skills</li>
+      <li>Expert mode runs code, but expect waits</li>
+    </ul>
+    <p class="where">Where: GenAI.mil, since 31 Aug 2026</p>
+  </div>
+</div>
+</div>
+</details>
+
+<details class="drawer" id="features">
+<summary><span class="drawer-text"><h2>Feature by feature</h2><span class="teaser">Every tool side by side: what it can do, and what it can&rsquo;t yet.</span></span><span class="chip">24 features</span><span class="dcaret" aria-hidden="true"></span></summary>
+<div class="drawer-body">
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th><span class="tool-name"><span class="logo-wrap" style="color:var(--copilot)"><svg class="logo" viewBox="0 0 1322.9 1147.5" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="m711.19 265.2c-27.333 0-46.933 3.07-58.8 9.33 27.067-80.267 47.6-210.13 168-210.13 114.93 0 108.4 138.27 157.87 200.8zm107.33 112.93c-35.467 125.2-70 251.2-110.13 375.33-12.133 36.4-45.733 61.6-84 61.6h-136.27c9.3333-14 16.8-28.933 21.467-45.733 35.467-125.07 70-251.07 110.13-375.33 12.133-36.4 45.733-61.6 84-61.6h136.27c-9.3333 14-16.8 28.934-21.467 45.734m-316.13 704.8c-114.93 0-108.4-138.13-157.87-200.67h267.07c27.467 0 47.067-3.07 58.8-9.33-27.067 80.266-47.6 210-168 210m777.47-758.93h0.93c-32.667-38.266-82.267-57.866-146.67-57.866h-36.4c-34.533-2.8-65.333-26.134-76.533-58.8l-36.4-103.6c-21.463-61.737-80.263-103.74-145.73-103.74h-475.07c-175.6 0-251.2 225.07-292.27 361.33-38.267 127.07-126 341.73-24.267 462.13 46.667 55.067 116.67 57.867 183.07 57.867 34.533 2.8 65.333 26.133 76.533 58.8l36.4 103.6c21.467 61.733 80.267 103.73 145.6 103.73h475.2c175.47 0 251.07-225.07 292.27-361.33 30.8-100.8 68.133-224.93 66.267-324.8 0-50.534-11.2-100-42.933-137.33"/></svg></span>Copilot</span></th>
+      <th><span class="tool-name"><span class="logo-wrap" style="color:var(--chatgpt)"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg></span>ChatGPT Mil</span></th>
+      <th><span class="tool-name"><span class="logo-wrap" style="color:var(--gemini)"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg></span>Gemini</span></th>
+      <th><span class="tool-name"><span class="logo-wrap" style="color:var(--grok)"><svg class="logo" viewBox="0 0 512 509.641" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M213.235 306.019l178.976-180.002v.169l51.695-51.763c-.924 1.32-1.86 2.605-2.785 3.89-39.281 54.164-58.46 80.649-43.07 146.922l-.09-.101c10.61 45.11-.744 95.137-37.398 131.836-46.216 46.306-120.167 56.611-181.063 14.928l42.462-19.675c38.863 15.278 81.392 8.57 111.947-22.03 30.566-30.6 37.432-75.159 22.065-112.252-2.92-7.025-11.67-8.795-17.792-4.263l-124.947 92.341zm-25.786 22.437l-.033.034L68.094 435.217c7.565-10.429 16.957-20.294 26.327-30.149 26.428-27.803 52.653-55.359 36.654-94.302-21.422-52.112-8.952-113.177 30.724-152.898 41.243-41.254 101.98-51.661 152.706-30.758 11.23 4.172 21.016 10.114 28.638 15.639l-42.359 19.584c-39.44-16.563-84.629-5.299-112.207 22.313-37.298 37.308-44.84 102.003-1.128 143.81z"/></svg></span>Grok</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><th>Chat</th><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td></tr>
+    <tr><th>Upload a file</th><td class="y">Yes: work files, images, Teams and OneDrive files</td><td class="y">Yes: files in chat, folders in Projects, up to 2 GB</td><td class="y">Yes: docs, CSVs, images, audio, video, handwritten notes</td><td class="y">Yes: files and folders. Large files may hit a limit</td></tr>
+    <tr><th>Search the web</th><td class="n">No. It can't reach the internet</td><td class="y">Yes, with citations, from a web copy hours behind</td><td class="y">Yes: a private Google index, hours behind</td><td class="y">Yes: Web switch, with citations. Off = knowledge to Jan 2024</td></tr>
+    <tr><th>Make Word, PDF, PowerPoint or Excel files</th><td class="m">Only with the right license</td><td class="n">Not yet. Word and PDF export coming</td><td class="y">Yes: downloadable Word documents and reports</td><td class="y">Yes: Word, PDF, PowerPoint and Excel, with skills</td></tr>
+    <tr><th>Build your own assistant</th><td class="n">Limited. Power Platform agents are restricted</td><td class="y">Yes: custom GPTs with your files and web search</td><td class="y">Yes: Agent Designer, no code. Manager agents delegate</td><td class="y">Yes: agents, plus skills from Skill creator</td></tr>
+    <tr><th>Run tasks on a schedule</th><td class="m">? Not in the training I watched</td><td class="m">? Not in the training I watched</td><td class="y">Yes: an agent's Schedule tab, such as daily at 0700</td><td class="y">Yes: project automations, daily or weekly</td></tr>
+    <tr><th>Run code and analyze data</th><td class="m">? Not in the training I watched</td><td class="n">Not yet, coming</td><td class="m">? Not in the training I watched</td><td class="y">Yes: Expert runs Python in a sandbox</td></tr>
+    <tr><th>Deep research (long report with sources)</th><td class="m">? Not in the training I watched</td><td class="n">Not yet</td><td class="y">Yes: Deep Research, even on your own files</td><td class="m">? Not in the training I watched</td></tr>
+    <tr><th>Make images</th><td class="n">No</td><td class="n">Not yet, coming</td><td class="y">Yes: a separate image option</td><td class="m">? Not in the training I watched</td></tr>
+    <tr><th>How much it can read at once</th><td class="m">? Not in the training I watched</td><td class="m">? Not in the training I watched</td><td class="y">About 1 million tokens, a few thousand pages</td><td class="m">? Not in the training I watched</td></tr>
+    <tr><th>Connectors</th><td class="y">Built in: your Microsoft 365 files, email, chats, people</td><td class="n">Not yet. Office 365 and SharePoint coming</td><td class="n">Not yet. Office 365, SharePoint, GAMECHANGER, Advana planned</td><td class="n">Admins only. Email, SharePoint, GAMECHANGER planned</td></tr>
+    <tr><th>Share what you build</th><td class="m">? Not in the training I watched</td><td class="y">By link, GenAI.mil users only. You can turn links off</td><td class="y">Share agents with named people by email</td><td class="y">Team spaces share projects and skills</td></tr>
+    <tr><th>Keep work together</th><td>Recent chats and pages only</td><td class="y">Projects: instructions, files, chats and project memory</td><td class="y">Knowledge files on chats and agents</td><td class="y">Projects: instructions, files, skills and automations</td></tr>
+    <tr><th>Reasoning modes</th><td class="y">Quick response, or think deeper</td><td class="y">Instant, Low, Medium, High</td><td class="y">Pick a model: Flash is faster, Pro thinks harder</td><td class="y">Fast, Expert, or Auto. Expert can be slow</td></tr>
+    <tr><th>Memory across chats</th><td class="m">? Not in the training I watched</td><td class="y">Yes, in settings. Not inside custom GPTs</td><td class="m">? Not confirmed here</td><td class="y">Yes: personal memory, under data controls</td></tr>
+    <tr><th>Custom instructions and tone</th><td class="m">? Not in the training I watched</td><td class="y">Yes: four tones, plus custom and project instructions</td><td class="m">? Not confirmed here</td><td class="y">Yes: concise, formal, tutor, comprehensive or custom</td></tr>
+    <tr><th>Training</th><td>Not on genai.mil</td><td class="y">The most: help center, 8 videos, prompt packs</td><td class="y">Courses, live workshops, office hours, agent training</td><td class="y">Courses, live sessions, help center, user guide PDF</td></tr>
+    <tr><th>Starter prompts built in</th><td class="y">Yes, a prompt library</td><td class="y">Prompt packs by role, plus helper GPTs</td><td class="y">Ready-made agents for AARs, info papers, summaries</td><td class="m">? Not in the training I watched</td></tr>
+    <tr><th>Underlying model named</th><td class="n">No</td><td class="y">GPT-5.4. Custom GPTs can also use GPT-5.6 Terra</td><td class="y">2.5 Flash and Pro. 3 Flash and 3.1 Pro in preview</td><td class="y">Fast is Grok 4.3, Expert is 4.5. 4.6 in beta</td></tr>
+    <tr><th>Not available yet</th><td class="n">Web search, images, plugins, third-party add-ons</td><td class="n">Running code, file export, connectors, images, voice</td><td class="n">Connectors, NotebookLM, voice, single-site search</td><td class="n">Your own connectors, event triggers, agent teams, coding tool</td></tr>
+    <tr><th>Works inside Outlook, Word, Teams</th><td class="y">Teams and Outlook. Word, PowerPoint, Excel need a license</td><td class="n">No</td><td class="n">No</td><td class="n">No</td></tr>
+    <tr><th>Your data used to train the AI</th><td class="m">? Chats are logged for auditing</td><td class="y">No. Your data stays U.S. government property</td><td class="m">? Not in the training I watched</td><td class="m">? Not in the training I watched</td></tr>
+    <tr><th>Data allowed</th><td>Unclassified, DoD 365 rules</td><td>Up to CUI (IL5)</td><td>Up to CUI (IL5)</td><td>Up to CUI (IL5)</td></tr>
+    <tr><th>Sign in</th><td>DoD 365 account</td><td>genai.mil with your CAC</td><td>genai.mil with your CAC</td><td>genai.mil with your CAC</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="legend"><span class="y">Yes</span> = confirmed in public sources or seen on screen on 10 Nov 2026. <span class="m">?</span> = not in my walkthrough or the training I watched. It may exist, so check on screen. Features change often.</p>
+</div>
+</details>
+
+<details class="drawer" id="training">
+<summary><span class="drawer-text"><h2>Free training on genai.mil</h2><span class="teaser">Where to find the free courses, help pages and live events.</span></span><span class="chip">5 steps</span><span class="dcaret" aria-hidden="true"></span></summary>
+<div class="drawer-body">
+<p>There's free training for all three genai.mil tools: Gemini, ChatGPT Mil and Grok. It takes a few clicks to find.</p>
+<ol class="steps">
+  <li>Open genai.mil and sign in with your CAC.</li>
+  <li>Click <b>Training</b> in the top menu. Pick a tool to see its self-paced courses, videos and quick references.</li>
+  <li>Use the links there to each tool's own help pages, such as help.openai.mil for ChatGPT Mil and docs.grok.genai.mil for Grok. They only open on the government network.</li>
+  <li>Click <b>Events</b> to register for a live workshop or office hours for more hands-on practice.</li>
+  <li>Spend ten minutes clicking around. Most of what's on this page, you'll find there too.</li>
+</ol>
+</div>
+</details>
+
+<details class="drawer" id="glossary">
+<summary><span class="drawer-text"><h2>Words you'll hear, in plain English</h2><span class="teaser">AI terms you&rsquo;ll hear, one line each.</span></span><span class="chip">26 terms</span><span class="dcaret" aria-hidden="true"></span></summary>
+<div class="drawer-body">
+<div class="table-wrap">
+<table class="glossary">
+  <tbody>
+    <tr><th>AI model</th><td>The engine behind the chat box. Gemini, GPT and Grok are models from three different companies.</td></tr>
+    <tr><th>Prompt</th><td>What you type to the AI. Say who it's for, what you want and the format.</td></tr>
+    <tr><th>GPT</th><td>Short for <b>Generative Pre-trained Transformer</b>, OpenAI's name for the model behind ChatGPT.</td></tr>
+    <tr><th>Custom GPT</th><td>Your own version of ChatGPT, set up once with instructions and files for one job. Only ChatGPT Mil has these.</td></tr>
+    <tr><th>Everyone can chat</th><td>A ChatGPT Mil setting that makes a share link anyone on GenAI.mil can use. Remove sensitive files first.</td></tr>
+    <tr><th>Reasoning effort</th><td>How hard the AI thinks before it answers. Higher is slower but more careful.</td></tr>
+    <tr><th>Agent</th><td>An assistant that carries out several steps on its own, such as reading notes and drafting a summary.</td></tr>
+    <tr><th>Manager agent</th><td>A Gemini agent that splits a job and hands the pieces to other agents, like a project manager.</td></tr>
+    <tr><th>Knowledge file</th><td>A file you attach so the AI answers from your material, such as an SOP or a spreadsheet.</td></tr>
+    <tr><th>RAG (retrieval-augmented generation)</th><td>The AI looks up the right passages in your files before it answers, like an open-book test.</td></tr>
+    <tr><th>Deep research</th><td>The AI spends several minutes searching and reading, then writes a long report with citations.</td></tr>
+    <tr><th>Multimodal</th><td>The AI can take in pictures, scans, audio and video, not just text.</td></tr>
+    <tr><th>Project or workspace</th><td>A folder that keeps related chats, files and instructions together.</td></tr>
+    <tr><th>Team space</th><td>A shared area in Grok where colleagues use the same projects and skills.</td></tr>
+    <tr><th>Automation</th><td>A task the AI runs by itself on a schedule, such as every weekday at 0700.</td></tr>
+    <tr><th>Custom instructions</th><td>Standing rules the AI follows in every chat, such as &ldquo;lead with the bottom line.&rdquo;</td></tr>
+    <tr><th>Memory</th><td>The AI remembers facts about you between chats. Check what it saved, and never let it store PII.</td></tr>
+    <tr><th>Connector</th><td>A plug that lets the AI read from a system you already use, such as email or a shared drive.</td></tr>
+    <tr><th>Skill</th><td>A saved recipe for one kind of job, such as &ldquo;make a PowerPoint,&rdquo; that the AI follows the same way every time.</td></tr>
+    <tr><th>Token and context window</th><td>A token is a small piece of a word. The context window is how much the AI can read at once.</td></tr>
+    <tr><th>Sandbox</th><td>A walled-off computer the AI uses to run code and build files without touching anything else.</td></tr>
+    <tr><th>Training cutoff</th><td>The date the AI stopped learning. Turn on web search for anything newer.</td></tr>
+    <tr><th>Web search index</th><td>The copy of the internet a tool searches. It may be a few hours behind the live web.</td></tr>
+    <tr><th>Citation</th><td>A link to where the answer came from. Click it and check it.</td></tr>
+    <tr><th>Hallucination</th><td>When the AI states something false with confidence. That's why a person checks every output.</td></tr>
+    <tr><th>CUI and IL5</th><td>CUI is sensitive but unclassified information. IL5 is the security level genai.mil is approved for: it covers CUI, not classified.</td></tr>
+  </tbody>
+</table>
+</div>
+</div>
+</details>
+
+<details class="drawer" id="try" open>
+<summary><span class="drawer-text"><h2>Try it in 3 steps</h2><span class="teaser">Open a tool, paste a prompt, check the answer.</span></span><span class="chip">3 steps</span><span class="dcaret" aria-hidden="true"></span></summary>
+<div class="drawer-body">
+<ol class="steps">
+  <li>On your government computer, open the tool: genai.mil with your CAC, or the Copilot tab in Teams.</li>
+  <li>Copy one <a href="#prompts">seed prompt</a> and paste it in. Add &ldquo;GIST check&rdquo; if you set up the skill.</li>
+  <li>Check the answer. Fix one thing in the prompt and run it again.</li>
+</ol>
+</div>
+</details>
+
+<footer>
+  <p><b>Open-source summary as of 10 November 2026. Unofficial.</b> Verify against current local IT/G6 policy and official GenAI.mil guidance before use. Not affiliated with or endorsed by DoD or any vendor.</p>
+  <p>The genai.mil front page, training, and the Copilot, ChatGPT Mil and Grok details come from a hands-on walkthrough on 10 Nov 2026. More ChatGPT Mil details (data handling, sharing, web search, what's coming) come from a ChatGPT Mil training session in Nov 2026 and OpenAI's description of ChatGPT on GenAI.mil. Gemini details (models, Deep Research, Agent Designer, connectors) come from a GenAI.mil Gemini training video viewed Nov 2026; image generation was seen on screen. More Grok details (citations, models, sandbox, projects, skills, what's planned) come from a Grok on GenAI.mil training video viewed Nov 2026. Copilot capabilities and limits reflect the author's own use in Nov 2026; Word, PowerPoint and Excel features depend on each office's license. Commercial Gemini comparisons come from Google's public help pages. Other sources: DoD CTO office, GenAI.mil launch (9 Dec 2025) and Agent Designer launch (Mar 2026); DefenseScoop, 10 Mar and 31 Aug 2026; Military Times, 31 Aug 2026; ExecutiveGov, 1 Sep 2026; Defense One, 23 Sep 2026; Microsoft Tech Community, "New AI capabilities available for Government environments" (2025).</p>
+</footer>
+
+</main>
+<script>
+  (function () {
+    var drawers = [].slice.call(document.querySelectorAll('details.drawer'));
+    var toggle = document.querySelector('button.toggle-all');
+    function sync() {
+      var all = drawers.every(function (d) { return d.open; });
+      toggle.textContent = all ? 'Close all' : 'Open all';
+      toggle.setAttribute('aria-pressed', all ? 'true' : 'false');
+    }
+    function reveal(id) {
+      var el = id && document.getElementById(id);
+      if (!el) return null;
+      for (var n = el; n; n = n.parentElement) { if (n.tagName === 'DETAILS') n.open = true; }
+      sync();
+      return el;
+    }
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var el = reveal(a.getAttribute('href').slice(1));
+      if (el) { e.preventDefault(); history.pushState(null, '', a.getAttribute('href')); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+    toggle.addEventListener('click', function () {
+      var openAll = !drawers.every(function (d) { return d.open; });
+      drawers.forEach(function (d) { d.open = openAll; });
+      sync();
+    });
+    drawers.forEach(function (d) { d.addEventListener('toggle', sync); });
+    window.addEventListener('beforeprint', function () { drawers.forEach(function (d) { d.open = true; }); });
+    function fromHash() { var el = reveal(location.hash.slice(1)); if (el) el.scrollIntoView(); }
+    window.addEventListener('hashchange', fromHash);
+    fromHash(); sync();
+  })();
+  (function () {
+    var btns = document.querySelectorAll('.tb-btn');
+    function closeAll(except) {
+      btns.forEach(function (b) {
+        if (b === except) return;
+        b.setAttribute('aria-expanded', 'false');
+        document.getElementById(b.getAttribute('aria-controls')).hidden = true;
+      });
+    }
+    btns.forEach(function (b) {
+      var menu = document.getElementById(b.getAttribute('aria-controls'));
+      b.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = b.getAttribute('aria-expanded') === 'true';
+        closeAll(b);
+        b.setAttribute('aria-expanded', open ? 'false' : 'true');
+        menu.hidden = open;
+      });
+      menu.addEventListener('click', function (e) { if (e.target.closest('a')) closeAll(); });
+    });
+    document.addEventListener('click', function (e) { if (!e.target.closest('.tb-item')) closeAll(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
+  })();
+  document.querySelectorAll('button.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.closest('.prompt').querySelector('pre').innerText;
+      function done() { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1500); }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else { fallback(); }
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+</script>
+</body>
+</html>
