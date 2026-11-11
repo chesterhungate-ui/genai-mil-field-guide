@@ -274,6 +274,13 @@
   @media (max-width: 640px) { ol.rgrid { grid-template-columns: 1fr; } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
   @media print { li.build[hidden], .panel[hidden] { display: block !important; } .stack-ctl, .tabs { display: none !important; } li.build { margin-left: 0; } }
+  section.drawer { border: 1px solid var(--line); border-left: 4px solid var(--gold); background: var(--surface); margin: 0 0 16px; }
+  .hero + section.drawer { margin-top: 36px; }
+  .drawer-head { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-bottom: 1px solid var(--line); }
+  .drawer-head h2 { margin: 0 0 4px; font-size: clamp(1.35rem, 3.4vw, 1.9rem); }
+  section.drawer .path > li, section.drawer .rcard { animation: rise .35s ease both; animation-delay: calc(var(--i, 0) * 70ms); }
+  details.drawer#prompts { border-left-color: var(--gold); margin-bottom: 16px; }
+  @media (max-width: 560px) { .drawer-head { padding: 14px 12px; gap: 10px; } }
   @media print {
     :root { --bg: #fff; --surface: #fff; --deep: #f2f2f2; --text: #000; --muted: #333; --tan: #333; --line: #bbb; --gold: #000;
       --yes: #1d6b3a; --no: #9a2f20; --maybe: #7a5600; --copilot: #0f6cbd; --chatgpt: #0b7d5f; --gemini: #3f55c8; --grok: #444; }
@@ -317,9 +324,8 @@
 <div class="rule"><b>Before you paste anything:</b> GenAI.mil is approved for unclassified work, up to and including CUI. Never put in classified information, PII or health information. Copilot follows your DoD 365 rules. And a person checks every output before it leaves the office.</div>
 </section>
 
-<div class="drawer-bar"><p>Open the part you need. Each one stands on its own.</p><button type="button" class="toggle-all" aria-pressed="false">Open all</button></div>
-<details class="drawer" id="take">
-<summary><span class="drawer-text"><h2>My take</h2><span class="teaser">Seven ideas, built one at a time. Each starts with one sentence, then the why.</span></span><span class="chip">7 ideas</span><span class="dcaret" aria-hidden="true"></span></summary>
+<section class="drawer open-sec" id="take">
+<div class="drawer-head"><span class="drawer-text"><h2>My take</h2><span class="teaser">Seven ideas, built one at a time. Each starts with one sentence, then the why.</span></span><span class="chip">7 ideas</span></div>
 <div class="drawer-body">
 <p>Anything new is a risk. Changing how you already work takes effort, and you don&rsquo;t know how it will turn out. There are more AI tools, courses and tips out there than anyone can use, and almost none of them are built for a specialized office like ours. This guide narrows it down to the tools we can actually open and what each one is good at.</p>
 <p>It won&rsquo;t answer every question in one swing, and nobody gets this right in a day. Treat it as a starting point. Expect to try, adjust and try again, and keep a positive outlook while you do. Most of us open these tools, type a question and stop there. Here&rsquo;s what I&rsquo;d do instead.</p>
@@ -334,15 +340,15 @@
 </ol>
 <div class="stack-ctl"><span class="stack-count">1 of 7</span><button type="button" class="btn stack-next">Next idea &darr;</button><button type="button" class="btn ghost stack-all">Show all 7</button></div>
 </div>
-</details>
+</section>
 
-<details class="drawer" id="rules">
-<summary><span class="drawer-text"><h2>My rules</h2><span class="teaser">Short rules for prompts that get a better answer the first time.</span></span><span class="chip">8 rules</span><span class="dcaret" aria-hidden="true"></span></summary>
+<section class="drawer open-sec" id="rules">
+<div class="drawer-head"><span class="drawer-text"><h2>My rules</h2><span class="teaser">Short rules for prompts that get a better answer the first time.</span></span><span class="chip">8 rules</span></div>
 <div class="drawer-body">
 <p>I adapted these from Ruben Hassid's <a href="https://ruben.substack.com/p/claude-101">"Claude 101"</a> (How to AI) and rewrote them for the tools on genai.mil.</p>
 <ol class="rgrid"><li class="rcard" style="--i:0"><span class="rnum">1</span><span class="step-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><div><b>One goal per prompt.</b><p>Give it the goal and the context, then tell it to ask you questions before it starts.</p></div></li><li class="rcard" style="--i:1"><span class="rnum">2</span><span class="step-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"/></svg></span><div><b>Say what "done" looks like.</b><p>Length, format and audience. Otherwise it guesses.</p></div></li><li class="rcard" style="--i:2"><span class="rnum">3</span><span class="step-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></span><div><b>Fix the prompt, not the answer.</b><p>A better prompt improves every answer after it. Arguing in the chat just piles on confusion. So if an answer misses, edit your prompt and run it again.</p></div></li><li class="rcard" style="--i:3"><span class="rnum">4</span><span class="step-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="m5 7-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></svg></span><div><b>Don't lead the witness.</b><p>Ask neutral questions. If you ask "this is right, isn't it?", it will usually agree.</p></div></li><li class="rcard" style="--i:4"><span class="rnum">5</span><span class="step-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></span><div><b>Ask for twenty ideas, and make it rank them.</b><p>The first five will be the obvious ones every AI gives. Have it put a percentage on each idea: how likely a typical AI would be to suggest it. Then look hard at the low-percentage ones. That&rsquo;s where the new thinking is. <a href="#twenty">Use this prompt.</a></p></div></li><li class="rcard" style="--i:5"><span class="rnum">6</span><span class="step-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg></span><div><b>Ask for the real file.</b><p>If you need a deck or a spreadsheet, have Grok build it, not describe it.</p></div></li><li class="rcard" style="--i:6"><span class="rnum">7</span><span class="step-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg></span><div><b>One project per line of effort.</b><p>Keep memory short and accurate, and never let it store PII.</p></div></li><li class="rcard" style="--i:7"><span class="rnum">8</span><span class="step-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><div><b>Start fresh when it drifts.</b><p>When a long chat gets worse, ask for a summary and paste it into a new chat.</p></div></li></ol>
 </div>
-</details>
+</section>
 
 <details class="drawer" id="prompts">
 <summary><span class="drawer-text"><h2>Seed prompts: try each tool on its strength</h2><span class="teaser">Pick a tool, then open a prompt. Copy, paste, run.</span></span><span class="chip">21 prompts &middot; 5 tools</span><span class="dcaret" aria-hidden="true"></span></summary>
@@ -358,8 +364,8 @@ Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confir
 </div>
 </details>
 
-<details class="drawer" id="where">
-<summary><span class="drawer-text"><h2>Where to find them</h2><span class="teaser">genai.mil for Gemini, Grok and ChatGPT Mil. Teams and Outlook for Copilot.</span></span><span class="chip">2 places</span><span class="dcaret" aria-hidden="true"></span></summary>
+<section class="drawer open-sec" id="where">
+<div class="drawer-head"><span class="drawer-text"><h2>Where to find them</h2><span class="teaser">genai.mil for Gemini, Grok and ChatGPT Mil. Teams and Outlook for Copilot.</span></span><span class="chip">2 places</span></div>
 <div class="drawer-body">
 <div class="cards">
   <div class="card" style="--c: var(--gold)">
@@ -375,10 +381,10 @@ Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confir
   </div>
 </div>
 </div>
-</details>
+</section>
 
-<details class="drawer" id="pick">
-<summary><span class="drawer-text"><h2>Pick a tool in 10 seconds</h2><span class="teaser">What each tool is best at, on one card each.</span></span><span class="chip">4 cards</span><span class="dcaret" aria-hidden="true"></span></summary>
+<section class="drawer open-sec" id="pick">
+<div class="drawer-head"><span class="drawer-text"><h2>Pick a tool in 10 seconds</h2><span class="teaser">What each tool is best at, on one card each.</span></span><span class="chip">4 cards</span></div>
 <div class="drawer-body">
 <div class="cards quad">
   <div class="card" id="pick-copilot" style="--c: var(--copilot)">
@@ -427,10 +433,10 @@ Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confir
   </div>
 </div>
 </div>
-</details>
+</section>
 
-<details class="drawer" id="features">
-<summary><span class="drawer-text"><h2>Feature by feature</h2><span class="teaser">Every tool side by side: what it can do, and what it can&rsquo;t yet.</span></span><span class="chip">24 features</span><span class="dcaret" aria-hidden="true"></span></summary>
+<section class="drawer open-sec" id="features">
+<div class="drawer-head"><span class="drawer-text"><h2>Feature by feature</h2><span class="teaser">Every tool side by side: what it can do, and what it can&rsquo;t yet.</span></span><span class="chip">24 features</span></div>
 <div class="drawer-body">
 <div class="table-wrap">
 <table>
@@ -473,18 +479,18 @@ Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confir
 </div>
 <p class="legend"><span class="y">Yes</span> = confirmed in public sources or seen on screen on 10 Nov 2026. <span class="m">?</span> = not in my walkthrough or the training I watched. It may exist, so check on screen. Features change often.</p>
 </div>
-</details>
+</section>
 
-<details class="drawer" id="training">
-<summary><span class="drawer-text"><h2>Free training on genai.mil</h2><span class="teaser">Where to find the free courses, help pages and live events.</span></span><span class="chip">5 steps</span><span class="dcaret" aria-hidden="true"></span></summary>
+<section class="drawer open-sec" id="training">
+<div class="drawer-head"><span class="drawer-text"><h2>Free training on genai.mil</h2><span class="teaser">Where to find the free courses, help pages and live events.</span></span><span class="chip">5 steps</span></div>
 <div class="drawer-body">
 <p>There's free training for all three genai.mil tools: Gemini, ChatGPT Mil and Grok. It takes a few clicks to find.</p>
 <ol class="path five"><li style="--i:0"><span class="step-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg></span><span class="step-n">Step 1</span><b>Sign in</b><span>Open genai.mil and sign in with your CAC.</span></li><li style="--i:1"><span class="step-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><span class="step-n">Step 2</span><b>Click Training</b><span>Pick a tool for self-paced courses, videos and quick references.</span></li><li style="--i:2"><span class="step-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span><span class="step-n">Step 3</span><b>Open the help pages</b><span>help.openai.mil for ChatGPT Mil, docs.grok.genai.mil for Grok. Government network only.</span></li><li style="--i:3"><span class="step-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span class="step-n">Step 4</span><b>Click Events</b><span>Register for a live workshop or office hours.</span></li><li style="--i:4"><span class="step-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36z"/></svg></span><span class="step-n">Step 5</span><b>Explore</b><span>Spend ten minutes clicking around. Most of this page is there too.</span></li></ol>
 </div>
-</details>
+</section>
 
-<details class="drawer" id="glossary">
-<summary><span class="drawer-text"><h2>Words you'll hear, in plain English</h2><span class="teaser">AI terms you&rsquo;ll hear, one line each.</span></span><span class="chip">26 terms</span><span class="dcaret" aria-hidden="true"></span></summary>
+<section class="drawer open-sec" id="glossary">
+<div class="drawer-head"><span class="drawer-text"><h2>Words you'll hear, in plain English</h2><span class="teaser">AI terms you&rsquo;ll hear, one line each.</span></span><span class="chip">26 terms</span></div>
 <div class="drawer-body">
 <div class="table-wrap">
 <table class="glossary">
@@ -519,10 +525,10 @@ Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confir
 </table>
 </div>
 </div>
-</details>
+</section>
 
-<details class="drawer" id="try" open>
-<summary><span class="drawer-text"><h2>Try it in 3 steps</h2><span class="teaser">Open a tool, paste a prompt, check the answer.</span></span><span class="chip">3 steps</span><span class="dcaret" aria-hidden="true"></span></summary>
+<section class="drawer open-sec" id="try">
+<div class="drawer-head"><span class="drawer-text"><h2>Try it in 3 steps</h2><span class="teaser">Open a tool, paste a prompt, check the answer.</span></span><span class="chip">3 steps</span></div>
 <div class="drawer-body">
 <ol class="steps">
   <li>On your government computer, open the tool: genai.mil with your CAC, or the Copilot tab in Teams.</li>
@@ -530,7 +536,7 @@ Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confir
   <li>Check the answer. Fix one thing in the prompt and run it again.</li>
 </ol>
 </div>
-</details>
+</section>
 
 <footer>
   <p><b>Open-source summary as of 10 November 2026. Unofficial.</b> Verify against current local IT/G6 policy and official GenAI.mil guidance before use. Not affiliated with or endorsed by DoD or any vendor.</p>
@@ -577,6 +583,7 @@ Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confir
     var drawers = [].slice.call(document.querySelectorAll('details.drawer'));
     var toggle = document.querySelector('button.toggle-all');
     function sync() {
+      if (!toggle) return;
       var all = drawers.every(function (d) { return d.open; });
       toggle.textContent = all ? 'Close all' : 'Open all';
       toggle.setAttribute('aria-pressed', all ? 'true' : 'false');
@@ -596,7 +603,7 @@ Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confir
       var el = reveal(a.getAttribute('href').slice(1));
       if (el) { e.preventDefault(); history.pushState(null, '', a.getAttribute('href')); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
-    toggle.addEventListener('click', function () {
+    if (toggle) toggle.addEventListener('click', function () {
       var openAll = !drawers.every(function (d) { return d.open; });
       drawers.forEach(function (d) { d.open = openAll; });
       sync();
