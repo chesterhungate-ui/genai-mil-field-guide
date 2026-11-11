@@ -92,6 +92,41 @@
   .logo-wrap .logo { width: 100%; height: 100%; }
   thead .logo-wrap { width: 16px; height: 16px; }
   .cards.quad { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  [id] { scroll-margin-top: 72px; }
+  .toolbar {
+    position: sticky; top: 0; z-index: 20; background: var(--deep); border-bottom: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; padding: 6px 12px;
+  }
+  .tb-item { position: relative; }
+  .tb-btn {
+    display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--text);
+    border: 0; border-bottom: 3px solid transparent; padding: 9px 14px 7px; cursor: pointer;
+    font-family: var(--head); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; font-size: 0.95rem;
+  }
+  .tb-btn .logo-wrap { color: var(--c); width: 18px; height: 18px; }
+  .tb-btn .caret { color: var(--muted); font-size: 0.75em; }
+  .tb-btn:hover, .tb-btn:focus-visible, .tb-btn[aria-expanded="true"] { border-bottom-color: var(--c); background: var(--surface); }
+  .tb-menu {
+    position: absolute; left: 0; top: 100%; min-width: 230px; background: var(--surface);
+    border: 1px solid var(--line); border-top: 3px solid var(--c); box-shadow: 0 10px 24px rgba(0,0,0,0.45);
+    padding: 6px 0; display: flex; flex-direction: column;
+  }
+  .tb-menu[hidden] { display: none; }
+  .tb-item.right .tb-menu { left: auto; right: 0; }
+  .tb-menu .tb-best { padding: 8px 16px 10px; font-size: 0.88rem; color: var(--tan); border-bottom: 1px solid var(--line); margin-bottom: 4px; }
+  .tb-menu a { color: var(--text); text-decoration: none; padding: 8px 16px; font-size: 0.95rem; }
+  .tb-menu a:hover, .tb-menu a:focus-visible { background: var(--deep); color: var(--gold); }
+  h3.group { display: flex; align-items: center; gap: 10px; margin: 34px 0 12px; font-size: 1.35rem; color: var(--gold); }
+  h3.group .logo-wrap { color: var(--c); }
+  .prompt.featured { border: 2px solid var(--gold); }
+  .prompt.featured .prompt-head b::before { content: "New \00b7 "; color: var(--gold); }
+  @media (max-width: 560px) {
+    .toolbar { justify-content: flex-start; padding: 4px 8px; }
+    .tb-btn { padding: 8px 9px 6px; font-size: 0.85rem; gap: 6px; }
+    .tb-item { position: static; }
+    [id] { scroll-margin-top: 100px; }
+    .tb-menu, .tb-item.right .tb-menu { left: 8px; right: 8px; min-width: 0; }
+  }
   @media (max-width: 640px) { .cards.quad { grid-template-columns: 1fr; } }
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
   .card {
@@ -139,7 +174,7 @@
     b { color: #000; }
     .card .best { color: #000; }
     main { padding: 0; max-width: none; }
-    .actions, button.copy { display: none; }
+    .actions, button.copy, .toolbar { display: none; }
     .table-wrap { overflow: visible; border: 0; }
     table { min-width: 0; font-size: 9pt; }
     .card, .prompt { break-inside: avoid; }
@@ -150,6 +185,18 @@
 </head>
 <body>
 <div class="topbar"><span class="brand">GenAI Field Guide</span><span class="tag">Unofficial · Open-source · Not a DoD or Army site</span></div>
+<nav class="toolbar" aria-label="Jump to a tool">
+  <div class="tb-item"><button class="tb-btn" type="button" aria-expanded="false" aria-controls="m-copilot" style="--c:var(--copilot)"><span class="logo-wrap"><svg class="logo" viewBox="0 0 1322.9 1147.5" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="m711.19 265.2c-27.333 0-46.933 3.07-58.8 9.33 27.067-80.267 47.6-210.13 168-210.13 114.93 0 108.4 138.27 157.87 200.8zm107.33 112.93c-35.467 125.2-70 251.2-110.13 375.33-12.133 36.4-45.733 61.6-84 61.6h-136.27c9.3333-14 16.8-28.933 21.467-45.733 35.467-125.07 70-251.07 110.13-375.33 12.133-36.4 45.733-61.6 84-61.6h136.27c-9.3333 14-16.8 28.934-21.467 45.734m-316.13 704.8c-114.93 0-108.4-138.13-157.87-200.67h267.07c27.467 0 47.067-3.07 58.8-9.33-27.067 80.266-47.6 210-168 210m777.47-758.93h0.93c-32.667-38.266-82.267-57.866-146.67-57.866h-36.4c-34.533-2.8-65.333-26.134-76.533-58.8l-36.4-103.6c-21.463-61.737-80.263-103.74-145.73-103.74h-475.07c-175.6 0-251.2 225.07-292.27 361.33-38.267 127.07-126 341.73-24.267 462.13 46.667 55.067 116.67 57.867 183.07 57.867 34.533 2.8 65.333 26.133 76.533 58.8l36.4 103.6c21.467 61.733 80.267 103.73 145.6 103.73h475.2c175.47 0 251.07-225.07 292.27-361.33 30.8-100.8 68.133-224.93 66.267-324.8 0-50.534-11.2-100-42.933-137.33"/></svg></span>Copilot<span class="caret" aria-hidden="true">&#9662;</span></button>
+    <div class="tb-menu" id="m-copilot" style="--c:var(--copilot)" hidden><p class="tb-best">Best for quick edits and summarizing your own meetings, chats and email.</p><a href="#pick-copilot">What it does</a><a href="#p-copilot">Seed prompts</a><a href="#where">Where to find it</a></div></div>
+  <div class="tb-item"><button class="tb-btn" type="button" aria-expanded="false" aria-controls="m-chatgpt" style="--c:var(--chatgpt)"><span class="logo-wrap"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg></span>ChatGPT<span class="caret" aria-hidden="true">&#9662;</span></button>
+    <div class="tb-menu" id="m-chatgpt" style="--c:var(--chatgpt)" hidden><p class="tb-best">Best for writing, and building a custom GPT your team can share.</p><a href="#pick-chatgpt">What it does</a><a href="#p-chatgpt">Seed prompts</a><a href="#where">Where to find it</a></div></div>
+  <div class="tb-item"><button class="tb-btn" type="button" aria-expanded="false" aria-controls="m-gemini" style="--c:var(--gemini)"><span class="logo-wrap"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg></span>Gemini<span class="caret" aria-hidden="true">&#9662;</span></button>
+    <div class="tb-menu" id="m-gemini" style="--c:var(--gemini)" hidden><p class="tb-best">Best for big piles of files, research and building agents.</p><a href="#pick-gemini">What it does</a><a href="#p-gemini">Seed prompts</a><a href="#where">Where to find it</a></div></div>
+  <div class="tb-item right"><button class="tb-btn" type="button" aria-expanded="false" aria-controls="m-grok" style="--c:var(--grok)"><span class="logo-wrap"><svg class="logo" viewBox="0 0 512 509.641" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M213.235 306.019l178.976-180.002v.169l51.695-51.763c-.924 1.32-1.86 2.605-2.785 3.89-39.281 54.164-58.46 80.649-43.07 146.922l-.09-.101c10.61 45.11-.744 95.137-37.398 131.836-46.216 46.306-120.167 56.611-181.063 14.928l42.462-19.675c38.863 15.278 81.392 8.57 111.947-22.03 30.566-30.6 37.432-75.159 22.065-112.252-2.92-7.025-11.67-8.795-17.792-4.263l-124.947 92.341zm-25.786 22.437l-.033.034L68.094 435.217c7.565-10.429 16.957-20.294 26.327-30.149 26.428-27.803 52.653-55.359 36.654-94.302-21.422-52.112-8.952-113.177 30.724-152.898 41.243-41.254 101.98-51.661 152.706-30.758 11.23 4.172 21.016 10.114 28.638 15.639l-42.359 19.584c-39.44-16.563-84.629-5.299-112.207 22.313-37.298 37.308-44.84 102.003-1.128 143.81z"/></svg></span>Grok<span class="caret" aria-hidden="true">&#9662;</span></button>
+    <div class="tb-menu" id="m-grok" style="--c:var(--grok)" hidden><p class="tb-best">Best for finished files, skills and automations.</p><a href="#pick-grok">What it does</a><a href="#gistcheck">GIST Check skill</a><a href="#p-grok">Seed prompts</a><a href="#where">Where to find it</a></div></div>
+  <div class="tb-item right"><button class="tb-btn" type="button" aria-expanded="false" aria-controls="m-guide" style="--c:var(--gold)">Guide<span class="caret" aria-hidden="true">&#9662;</span></button>
+    <div class="tb-menu" id="m-guide" style="--c:var(--gold)" hidden><a href="#take">My take</a><a href="#rules">My rules</a><a href="#prompts">Seed prompts</a><a href="#features">Compare features</a><a href="#training">Free training</a><a href="#glossary">Words you&rsquo;ll hear</a></div></div>
+</nav>
 <main>
 
 <section class="hero">
@@ -176,7 +223,8 @@
       <li><b>S</b>hape: what the answer should look like, such as one page, a table or five slides.</li>
       <li><b>T</b>raps: what to avoid, such as no jargon, no guessing, or nothing over 200 words.</li>
     </ul>
-    Expect about half of what you want on the first try. Then check it: is it right, is it clear, can I use it, and did it answer what I asked?</li>
+    Expect about half of what you want on the first try. Then check it: is it right, is it clear, can I use it, and did it answer what I asked?
+    <br><b>Shortcut: just type &ldquo;GIST check.&rdquo;</b> Set up the <a href="#gistcheck">GIST Check skill</a> in Grok once. Then add &ldquo;GIST check&rdquo; to the end of any prompt, and before it starts, the AI tells you what you left out, such as the audience or the format. You don&rsquo;t have to memorize the checklist. The AI checks it for you.</li>
   <li><b>Show it, don't describe it.</b> Upload the actual spreadsheet, slide or memo instead of retyping it. Every time you put a file into your own words, detail gets lost.</li>
   <li><b>Know when it's guessing.</b> With web search off, the AI only knows what it learned up to its training date. Turn search on for anything current, and check every citation.</li>
 </ol>
@@ -195,7 +243,125 @@
 </ol>
 </section>
 
-<h2>Where to find them</h2>
+<h2 id="prompts">Seed prompts: try each tool on its strength</h2>
+<p>Here are the rules in practice. Every example is notional. Swap in your own unclassified details, never names or PII.</p>
+
+<h3 class="group" id="p-copilot" style="--c:var(--copilot)"><span class="logo-wrap"><svg class="logo" viewBox="0 0 1322.9 1147.5" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="m711.19 265.2c-27.333 0-46.933 3.07-58.8 9.33 27.067-80.267 47.6-210.13 168-210.13 114.93 0 108.4 138.27 157.87 200.8zm107.33 112.93c-35.467 125.2-70 251.2-110.13 375.33-12.133 36.4-45.733 61.6-84 61.6h-136.27c9.3333-14 16.8-28.933 21.467-45.733 35.467-125.07 70-251.07 110.13-375.33 12.133-36.4 45.733-61.6 84-61.6h136.27c-9.3333 14-16.8 28.934-21.467 45.734m-316.13 704.8c-114.93 0-108.4-138.13-157.87-200.67h267.07c27.467 0 47.067-3.07 58.8-9.33-27.067 80.266-47.6 210-168 210m777.47-758.93h0.93c-32.667-38.266-82.267-57.866-146.67-57.866h-36.4c-34.533-2.8-65.333-26.134-76.533-58.8l-36.4-103.6c-21.463-61.737-80.263-103.74-145.73-103.74h-475.07c-175.6 0-251.2 225.07-292.27 361.33-38.267 127.07-126 341.73-24.267 462.13 46.667 55.067 116.67 57.867 183.07 57.867 34.533 2.8 65.333 26.133 76.533 58.8l36.4 103.6c21.467 61.733 80.267 103.73 145.6 103.73h475.2c175.47 0 251.07-225.07 292.27-361.33 30.8-100.8 68.133-224.93 66.267-324.8 0-50.534-11.2-100-42.933-137.33"/></svg></span>Copilot</h3>
+<div class="prompt">
+  <div class="prompt-head"><div><b>Copilot: tighten a Teams message or email</b><span>Paste your draft into the Copilot tab in Teams.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Rewrite my draft below so it is shorter and clearer for a senior leader. Put the ask in the first sentence. Keep it professional and under 80 words. Give me two versions: one formal, one casual for a Teams chat.
+
+Draft: Hey sir, wanted to touch base on the training schedule thing from last week, we still need a decision on whether land nav is a half day or a full day because S4 needs to lock in buses by Monday and I think a half day is probably fine but wanted your thoughts.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Copilot: pull taskers from a file in your cloud</b><span>Add the file as a source first: a cloud file from Teams or OneDrive.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>From the attached file, list every tasker with the owner's role and the due date, in a table. Then give me a two-sentence bottom line for my boss. Flag anything with no owner or no date.</pre>
+</div>
+
+<h3 class="group" id="p-chatgpt" style="--c:var(--chatgpt)"><span class="logo-wrap"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg></span>ChatGPT Mil</h3>
+<div class="prompt">
+  <div class="prompt-head"><div><b>ChatGPT Mil: turn rough notes into a memo</b><span>Start a Project, paste your notes, run this.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>You are a staff writer. Turn the notes below into a one-page information memo. Use a bottom line up front, then three to five numbered points, then a recommendation. Plain English, active voice, sentences under 25 words. If something is missing, list the questions I need to answer instead of guessing.
+
+Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confirm bus support by Monday. Company A needs 40 more sets of eye protection. Decision needed: land navigation refresher half day or full day.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>ChatGPT Mil: build a custom GPT for your work stream</b><span>Paste into the custom GPT's instructions box, then add your unclassified reference files.</span></div><button class="copy" type="button">Copy</button></div>
+<p style="margin:12px 14px 0">Tip: add two or three starter prompts for questions your team asks every week, and turn on web search if the answers need current information. Keep it on "Only me" until you've removed anything not everyone should see.</p>
+<pre>You are the go-to helper for a notional battalion S3 training section. Answer questions using the attached reference files first, and say which file each answer came from. If the files don't cover the question, say so plainly and don't guess. Keep answers short: a bottom line up front, then up to five bullets. When someone asks for a product, such as a training schedule or a memo, ask up to three questions before you draft it. Never store or repeat names, phone numbers or other personal information.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>ChatGPT Mil: set your custom instructions once</b><span>Settings, then Personalization, then Custom instructions.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>I am a staff officer. Write in plain English for busy leaders. Always start with a one or two sentence bottom line up front. Use short numbered points instead of long paragraphs. If you are not sure about something, tell me instead of guessing, and list what I should check.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>ChatGPT Mil: shape an idea into a one-page concept</b><span>Set reasoning to High first. Good for early concepts and requirements, not code.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Help me turn a rough idea into a one-page concept for my boss. The idea: a shared, unclassified tracker so every section can see upcoming training, room bookings and vehicle requests in one place. Write it with these headings: Problem, Proposed solution, Who uses it, What success looks like in 90 days, Risks, and Decisions needed. Ask me up to three questions first if something important is missing.</pre>
+</div>
+
+<h3 class="group" id="p-gemini" style="--c:var(--gemini)"><span class="logo-wrap"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg></span>Gemini</h3>
+<div class="prompt">
+  <div class="prompt-head"><div><b>Gemini: research with sources</b><span>Use a public topic so the search can help.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Find the most recent public guidance on running effective after action reviews in a small unit. Summarize it in five bullets a new team leader can use tomorrow. Give the source and date for each bullet, and tell me which points you could not confirm.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Gemini: build your first agent</b><span>Paste into Agent Designer's description box.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Create an agent called "Meeting Notes to Action Items." It turns rough, unclassified meeting notes into a one-page summary: the meeting purpose in one sentence, decisions made, a table of tasks (task, owner by role, due date, status) and open questions. It uses only the notes provided, marks missing details as TBD, and never includes names or personal information.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Gemini: turn messy notes into a trip report</b><span>Upload your notes. A photo of handwritten notes works too.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Turn the attached notes into a trip report I can download as a Word document. Use these headings: purpose, key engagements, observations, decisions, action items (a table with task, owner by role and due date) and follow-ups. Use only what is in my notes, mark anything missing as TBD, and leave out names and personal information.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Gemini: deep research on your own files</b><span>Choose Deep Research, attach several unclassified documents, then run this.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Read all the attached documents and write a report on what they agree on, where they conflict, and what is missing. Cite the document and section for every point, so I can check it. End with three questions I should ask before making a decision.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Gemini: a manager agent with a small team</b><span>Agent Designer. Then use the Preview tab to test it before you share it.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Create a manager agent called "Staff Product Builder." When I give it a topic and unclassified source files, it assigns the work to three sub-agents: a researcher that pulls the key facts from the files, an analyst that lists options with pros, cons and risks, and a writer that turns the result into a one-page information paper with a bottom line up front. The manager checks that every fact traces back to a source file and flags anything it can't confirm.</pre>
+</div>
+
+<h3 class="group" id="p-grok" style="--c:var(--grok)"><span class="logo-wrap"><svg class="logo" viewBox="0 0 512 509.641" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M213.235 306.019l178.976-180.002v.169l51.695-51.763c-.924 1.32-1.86 2.605-2.785 3.89-39.281 54.164-58.46 80.649-43.07 146.922l-.09-.101c10.61 45.11-.744 95.137-37.398 131.836-46.216 46.306-120.167 56.611-181.063 14.928l42.462-19.675c38.863 15.278 81.392 8.57 111.947-22.03 30.566-30.6 37.432-75.159 22.065-112.252-2.92-7.025-11.67-8.795-17.792-4.263l-124.947 92.341zm-25.786 22.437l-.033.034L68.094 435.217c7.565-10.429 16.957-20.294 26.327-30.149 26.428-27.803 52.653-55.359 36.654-94.302-21.422-52.112-8.952-113.177 30.724-152.898 41.243-41.254 101.98-51.661 152.706-30.758 11.23 4.172 21.016 10.114 28.638 15.639l-42.359 19.584c-39.44-16.563-84.629-5.299-112.207 22.313-37.298 37.308-44.84 102.003-1.128 143.81z"/></svg></span>Grok</h3>
+<div class="prompt featured" id="gistcheck">
+  <div class="prompt-head"><div><b>Grok: build a GIST Check skill</b><span>Turn on Skill creator and paste this. After that, end any prompt with &ldquo;GIST check.&rdquo; In ChatGPT Mil, you can paste it into Custom instructions instead.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Help me build a skill called "GIST Check." Use it whenever my prompt includes the words "GIST check." Before doing any work, check my prompt for four parts: Goal (what exactly I want done), Info (the background, including who it's for), Shape (the format and length, such as one page, a table or five slides) and Traps (what to avoid). Reply first with a short table that lists each part as Clear or Missing, with one line on what's missing, such as "no audience" or "no length." Then ask me up to three questions to fill the gaps, and show a better version of my prompt with the gaps marked [like this]. Don't start the task until I answer or say "go." If all four parts are clear, say "GIST complete" and do the task. Ask me any questions you need before you build it.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Grok: see why web search matters</b><span>Ask this twice: once with the Web switch off, then on. Compare the answers.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>What is today's date, who is the current President of the United States, and what is the most recent date your information covers?</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Grok: make a real slide deck</b><span>Click + in the chat box, add the PowerPoint skill, then run this.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Make a five-slide PowerPoint for a 10-minute leader brief on a notional office move. Slide 1: title and bottom line. Slide 2: why we're moving. Slide 3: the timeline as a simple table. Slide 4: risks and how we reduce them. Slide 5: decisions needed from the commander. Plain style, large text, no more than four bullets a slide.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Grok: set up a daily automation</b><span>Open a project, choose Automations, and use this as the task.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Every weekday at 0700, search the web for public news from the last 24 hours about [a public topic your section tracks]. Write a half-page roundup: a two-sentence bottom line, then up to five bullets, each with its source and date. End with one line on anything that may need a leader's attention. Use public sources only.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Grok: build your own skill</b><span>Turn on Skill creator, then describe the skill you want.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Help me build a skill called "Executive Summary." When I give it a document, it writes a summary of no more than 200 words for a senior leader: a bottom line up front, three key points, and the decision or action needed. It uses plain English, avoids jargon and filler phrases, and flags anything in the document that looks out of date. Ask me any questions you need before you build it.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Grok: teach it your format once</b><span>Skill creator. Attach one good, unclassified example of the product first.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Help me build a skill called "Our Memo Format." Use the attached example as the template: copy its headings, order, length and tone exactly. When I give it rough notes, it fills in that format, keeps every fact from my notes, marks anything missing as TBD, and adds nothing I didn't provide. Ask me any questions you need before you build it.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Grok: analyze a spreadsheet</b><span>Switch to Expert mode and upload an unclassified Excel or CSV file. It may take a few minutes.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Analyze the attached spreadsheet. Tell me in three sentences what it shows, then list the three biggest trends or outliers with the numbers behind them. Build one chart that shows the most important trend, and give me a cleaned-up Excel file I can download. Tell me any data problems you found, such as blanks or duplicates.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>Grok: think a decision through</b><span>Switch to Expert mode first.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Help me compare two options for a notional office move. Option A: move all at once over one weekend. Option B: move one section per week for four weeks. Build a short decision matrix on mission impact, cost, risk and workload. Then argue against your own recommendation in three sentences and tell me what information would change your answer.</pre>
+</div>
+
+<h3 class="group" id="p-all" style="--c:var(--gold)">All four tools</h3>
+<div class="prompt" id="twenty">
+  <div class="prompt-head"><div><b>All four: twenty ideas, ranked by how obvious they are</b><span>Works in any tool. Replace the bracket with your problem.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>Give me 20 ideas for [your problem, for example: getting more junior leaders to use our office's AI tools]. For each idea, estimate the percent chance that a typical AI assistant would suggest it, from 0 to 100 percent. Sort the list from most likely to least likely. At least eight ideas should be under 10 percent. Then pick the two low-percentage ideas you think are most worth trying, and tell me in one sentence each why.</pre>
+</div>
+
+<div class="prompt">
+  <div class="prompt-head"><div><b>All four: same prompt, side by side</b><span>Run this in each tool and compare the answers.</span></div><button class="copy" type="button">Copy</button></div>
+<pre>In 120 words or less, explain to a new staff officer what CUI is, what it is not, and one common mistake people make when handling it. End with one question I should ask my security manager.</pre>
+</div>
+
+<h2 id="where">Where to find them</h2>
 <div class="cards">
   <div class="card" style="--c: var(--gold)">
     <h3>genai.mil</h3>
@@ -212,7 +378,7 @@
 
 <h2>Pick a tool in 10 seconds</h2>
 <div class="cards quad">
-  <div class="card" style="--c: var(--copilot)">
+  <div class="card" id="pick-copilot" style="--c: var(--copilot)">
     <h3 class="tool-name"><span class="logo-wrap" style="color:var(--copilot)"><svg class="logo" viewBox="0 0 1322.9 1147.5" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="m711.19 265.2c-27.333 0-46.933 3.07-58.8 9.33 27.067-80.267 47.6-210.13 168-210.13 114.93 0 108.4 138.27 157.87 200.8zm107.33 112.93c-35.467 125.2-70 251.2-110.13 375.33-12.133 36.4-45.733 61.6-84 61.6h-136.27c9.3333-14 16.8-28.933 21.467-45.733 35.467-125.07 70-251.07 110.13-375.33 12.133-36.4 45.733-61.6 84-61.6h136.27c-9.3333 14-16.8 28.934-21.467 45.734m-316.13 704.8c-114.93 0-108.4-138.13-157.87-200.67h267.07c27.467 0 47.067-3.07 58.8-9.33-27.067 80.266-47.6 210-168 210m777.47-758.93h0.93c-32.667-38.266-82.267-57.866-146.67-57.866h-36.4c-34.533-2.8-65.333-26.134-76.533-58.8l-36.4-103.6c-21.463-61.737-80.263-103.74-145.73-103.74h-475.07c-175.6 0-251.2 225.07-292.27 361.33-38.267 127.07-126 341.73-24.267 462.13 46.667 55.067 116.67 57.867 183.07 57.867 34.533 2.8 65.333 26.133 76.533 58.8l36.4 103.6c21.467 61.733 80.267 103.73 145.6 103.73h475.2c175.47 0 251.07-225.07 292.27-361.33 30.8-100.8 68.133-224.93 66.267-324.8 0-50.534-11.2-100-42.933-137.33"/></svg></span>Copilot</h3>
     <p class="best">Best for: quick edits, and summarizing your own meetings, chats and email.</p>
     <ul>
@@ -223,7 +389,7 @@
     </ul>
     <p class="where">Where: the Copilot tab on the left side of Teams, or in Outlook. Not on GenAI.mil.</p>
   </div>
-  <div class="card" style="--c: var(--chatgpt)">
+  <div class="card" id="pick-chatgpt" style="--c: var(--chatgpt)">
     <h3 class="tool-name"><span class="logo-wrap" style="color:var(--chatgpt)"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg></span>ChatGPT Mil</h3>
     <p class="best">Best for: writing documents and building your own helper.</p>
     <ul>
@@ -234,7 +400,7 @@
     </ul>
     <p class="where">Where: GenAI.mil, since 31 Aug 2026</p>
   </div>
-  <div class="card" style="--c: var(--gemini)">
+  <div class="card" id="pick-gemini" style="--c: var(--gemini)">
     <h3 class="tool-name"><span class="logo-wrap" style="color:var(--gemini)"><svg class="logo" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg></span>Gemini</h3>
     <p class="best">Best for: long research, big stacks of documents, and building agents.</p>
     <ul>
@@ -245,7 +411,7 @@
     </ul>
     <p class="where">Where: GenAI.mil, since 9 Dec 2025</p>
   </div>
-  <div class="card" style="--c: var(--grok)">
+  <div class="card" id="pick-grok" style="--c: var(--grok)">
     <h3 class="tool-name"><span class="logo-wrap" style="color:var(--grok)"><svg class="logo" viewBox="0 0 512 509.641" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M213.235 306.019l178.976-180.002v.169l51.695-51.763c-.924 1.32-1.86 2.605-2.785 3.89-39.281 54.164-58.46 80.649-43.07 146.922l-.09-.101c10.61 45.11-.744 95.137-37.398 131.836-46.216 46.306-120.167 56.611-181.063 14.928l42.462-19.675c38.863 15.278 81.392 8.57 111.947-22.03 30.566-30.6 37.432-75.159 22.065-112.252-2.92-7.025-11.67-8.795-17.792-4.263l-124.947 92.341zm-25.786 22.437l-.033.034L68.094 435.217c7.565-10.429 16.957-20.294 26.327-30.149 26.428-27.803 52.653-55.359 36.654-94.302-21.422-52.112-8.952-113.177 30.724-152.898 41.243-41.254 101.98-51.661 152.706-30.758 11.23 4.172 21.016 10.114 28.638 15.639l-42.359 19.584c-39.44-16.563-84.629-5.299-112.207 22.313-37.298 37.308-44.84 102.003-1.128 143.81z"/></svg></span>Grok</h3>
     <p class="best">Best for: making real files and running tasks on a schedule.</p>
     <ul>
@@ -300,7 +466,7 @@
 </div>
 <p class="legend"><span class="y">Yes</span> = confirmed in public sources or seen on screen on 10 Nov 2026. <span class="m">?</span> = not in my walkthrough or the training I watched. It may exist, so check on screen. Features change often.</p>
 
-<h2>Free training on genai.mil</h2>
+<h2 id="training">Free training on genai.mil</h2>
 <p>There's free training for all three genai.mil tools: Gemini, ChatGPT Mil and Grok. It takes a few clicks to find.</p>
 <ol class="steps">
   <li>Open genai.mil and sign in with your CAC.</li>
@@ -310,152 +476,44 @@
   <li>Spend ten minutes clicking around. Most of what's on this page, you'll find there too.</li>
 </ol>
 
-<h2>Words you'll hear, in plain English</h2>
+<h2 id="glossary">Words you'll hear, in plain English</h2>
 <div class="table-wrap">
 <table class="glossary">
   <tbody>
-    <tr><th>AI model</th><td>The engine behind the chat box. Gemini, GPT and Grok are models from three different companies. Each one writes answers by predicting the most likely next words.</td></tr>
-    <tr><th>Prompt</th><td>What you type to the AI. Clear prompts get better answers: say who it's for, what you want, and the format.</td></tr>
-    <tr><th>GPT</th><td>Short for <b>Generative Pre-trained Transformer</b>. Generative means it creates new text. Pre-trained means it already learned from a huge amount of writing before you ever used it. Transformer is the type of design inside it. GPT is OpenAI's name, so it belongs to ChatGPT.</td></tr>
-    <tr><th>Custom GPT</th><td>Your own version of ChatGPT, set up for one job. You give it instructions and reference files once, and anyone you share it with can just ask it questions. On genai.mil, only ChatGPT Mil has these.</td></tr>
-    <tr><th>Everyone can chat</th><td>A ChatGPT Mil sharing setting. It creates a link to your custom GPT that you send to people yourself. Anyone with GenAI.mil access who has the link can chat with it, and you can turn the link off. Before you share, remove any file that not everyone with the link should see.</td></tr>
-    <tr><th>Reasoning effort</th><td>How hard the AI thinks before it answers. In ChatGPT Mil: Instant, Low, Medium or High. In Grok: Fast or Expert, or Auto to let it choose. Higher is slower but more careful, so save it for analysis rather than quick rewrites.</td></tr>
-    <tr><th>Agent</th><td>An assistant that can carry out several steps on its own, such as reading notes, sorting tasks and drafting a summary. Gemini's Agent Designer lets you build one in plain English.</td></tr>
-    <tr><th>Manager agent</th><td>In Gemini's Agent Designer, an agent that splits a job and hands the pieces to other agents (sub-agents), like a project manager assigning tasks to specialists. For example, one researches, one analyzes and one summarizes.</td></tr>
-    <tr><th>Knowledge file</th><td>A file you attach to a chat or agent so it answers from your material, such as an SOP, doctrine or a spreadsheet. In Gemini agents the whole file is placed in front of the AI, so keep knowledge files short and on topic.</td></tr>
-    <tr><th>RAG (retrieval-augmented generation)</th><td>A way for the AI to look things up in your files before it answers, instead of relying only on what it learned in training. It finds the most relevant passages, then writes the answer from them, often with citations. Think of an open-book test. Grok uses this with your uploaded files and projects. Gemini agents currently load the whole knowledge file instead.</td></tr>
-    <tr><th>Deep research</th><td>A mode where the AI spends several minutes searching and reading, then writes a long report with citations. Use it for a full picture, not a quick answer.</td></tr>
-    <tr><th>Multimodal</th><td>The AI can take in more than text: pictures, scans, audio and video. Gemini can read a photo of handwritten notes and turn it into a summary.</td></tr>
-    <tr><th>Project or workspace</th><td>A folder that keeps related chats, files and instructions together, so you don't start from zero each time.</td></tr>
-    <tr><th>Team space</th><td>A shared area in Grok that colleagues invite you to. Everyone in it can use the same projects and skills. Switch between your personal space and your teams by clicking your name.</td></tr>
-    <tr><th>Automation</th><td>A task the AI runs by itself on a schedule, such as every weekday at 0700. In Grok you set one up inside a project. For example, a daily roundup of public news on a topic you track.</td></tr>
-    <tr><th>Custom instructions</th><td>Standing rules the AI follows in every chat, such as "always lead with the bottom line."</td></tr>
-    <tr><th>Memory</th><td>The AI remembers facts about you and your work between chats. Useful, but check what it has saved, and never let it store PII.</td></tr>
-    <tr><th>Connector</th><td>A plug that lets the AI reach outside the chat into a system you already use, such as email, a calendar or a shared drive, and read from it for you. Without one, the AI only knows what you type or upload. Copilot's cloud files work this way. In Grok, only admins can add connectors for now.</td></tr>
-    <tr><th>Skill</th><td>A saved recipe for one kind of job, such as "make a PowerPoint" or "write an executive summary." Turn it on in a chat and the AI follows that recipe every time. Grok comes with skills for Word, PDF, PowerPoint, Excel and video files, and you can build your own just by describing it to Skill creator. A skill can include example files, such as a sample memo, so every output follows the same format. Build several small skills rather than one giant one. Teams can share their skills with each other.</td></tr>
-    <tr><th>Token and context window</th><td>A token is a small piece of a word. The context window is how many tokens the AI can keep in mind at once. Gemini's is about 1 million tokens, enough for a few thousand pages, so you can give it a big stack of files in one go.</td></tr>
-    <tr><th>Sandbox</th><td>A walled-off practice computer the AI can use to run code, build files or crunch numbers, without touching anything else. Grok's Expert mode uses one, which is how it makes finished spreadsheets and slide decks.</td></tr>
-    <tr><th>Training cutoff</th><td>The date the AI stopped learning. Without web search it doesn't know anything newer, so it may give an old answer about current events. Turn web search on for anything recent.</td></tr>
-    <tr><th>Web search index</th><td>The copy of the internet a tool searches. ChatGPT Mil and Gemini both search a copy kept inside the secure government environment instead of the live web, so very recent news may be a few hours behind.</td></tr>
-    <tr><th>Citation</th><td>A link to where the answer came from. Click it, and check that it says what the AI claims.</td></tr>
-    <tr><th>Hallucination</th><td>When the AI states something false with confidence. This is why a person checks every output.</td></tr>
-    <tr><th>CUI and IL5</th><td>CUI is Controlled Unclassified Information: sensitive but not classified. IL5 is the security level genai.mil is approved for, which covers CUI. It does not cover classified information.</td></tr>
+    <tr><th>AI model</th><td>The engine behind the chat box. Gemini, GPT and Grok are models from three different companies.</td></tr>
+    <tr><th>Prompt</th><td>What you type to the AI. Say who it's for, what you want and the format.</td></tr>
+    <tr><th>GPT</th><td>Short for <b>Generative Pre-trained Transformer</b>, OpenAI's name for the model behind ChatGPT.</td></tr>
+    <tr><th>Custom GPT</th><td>Your own version of ChatGPT, set up once with instructions and files for one job. Only ChatGPT Mil has these.</td></tr>
+    <tr><th>Everyone can chat</th><td>A ChatGPT Mil setting that makes a share link anyone on GenAI.mil can use. Remove sensitive files first.</td></tr>
+    <tr><th>Reasoning effort</th><td>How hard the AI thinks before it answers. Higher is slower but more careful.</td></tr>
+    <tr><th>Agent</th><td>An assistant that carries out several steps on its own, such as reading notes and drafting a summary.</td></tr>
+    <tr><th>Manager agent</th><td>A Gemini agent that splits a job and hands the pieces to other agents, like a project manager.</td></tr>
+    <tr><th>Knowledge file</th><td>A file you attach so the AI answers from your material, such as an SOP or a spreadsheet.</td></tr>
+    <tr><th>RAG (retrieval-augmented generation)</th><td>The AI looks up the right passages in your files before it answers, like an open-book test.</td></tr>
+    <tr><th>Deep research</th><td>The AI spends several minutes searching and reading, then writes a long report with citations.</td></tr>
+    <tr><th>Multimodal</th><td>The AI can take in pictures, scans, audio and video, not just text.</td></tr>
+    <tr><th>Project or workspace</th><td>A folder that keeps related chats, files and instructions together.</td></tr>
+    <tr><th>Team space</th><td>A shared area in Grok where colleagues use the same projects and skills.</td></tr>
+    <tr><th>Automation</th><td>A task the AI runs by itself on a schedule, such as every weekday at 0700.</td></tr>
+    <tr><th>Custom instructions</th><td>Standing rules the AI follows in every chat, such as &ldquo;lead with the bottom line.&rdquo;</td></tr>
+    <tr><th>Memory</th><td>The AI remembers facts about you between chats. Check what it saved, and never let it store PII.</td></tr>
+    <tr><th>Connector</th><td>A plug that lets the AI read from a system you already use, such as email or a shared drive.</td></tr>
+    <tr><th>Skill</th><td>A saved recipe for one kind of job, such as &ldquo;make a PowerPoint,&rdquo; that the AI follows the same way every time.</td></tr>
+    <tr><th>Token and context window</th><td>A token is a small piece of a word. The context window is how much the AI can read at once.</td></tr>
+    <tr><th>Sandbox</th><td>A walled-off computer the AI uses to run code and build files without touching anything else.</td></tr>
+    <tr><th>Training cutoff</th><td>The date the AI stopped learning. Turn on web search for anything newer.</td></tr>
+    <tr><th>Web search index</th><td>The copy of the internet a tool searches. It may be a few hours behind the live web.</td></tr>
+    <tr><th>Citation</th><td>A link to where the answer came from. Click it and check it.</td></tr>
+    <tr><th>Hallucination</th><td>When the AI states something false with confidence. That's why a person checks every output.</td></tr>
+    <tr><th>CUI and IL5</th><td>CUI is sensitive but unclassified information. IL5 is the security level genai.mil is approved for: it covers CUI, not classified.</td></tr>
   </tbody>
 </table>
-</div>
-
-<h2 id="prompts">Seed prompts: try each tool on its strength</h2>
-<p>Every example is notional. Swap in your own unclassified details, never names or PII.</p>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>Copilot: tighten a Teams message or email</b><span>Paste your draft into the Copilot tab in Teams.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>Rewrite my draft below so it is shorter and clearer for a senior leader. Put the ask in the first sentence. Keep it professional and under 80 words. Give me two versions: one formal, one casual for a Teams chat.
-
-Draft: Hey sir, wanted to touch base on the training schedule thing from last week, we still need a decision on whether land nav is a half day or a full day because S4 needs to lock in buses by Monday and I think a half day is probably fine but wanted your thoughts.</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>Copilot: pull taskers from a file in your cloud</b><span>Add the file as a source first: a cloud file from Teams or OneDrive.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>From the attached file, list every tasker with the owner's role and the due date, in a table. Then give me a two-sentence bottom line for my boss. Flag anything with no owner or no date.</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>ChatGPT Mil: turn rough notes into a memo</b><span>Start a Project, paste your notes, run this.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>You are a staff writer. Turn the notes below into a one-page information memo. Use a bottom line up front, then three to five numbered points, then a recommendation. Plain English, active voice, sentences under 25 words. If something is missing, list the questions I need to answer instead of guessing.
-
-Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confirm bus support by Monday. Company A needs 40 more sets of eye protection. Decision needed: land navigation refresher half day or full day.</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>ChatGPT Mil: build a custom GPT for your work stream</b><span>Paste into the custom GPT's instructions box, then add your unclassified reference files.</span></div><button class="copy" type="button">Copy</button></div>
-<p style="margin:12px 14px 0">Tip: add two or three starter prompts for questions your team asks every week, and turn on web search if the answers need current information. Keep it on "Only me" until you've removed anything not everyone should see.</p>
-<pre>You are the go-to helper for a notional battalion S3 training section. Answer questions using the attached reference files first, and say which file each answer came from. If the files don't cover the question, say so plainly and don't guess. Keep answers short: a bottom line up front, then up to five bullets. When someone asks for a product, such as a training schedule or a memo, ask up to three questions before you draft it. Never store or repeat names, phone numbers or other personal information.</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>ChatGPT Mil: set your custom instructions once</b><span>Settings, then Personalization, then Custom instructions.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>I am a staff officer. Write in plain English for busy leaders. Always start with a one or two sentence bottom line up front. Use short numbered points instead of long paragraphs. If you are not sure about something, tell me instead of guessing, and list what I should check.</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>ChatGPT Mil: shape an idea into a one-page concept</b><span>Set reasoning to High first. Good for early concepts and requirements, not code.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>Help me turn a rough idea into a one-page concept for my boss. The idea: a shared, unclassified tracker so every section can see upcoming training, room bookings and vehicle requests in one place. Write it with these headings: Problem, Proposed solution, Who uses it, What success looks like in 90 days, Risks, and Decisions needed. Ask me up to three questions first if something important is missing.</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>Gemini: research with sources</b><span>Use a public topic so the search can help.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>Find the most recent public guidance on running effective after action reviews in a small unit. Summarize it in five bullets a new team leader can use tomorrow. Give the source and date for each bullet, and tell me which points you could not confirm.</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>Gemini: build your first agent</b><span>Paste into Agent Designer's description box.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>Create an agent called "Meeting Notes to Action Items." It turns rough, unclassified meeting notes into a one-page summary: the meeting purpose in one sentence, decisions made, a table of tasks (task, owner by role, due date, status) and open questions. It uses only the notes provided, marks missing details as TBD, and never includes names or personal information.</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>Gemini: turn messy notes into a trip report</b><span>Upload your notes. A photo of handwritten notes works too.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>Turn the attached notes into a trip report I can download as a Word document. Use these headings: purpose, key engagements, observations, decisions, action items (a table with task, owner by role and due date) and follow-ups. Use only what is in my notes, mark anything missing as TBD, and leave out names and personal information.</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>Gemini: deep research on your own files</b><span>Choose Deep Research, attach several unclassified documents, then run this.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>Read all the attached documents and write a report on what they agree on, where they conflict, and what is missing. Cite the document and section for every point, so I can check it. End with three questions I should ask before making a decision.</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>Gemini: a manager agent with a small team</b><span>Agent Designer. Then use the Preview tab to test it before you share it.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>Create a manager agent called "Staff Product Builder." When I give it a topic and unclassified source files, it assigns the work to three sub-agents: a researcher that pulls the key facts from the files, an analyst that lists options with pros, cons and risks, and a writer that turns the result into a one-page information paper with a bottom line up front. The manager checks that every fact traces back to a source file and flags anything it can't confirm.</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>Grok: see why web search matters</b><span>Ask this twice: once with the Web switch off, then on. Compare the answers.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>What is today's date, who is the current President of the United States, and what is the most recent date your information covers?</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>Grok: make a real slide deck</b><span>Click + in the chat box, add the PowerPoint skill, then run this.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>Make a five-slide PowerPoint for a 10-minute leader brief on a notional office move. Slide 1: title and bottom line. Slide 2: why we're moving. Slide 3: the timeline as a simple table. Slide 4: risks and how we reduce them. Slide 5: decisions needed from the commander. Plain style, large text, no more than four bullets a slide.</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>Grok: set up a daily automation</b><span>Open a project, choose Automations, and use this as the task.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>Every weekday at 0700, search the web for public news from the last 24 hours about [a public topic your section tracks]. Write a half-page roundup: a two-sentence bottom line, then up to five bullets, each with its source and date. End with one line on anything that may need a leader's attention. Use public sources only.</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>Grok: build your own skill</b><span>Turn on Skill creator, then describe the skill you want.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>Help me build a skill called "Executive Summary." When I give it a document, it writes a summary of no more than 200 words for a senior leader: a bottom line up front, three key points, and the decision or action needed. It uses plain English, avoids jargon and filler phrases, and flags anything in the document that looks out of date. Ask me any questions you need before you build it.</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>Grok: teach it your format once</b><span>Skill creator. Attach one good, unclassified example of the product first.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>Help me build a skill called "Our Memo Format." Use the attached example as the template: copy its headings, order, length and tone exactly. When I give it rough notes, it fills in that format, keeps every fact from my notes, marks anything missing as TBD, and adds nothing I didn't provide. Ask me any questions you need before you build it.</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>Grok: analyze a spreadsheet</b><span>Switch to Expert mode and upload an unclassified Excel or CSV file. It may take a few minutes.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>Analyze the attached spreadsheet. Tell me in three sentences what it shows, then list the three biggest trends or outliers with the numbers behind them. Build one chart that shows the most important trend, and give me a cleaned-up Excel file I can download. Tell me any data problems you found, such as blanks or duplicates.</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>Grok: think a decision through</b><span>Switch to Expert mode first.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>Help me compare two options for a notional office move. Option A: move all at once over one weekend. Option B: move one section per week for four weeks. Build a short decision matrix on mission impact, cost, risk and workload. Then argue against your own recommendation in three sentences and tell me what information would change your answer.</pre>
-</div>
-
-<div class="prompt" id="twenty">
-  <div class="prompt-head"><div><b>All four: twenty ideas, ranked by how obvious they are</b><span>Works in any tool. Replace the bracket with your problem.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>Give me 20 ideas for [your problem, for example: getting more junior leaders to use our office's AI tools]. For each idea, estimate the percent chance that a typical AI assistant would suggest it, from 0 to 100 percent. Sort the list from most likely to least likely. At least eight ideas should be under 10 percent. Then pick the two low-percentage ideas you think are most worth trying, and tell me in one sentence each why.</pre>
-</div>
-
-<div class="prompt">
-  <div class="prompt-head"><div><b>All four: same prompt, side by side</b><span>Run this in each tool and compare the answers.</span></div><button class="copy" type="button">Copy</button></div>
-<pre>In 120 words or less, explain to a new staff officer what CUI is, what it is not, and one common mistake people make when handling it. End with one question I should ask my security manager.</pre>
 </div>
 
 <h2>Try it in 3 steps</h2>
 <ol class="steps">
   <li>On your government computer, open the tool: genai.mil with your CAC, or the Copilot tab in Teams.</li>
-  <li>Copy one seed prompt above and paste it in.</li>
+  <li>Copy one <a href="#prompts">seed prompt</a> and paste it in. Add &ldquo;GIST check&rdquo; if you set up the skill.</li>
   <li>Check the answer. Fix one thing in the prompt and run it again.</li>
 </ol>
 
@@ -466,6 +524,29 @@ Notes: Range day moved from Tuesday to Thursday because of weather. S4 to confir
 
 </main>
 <script>
+  (function () {
+    var btns = document.querySelectorAll('.tb-btn');
+    function closeAll(except) {
+      btns.forEach(function (b) {
+        if (b === except) return;
+        b.setAttribute('aria-expanded', 'false');
+        document.getElementById(b.getAttribute('aria-controls')).hidden = true;
+      });
+    }
+    btns.forEach(function (b) {
+      var menu = document.getElementById(b.getAttribute('aria-controls'));
+      b.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = b.getAttribute('aria-expanded') === 'true';
+        closeAll(b);
+        b.setAttribute('aria-expanded', open ? 'false' : 'true');
+        menu.hidden = open;
+      });
+      menu.addEventListener('click', function (e) { if (e.target.closest('a')) closeAll(); });
+    });
+    document.addEventListener('click', function (e) { if (!e.target.closest('.tb-item')) closeAll(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
+  })();
   document.querySelectorAll('button.copy').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var text = btn.closest('.prompt').querySelector('pre').innerText;
