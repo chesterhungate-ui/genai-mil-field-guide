@@ -345,6 +345,23 @@ footer b{color:var(--tan)}
   .fc-flow li{min-height:0;padding:7px 10px 7px 42px}
   .savecard{display:none}
   #pr-a4 .demo{display:none}
+  .hero .wrap{padding-top:26px;padding-bottom:22px;gap:20px}
+  .eyebrow{font-size:12px;gap:8px}
+  .eyebrow span+span::before{margin-right:8px}
+  .hero h1{font-size:2.5rem;margin:10px 0 12px}
+  .hero .lede{font-size:1.02rem;margin-bottom:16px}
+  .hero .actions{gap:8px;flex-wrap:nowrap}
+  .hero .actions .btn{flex:1;justify-content:center;padding:12px 8px;font-size:14px}
+  .byline{margin-top:14px;font-size:13px}
+  .kit{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+  .kit .tile{padding:10px 4px 9px;gap:6px;align-items:center;text-align:center}
+  .kit .tile .logo{width:22px;height:22px}
+  .kit .tile b{font-size:14px;line-height:1.05}
+  .kit .tile span{display:none}
+  .safety .wrap{gap:10px;padding-top:12px;padding-bottom:12px}
+  .safety ul{font-size:14px;gap:6px 14px}
+  section.sec.lib{padding-top:34px}
+  header.hero::before{height:96px;clip-path:polygon(0 40%,100% 0,100% 100%,0 100%)}
   .chips{grid-template-columns:1fr 1fr;gap:6px}
   .chip{padding:10px;gap:8px}
   .chip .ic{width:18px;height:18px}
@@ -426,9 +443,9 @@ footer b{color:var(--tan)}
     <div>
       <div class="eyebrow"><span>Prompt library</span><span>AEMO</span><span>Updated 16 Nov 2026</span></div>
       <h1>Your AI<br>fire team<em>has reported for duty.</em></h1>
-      <p class="lede">54 prompts for our work, sorted by task, for the four AI tools on GenAI.mil and in Teams. Find one, copy it, run it. New to this? Start with the basics below the library.</p>
+      <p class="lede">54 prompts for our work, sorted by task, for the four AI tools on GenAI.mil and in Teams. Find one, copy it, run it.</p>
       <div class="actions">
-        <a class="btn solid" href="#prompts">Find a prompt &darr;</a>
+        <a class="btn solid" href="#prompts" data-focus>Find a prompt &darr;</a>
         <a class="btn" href="#start">New here? Start</a>
       </div>
       <p class="byline">By MAJ Hungate, Army Enterprise Marketing Office. These views are the author&rsquo;s own and are not those of the Army or DoD.</p>
@@ -1110,6 +1127,7 @@ Friday 1400: get a status for each (done, partly, not started), then write a fiv
     if(id==='gist'){e.preventDefault();openPrompt('gist');history.replaceState(null,'','#gist');return;}
     if(id.indexOf('pr-')===0 && openPrompt(id)){e.preventDefault();history.replaceState(null,'','#'+id);}
     var dq=a.getAttribute('data-q'); if(dq!==null){q.value=dq;S.q=dq;apply();}
+    if(a.hasAttribute('data-focus') && window.matchMedia('(hover:hover) and (pointer:fine)').matches){e.preventDefault();lib.scrollIntoView({behavior:'smooth'});setTimeout(function(){q.focus({preventScroll:true});var b=q.getBoundingClientRect();if(b.top<0||b.bottom>window.innerHeight)q.scrollIntoView({block:'center'});},450);}
     var tool=a.getAttribute('data-tool'); if(tool){var c=$('#pick-'+tool); if(c){c.classList.remove('flash');void c.offsetWidth;c.classList.add('flash')}}
   });
   if(location.hash.indexOf('#pr-')===0) openPrompt(location.hash.slice(1));
