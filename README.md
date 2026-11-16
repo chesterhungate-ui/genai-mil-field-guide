@@ -10,9 +10,9 @@ Each version is one self-contained HTML file, with no build step and no external
 
 | Path | What it is |
 |---|---|
-| `/` (`index.html`) | Current main page. Same file as `/v4/`. |
-| `/v5/` | Draft. A daily prompt library first: 54 prompts by task or by tool, with search. Many are adapted from Ruben Hassid's How to AI prompt library. |
-| `/v4/` | Goarmy-inspired redesign, built as a handout for a 12 Nov 2026 leader development session: QR bookmark, start levels, tool quiz, 21 prompts. |
+| `/` (`index.html`) | Current main page. Same file as `/v5/`. |
+| `/v5/` | A daily prompt library first: 54 prompts by task or by tool, with search. Many are adapted from Ruben Hassid's How to AI prompt library. |
+| `/v4/` | Goarmy-inspired redesign, built as a handout for a 12 Nov 2026 leader development session: QR bookmark, start levels, tool quiz, 21 prompts. Archived. |
 | `/v3/` | Black-and-gold hybrid of v1 and v2. Archived. |
 | `/v2/` | Design experiment in Claude's clay-and-serif style. Archived. |
 | `/v1/` | Original full-text page. Archived. |

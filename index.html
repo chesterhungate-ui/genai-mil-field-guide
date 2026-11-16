@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>genai.mil Field Guide</title>
-<meta name="description" content="Unofficial, open-source field guide to Copilot, Gemini, Grok and ChatGPT Mil. Bookmark it and come back.">
+<meta name="description" content="Unofficial, open-source prompt library and field guide for Copilot, Gemini, Grok and ChatGPT Mil. Find a prompt, copy it, run it.">
 <style>
 :root{
   --bg:#121011; --surface:#1c191a; --s2:#262223; --line:#3a3436; --deep:#0b0a0a;
@@ -289,6 +289,88 @@ footer{padding:40px 0 60px;font-size:13.5px;color:var(--muted);background:var(--
 footer p{max-width:100ch}
 footer b{color:var(--tan)}
 
+
+/* v5 library */
+.hero .wrap{min-height:0;padding-top:40px;padding-bottom:40px}
+.hero h1{font-size:clamp(2.8rem,6vw,5.6rem);margin:14px 0 18px}
+.libcredit{display:flex;gap:10px;align-items:flex-start;margin:-18px 0 22px;font-size:15px;color:var(--tan)}
+.libcredit .ic{color:var(--gold);width:18px;height:18px;margin-top:2px}
+.featcard{display:grid;grid-template-columns:1fr auto;gap:10px 24px;align-items:center;background:var(--gold);color:var(--ink);text-decoration:none;padding:20px 22px;margin:0 0 22px;transition:transform 200ms var(--ease)}
+.featcard:active{transform:scale(.99)}
+@media (hover:hover) and (pointer:fine){.featcard:hover{transform:translateY(-2px)}}
+.fc-top{grid-column:1/-1;display:flex;gap:12px;align-items:center;flex-wrap:wrap;font:800 13px/1 var(--head);letter-spacing:.12em;text-transform:uppercase}
+.fc-tag{display:inline-flex;gap:6px;align-items:center;background:var(--ink);color:var(--gold);padding:6px 9px}
+.fc-tag .ic{width:14px;height:14px}
+.fc-h{font:800 clamp(30px,4.4vw,46px)/1 var(--head);text-transform:uppercase}
+.fc-flow{grid-column:1/-1;grid-row:3;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fc-flow li{position:relative;background:rgba(18,16,17,.1);padding:10px 12px 10px 44px;font:700 15px/1.2 Arial,sans-serif;min-height:44px;display:flex;align-items:center}
+.fc-flow i{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:var(--ink);color:var(--gold);font:800 14px/24px var(--head);font-style:normal;text-align:center}
+.fc-go{grid-column:2;grid-row:2;font:800 15px/1 var(--head);letter-spacing:.08em;text-transform:uppercase;border:2px solid var(--ink);padding:11px 14px;white-space:nowrap}
+.finder{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap;margin-bottom:14px}
+.search{flex:1 1 280px;display:flex;align-items:center;gap:10px;background:var(--deep);border:2px solid var(--line);padding:0 14px;transition:border-color .15s ease}
+.search:focus-within{border-color:var(--gold)}
+.search .ic{color:var(--gold)}
+.search input{flex:1;min-width:0;background:none;border:0;color:var(--text);font:17px/1.2 Arial,sans-serif;padding:14px 0;outline:none}
+.search input::placeholder{color:var(--muted)}
+.viewsw{display:flex;border:2px solid var(--line)}
+.viewsw button{font:800 15px/1 var(--head);letter-spacing:.06em;text-transform:uppercase;background:none;border:0;color:var(--muted);padding:0 16px;min-height:48px;cursor:pointer}
+.viewsw button[aria-pressed="true"]{background:var(--gold);color:var(--ink)}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px}
+.chips[hidden],.tabs[hidden]{display:none}
+.chip{display:flex;gap:10px;align-items:center;text-align:left;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--line);color:var(--text);padding:12px 14px;cursor:pointer;transition:background-color .15s ease,border-color .15s ease}
+.chip .ic{color:var(--gold);width:20px;height:20px}
+.chip b{flex:1;font:800 17px/1.05 var(--head);text-transform:uppercase}
+.chip .n{font:700 12px/1 Arial;background:var(--s2);color:var(--tan);padding:3px 7px;border-radius:10px}
+.chip[aria-pressed="true"]{background:var(--s2);border-left-color:var(--gold)}
+.chip[aria-pressed="true"] .n{background:var(--gold);color:var(--ink)}
+@media (hover:hover) and (pointer:fine){.chip:hover{border-left-color:var(--gold)}.viewsw button:hover{color:var(--text)}.viewsw button[aria-pressed="true"]:hover{color:var(--ink)}}
+.searching .chip[aria-pressed="true"]{background:var(--surface);border-left-color:var(--line)}
+.searching .chip[aria-pressed="true"] .n{background:var(--s2);color:var(--tan)}
+.pstatus{font:700 14px/1.3 var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(--tan);margin:0 0 10px;min-height:18px}
+.pstatus b{color:var(--gold)}
+.tt{display:block;font:700 12px/1 var(--head);font-style:normal;letter-spacing:.12em;text-transform:uppercase;color:var(--t);margin-bottom:5px}
+.src{font-size:13px;color:var(--muted);margin:12px 0 0}
+.ptip a{color:var(--gold)}
+.unk{color:var(--maybe);font-weight:700}
+.nores{background:var(--surface);border:1px dashed var(--line);padding:18px;color:var(--tan);margin:0}
+.nores[hidden]{display:none}
+.linkbtn{background:none;border:0;color:var(--gold);text-decoration:underline;font:inherit;cursor:pointer;padding:0}
+.fw{font-size:14.5px;color:var(--muted);margin:22px 0 0}
+@media (max-width:640px){
+  .libcredit{margin-top:-24px}
+  .featcard{grid-template-columns:1fr;padding:18px 16px}
+  .fc-go{grid-column:1;grid-row:auto;justify-self:start}
+  .fc-flow{grid-row:auto;grid-template-columns:1fr}
+  .fc-flow{gap:4px}
+  .fc-flow li{min-height:0;padding:7px 10px 7px 42px}
+  .savecard{display:none}
+  #pr-a4 .demo{display:none}
+  .hero .wrap{padding-top:26px;padding-bottom:22px;gap:20px}
+  .eyebrow{font-size:12px;gap:8px}
+  .eyebrow span+span::before{margin-right:8px}
+  .hero h1{font-size:2.5rem;margin:10px 0 12px}
+  .hero .lede{font-size:1.02rem;margin-bottom:16px}
+  .hero .actions{gap:8px;flex-wrap:nowrap}
+  .hero .actions .btn{flex:1;justify-content:center;padding:12px 8px;font-size:14px}
+  .byline{margin-top:14px;font-size:13px}
+  .kit{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+  .kit .tile{padding:10px 4px 9px;gap:6px;align-items:center;text-align:center}
+  .kit .tile .logo{width:22px;height:22px}
+  .kit .tile b{font-size:14px;line-height:1.05}
+  .kit .tile span{display:none}
+  .safety .wrap{gap:10px;padding-top:12px;padding-bottom:12px}
+  .safety ul{font-size:14px;gap:6px 14px}
+  section.sec.lib{padding-top:34px}
+  header.hero::before{height:96px;clip-path:polygon(0 40%,100% 0,100% 100%,0 100%)}
+  .chips{grid-template-columns:1fr 1fr;gap:6px}
+  .chip{padding:10px;gap:8px}
+  .chip .ic{width:18px;height:18px}
+  .chip b{font-size:15px}
+  .viewsw{flex:1 1 100%}
+  .viewsw button{flex:1}
+  .tabs button{padding:12px 10px;font-size:15px}
+}
+
 /* scroll reveal */
 .js .rv{opacity:0;transform:translateY(16px);transition:opacity 500ms var(--ease),transform 500ms var(--ease);transition-delay:calc(var(--i,0) * 60ms)}
 .js .rv.in{opacity:1;transform:none}
@@ -349,7 +431,7 @@ footer b{color:var(--tan)}
   <div class="wrap">
     <a class="home" href="#top">genai<i>.</i>mil field guide</a>
     <div class="links">
-      <a href="#start">Start</a><a href="#take">My take</a><a href="#rules">My rules</a><a href="#tools">Pick a tool</a><a href="#prompts">Prompts</a><a href="#compare">Compare</a><a href="#more">Learn more</a>
+      <a href="#prompts">Prompts</a><a href="#start">Start</a><a href="#take">My take</a><a href="#rules">My rules</a><a href="#tools">Pick a tool</a><a href="#compare">Compare</a><a href="#more">Learn more</a>
     </div>
     <a class="save" href="#save"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg><span>Save page</span></a>
   </div>
@@ -359,12 +441,12 @@ footer b{color:var(--tan)}
 <header class="hero">
   <div class="wrap">
     <div>
-      <div class="eyebrow"><span>LPD field guide</span><span>AEMO</span><span>12 Nov 2026</span></div>
+      <div class="eyebrow"><span>Prompt library</span><span>AEMO</span><span>Updated 16 Nov 2026</span></div>
       <h1>Your AI<br>fire team<em>has reported for duty.</em></h1>
-      <p class="lede">Four AI tools on GenAI.mil and in Teams, aimed at our work: briefs, campaigns, research and reports. Which one to use, how to ask, and what to try first.</p>
+      <p class="lede">54 prompts for our work, sorted by task, for the four AI tools on GenAI.mil and in Teams. Find one, copy it, run it.</p>
       <div class="actions">
-        <a class="btn solid" href="#start">Find your starting point &darr;</a>
-        <a class="btn" href="#prompts">Jump to prompts</a>
+        <a class="btn solid" href="#prompts" data-focus>Find a prompt &darr;</a>
+        <a class="btn" href="#start">New here? Start</a>
       </div>
       <p class="byline">By MAJ Hungate, Army Enterprise Marketing Office. These views are the author&rsquo;s own and are not those of the Army or DoD.</p>
     </div>
@@ -381,12 +463,6 @@ footer b{color:var(--tan)}
   </div>
 </header>
 
-<div class="stats"><div class="wrap">
-  <div class="stat"><b>4</b><span>AI tools on your computer</span></div>
-  <div class="stat"><b>8</b><span>Rules for better answers</span></div>
-  <div class="stat"><b>21</b><span>Prompts for our work</span></div>
-  <div class="stat"><b>3</b><span>Questions to pick a tool</span></div>
-</div></div>
 
 <div class="safety"><div class="wrap">
   <span class="lbl"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>Before you paste</span>
@@ -397,10 +473,407 @@ footer b{color:var(--tan)}
   </ul>
 </div></div>
 
+<!-- PROMPTS -->
+<section class="sec lib" id="prompts">
+<div class="wrap">
+  <div class="sec-head"><span class="sec-n">01 / Prompt library</span><h2>Find it. Copy it. Run it.</h2><p>54 prompts for our work, sorted by task. Every detail is notional, so swap in your own unclassified facts, never names or PII.</p></div>
+  <p class="libcredit"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Many of these are adapted from <a href="https://home.how-to-ai.co/c/prompt-library/chatgpt-gemini-claude-grok-prompts" rel="noopener">Ruben Hassid&rsquo;s How to AI prompt library</a>, rewritten for marketing staff work and our four tools.</span></p>
+
+  <a class="featcard" href="#pr-a4">
+    <span class="fc-top"><span class="fc-tag"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>Start here</span><span class="fc-tool">All four tools</span></span>
+    <b class="fc-h">Ask &rarr; decide &rarr; do</b>
+    <ol class="fc-flow"><li><i>1</i>Compare three options</li><li><i>2</i>Recommend one</li><li><i>3</i>Draft the product</li></ol>
+    <span class="fc-go">Open the prompt &rarr;</span>
+  </a>
+
+  <div class="finder">
+    <label class="search"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span class="sr">Search prompts</span><input id="pq" type="search" placeholder="Search: brief, survey, email, deck&hellip;" autocomplete="off" spellcheck="false"></label>
+    <div class="viewsw" role="group" aria-label="Browse prompts"><button type="button" data-view="task" aria-pressed="true">By task</button><button type="button" data-view="tool" aria-pressed="false">By tool</button></div>
+  </div>
+  <div class="chips" id="chips" role="group" aria-label="Prompts by task"><button type="button" class="chip" data-g="daily" aria-pressed="true"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><b>Daily drivers</b><span class="n">5</span></button><button type="button" class="chip" data-g="plan" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><b>Plan a campaign</b><span class="n">6</span></button><button type="button" class="chip" data-g="content" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></svg><b>Make content</b><span class="n">6</span></button><button type="button" class="chip" data-g="write" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><b>Write and edit</b><span class="n">10</span></button><button type="button" class="chip" data-g="think" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><b>Think it through</b><span class="n">7</span></button><button type="button" class="chip" data-g="data" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18M7 16v-4M12 16V8M17 16v-7"/></svg><b>Data and research</b><span class="n">8</span></button><button type="button" class="chip" data-g="learn" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><b>Learn and teach</b><span class="n">7</span></button><button type="button" class="chip" data-g="week" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><b>Run the week</b><span class="n">5</span></button><button type="button" class="chip all" data-g="all" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg><b>All prompts</b><span class="n">54</span></button></div>
+  <div class="tabs" role="tablist" aria-label="Prompts by tool" id="tooltabs" hidden>
+    <button role="tab" type="button" id="tab-copilot" data-t="copilot" aria-controls="plist" aria-selected="true" style="--c:var(--copilot)"><svg class="logo" aria-hidden="true"><use href="#lg-copilot"/></svg>Copilot<span class="n">4</span></button>
+    <button role="tab" type="button" id="tab-gemini" data-t="gemini" aria-controls="plist" aria-selected="false" tabindex="-1" style="--c:var(--gemini)"><svg class="logo" aria-hidden="true"><use href="#lg-gemini"/></svg>Gemini<span class="n">7</span></button>
+    <button role="tab" type="button" id="tab-grok" data-t="grok" aria-controls="plist" aria-selected="false" tabindex="-1" style="--c:var(--grok)"><svg class="logo" aria-hidden="true"><use href="#lg-grok"/></svg>Grok<span class="n">15</span></button>
+    <button role="tab" type="button" id="tab-chatgpt" data-t="chatgpt" aria-controls="plist" aria-selected="false" tabindex="-1" style="--c:var(--chatgpt)"><svg class="logo" aria-hidden="true"><use href="#lg-chatgpt"/></svg>ChatGPT Mil<span class="n">16</span></button>
+    <button role="tab" type="button" id="tab-all" data-t="all" aria-controls="plist" aria-selected="false" tabindex="-1" style="--c:var(--gold)"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>All four<span class="n">12</span></button>
+  </div>
+  <p class="pstatus" id="pstatus" aria-live="polite"></p>
+  <div class="panel" id="plist" role="tabpanel" aria-label="Prompts">
+    
+    <details class="prow feat" id="pr-a4" data-o="42" data-tool="all" data-g="daily" data-k="course of action coa compare options recommend decision memo" style="--c:var(--gold)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="12" cy="20" r="2"/><path d="M6 7v1a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4V7M12 12v6"/></svg><span class="pt"><i class="tt" style="--t:var(--gold)">All four</i><b>Ask &rarr; decide &rarr; do</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When you have a choice to make and a product due right after it.</span></span><span class="demo keep">Start here</span><span class="pc"></span></summary><div class="pb"><p class="ptip">Works in all four. In Grok, add the Word skill and it hands you the memo as a file.</p><pre><span class="k">GOAL:</span> Help me pick one course of action, then draft the product for it.
+
+<span class="k">INFO:</span> The decision: [for example: where to put a notional $50,000 left in this quarter's budget: more paid social, a second campus event, or new short-form video].
+It goes to [for example: my director], who will judge it on [one yardstick, for example: lowest cost per qualified lead within 60 days].
+We can't exceed [time, money, people, approvals].
+Once we choose, I owe [for example: a one-page decision memo].
+
+<span class="k">SHAPE:</span> COMPARE: a table of three courses of action, with columns for what it is, upside, downside and the risk that worries you most.
+RECOMMEND: name the winner against my yardstick in two sentences.
+DRAFT: write the product for the winner.
+CHECK: close with the facts and numbers a reviewer should confirm.
+
+<span class="k">TRAPS:</span> Where I left something out, make a sensible guess, say so, and keep moving. Write [TBD] in place of any number I didn't give you. Bullets over paragraphs, and no jargon.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 2.</p></div></details>
+    <details class="prow" id="pr-a3" data-o="45" data-tool="all" data-g="daily" data-k="example template match style all-rounder" style="--c:var(--gold)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg><span class="pt"><i class="tt" style="--t:var(--gold)">All four</i><b>Show it the format</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When you have one good example and want another like it.</span></span><span class="pc"></span></summary><div class="pb"><pre><span class="k">GOAL:</span> [The task, for example: write a 150-word event recap for our internal newsletter.]
+
+<span class="k">INFO:</span> Write it as [the expert you need, for example: an internal-communications editor]. It's for [audience].
+Here is one example I like. Match its length, structure and tone, not its facts:
+[paste one good example]
+My facts: [paste your notes]
+
+<span class="k">SHAPE:</span> Work in three steps:
+1. [for example: pull the three most important facts from my notes]
+2. [for example: write the draft in the example's structure]
+3. [for example: cut it to 150 words]
+Then show me the draft.
+
+<span class="k">TRAPS:</span> Don't copy wording or facts from the example. Use only my facts and mark gaps [TBD].</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 1.</p></div></details>
+    <details class="prow" id="pr-a5" data-o="46" data-tool="all" data-g="daily" data-k="stuck brainstorm questions new approach" style="--c:var(--gold)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg><span class="pt"><i class="tt" style="--t:var(--gold)">All four</i><b>Get unstuck</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When you keep circling the same ideas.</span></span><span class="pc"></span></summary><div class="pb"><pre><span class="k">GOAL:</span> Help me find a new approach to [problem, for example: getting regional teams to use our shared event calendar].
+
+<span class="k">INFO:</span> What I've tried: [two or three things]. Why each fell short: [one line each].
+
+<span class="k">SHAPE:</span> Don't give me answers yet. Ask me one question at a time, up to eight, about the problem. Then give me three approaches I haven't tried, and the first step for each.
+
+<span class="k">TRAPS:</span> No generic advice. Don't repeat what I've already tried.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 4.</p></div></details>
+    <details class="prow" id="pr-k2" data-o="12" data-tool="grok" data-g="daily" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 2 2 4-4M3 7l2 2 4-4M13 6h8M13 12h8M13 18h8"/></svg><span class="pt"><i class="tt" style="--t:var(--grok)">Grok &middot; Skill</i><b>Build a GIST Check skill</b><span>Turn on Skill creator and paste this. Then end any prompt with &ldquo;GIST check.&rdquo;</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">In ChatGPT Mil, you can paste this into Custom instructions instead.</p><pre>Help me build a skill called "GIST Check." Use it whenever my prompt includes the words "GIST check." Before doing any work, check my prompt for four parts: Goal (what exactly I want done), Info (the background, including who it's for), Shape (the format and length, such as one page, a table or five slides) and Traps (what to avoid). Reply first with a short table that lists each part as Clear or Missing, with one line on what's missing, such as "no audience" or "no length." Then ask me up to three questions to fill the gaps, and show a better version of my prompt with the gaps marked [like this]. Don't start the task until I answer or say "go." If all four parts are clear, say "GIST complete" and do the task. Ask me any questions you need before you build it.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-o4" data-o="29" data-tool="chatgpt" data-g="daily" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg><span class="pt"><i class="tt" style="--t:var(--chatgpt)">ChatGPT Mil</i><b>Set your custom instructions once</b><span>Settings, then Personalization, then Custom instructions.</span></span><span class="pc"></span></summary><div class="pb"><pre>I work in a marketing office. Write in plain English for busy leaders. Always start with a one- or two-sentence bottom line. Use short numbered points instead of long paragraphs. When I ask for copy, give me two options. If you're not sure about something, tell me instead of guessing, and list what I should check.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-o7" data-o="32" data-tool="chatgpt" data-g="plan" data-k="creative brief agency" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M9 12h6M9 16h4"/></svg><span class="pt"><i class="tt" style="--t:var(--chatgpt)">ChatGPT Mil</i><b>A full brief from a rough one</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When all you have is a few lines and a deadline.</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">Do this every week? Build the reusable version: the <a href="#pr-g3">Creative Brief Builder agent</a> in Gemini.</p><pre><span class="k">GOAL:</span> Turn my rough notes into a full creative brief an agency could work from.
+
+<span class="k">INFO:</span>
+[paste your rough brief: what, for whom, by when, budget]
+
+<span class="k">SHAPE:</span>
+First, two sentences on what you think the job is, so I can correct you. Then ask me up to five questions.
+After I answer, write the brief with these headings: Background, Objective, Audience, Insight, Single-minded message, Proof points, Deliverables, Mandatories, Budget, Timeline, How we'll measure it.
+
+<span class="k">TRAPS:</span> Use only what I give you and mark gaps [TBD]. No names or personal information.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 53.</p></div></details>
+    <details class="prow" id="pr-g3" data-o="6" data-tool="gemini" data-g="plan" style="--c:var(--gemini)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M12 7v4M8 16h.01M16 16h.01"/><circle cx="12" cy="5" r="2"/></svg><span class="pt"><i class="tt" style="--t:var(--gemini)">Gemini &middot; Agent</i><b>Build an agent: Creative Brief Builder</b><span>Paste into Agent Designer&rsquo;s description box. Test it in Preview before you share it.</span></span><span class="pc"></span></summary><div class="pb"><pre>Create an agent called "Creative Brief Builder." When I give it rough, unclassified notes about a marketing need, it writes a one-page creative brief with these headings: Objective, Audience, Key insight, Single-minded message, Proof points, Deliverables, Mandatories, Timeline, and How we'll measure it. It uses only what I provide, marks gaps as TBD, asks up to three questions when the objective or audience is unclear, and never includes names or personal information.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-k8" data-o="18" data-tool="grok" data-g="plan" data-k="omni-channel roadmap annual media plan excel spreadsheet kpi" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="pt"><i class="tt" style="--t:var(--grok)">Grok &middot; Excel</i><b>A 12-month channel plan</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When you need a year of channels and messages on one sheet.</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">Click + and add the Excel skill, then paste this. Turn on Web if you want seasonal data with sources.</p><pre><span class="k">GOAL:</span> A 12-month channel plan for [campaign, for example: a notional awareness campaign for part-time service], as an Excel file.
+
+<span class="k">INFO:</span> Audience: [who]. Budget range: [notional]. Channels we use: [for example: social, paid video, email, events, out-of-home]. Fixed dates: [events, school calendar, holidays].
+
+<span class="k">SHAPE:</span>
+Sheet 1: one row per month, one column per channel, with the activity and its message.
+Sheet 2: KPIs by stage (aware, consider, act), with a target for each.
+Sheet 3: one line per channel on how the core message changes there.
+Then three sentences on the one choice that matters most.
+
+<span class="k">TRAPS:</span> Pick one approach and say how to do it; don't list options. Tie timing to the dates I gave. Don't invent benchmarks: mark targets [set by us].</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 23.</p></div></details>
+    <details class="prow" id="pr-g5" data-o="8" data-tool="gemini" data-g="plan" data-k="blue ocean segment audience research untapped" style="--c:var(--gemini)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16.2 7.8-2.1 6.3-6.3 2.1 2.1-6.3z"/></svg><span class="pt"><i class="tt" style="--t:var(--gemini)">Gemini &middot; Deep Research</i><b>Find underserved audiences</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When everyone is chasing the same people.</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">Choose Deep Research, then paste this.</p><pre><span class="k">GOAL:</span> Find audiences nobody is reaching well for [program, for example: a notional part-time service program], and outline a campaign for the best one.
+
+<span class="k">INFO:</span> Who we reach now: [audience]. Who competes for the same people: [for example: colleges, employers, trade schools]. Search public research and data.
+
+<span class="k">SHAPE:</span>
+1. A table of three to five groups that get little attention from anyone: who they are, rough size, why they're overlooked, sources.
+2. Pick one. What would we drop, do less of, do more of, and do that nobody else does? One box each.
+3. A one-page outline: message, channels and the first 90 days.
+4. What result at day 90 would tell us we picked wrong.
+
+<span class="k">TRAPS:</span> Cite every number with its source and date, and mark estimates. Define segments by interests, life stage and location, not protected traits.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 21.</p></div></details>
+    <details class="prow" id="pr-o6" data-o="31" data-tool="chatgpt" data-g="plan" data-k="brand storytelling narrative message" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span class="pt"><i class="tt" style="--t:var(--chatgpt)">ChatGPT Mil</i><b>One story for the whole campaign</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When every channel is telling a slightly different story.</span></span><span class="pc"></span></summary><div class="pb"><pre><span class="k">GOAL:</span> Turn our campaign facts into one story every channel can tell.
+
+<span class="k">INFO:</span> Campaign: [one line]. Audience: [who]. What we want them to feel and do: [one line]. Proof points: [three to five facts].
+
+<span class="k">SHAPE:</span>
+1. The audience in one sentence.
+2. The story in four beats: the person, the challenge, the turning point, what changes.
+3. The core message in under 12 words.
+4. How the story shifts for video, social, email and an event booth, one line each.
+
+<span class="k">TRAPS:</span> The audience member is the hero, not us. No invented testimonials or numbers. No slogans or logos that aren't ours to use.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 25.</p></div></details>
+    <details class="prow feat" id="pr-k1" data-o="11" data-tool="grok" data-g="plan" data-k="try first" style="--c:var(--gold)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span class="pt"><i class="tt" style="--t:var(--grok)">Grok &middot; PowerPoint</i><b>Build a full campaign-recap deck</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>A finished 7-slide PowerPoint in a bold black-and-gold style.</span></span><span class="demo keep">Try first</span><span class="pc"></span></summary><div class="pb">
+      <ol class="steps4">
+        <li><b>Step 1</b>Open Grok on genai.mil and start a new chat.</li>
+        <li><b>Step 2</b>Click + in the chat box and add the PowerPoint skill.</li>
+        <li><b>Step 3</b>Paste the prompt. Answer its questions.</li>
+        <li><b>Step 4</b>Download the file. Then refine it: &ldquo;Make slide 4 a bar chart.&rdquo;</li>
+      </ol>
+<pre><span class="k">GOAL:</span> Build a finished 7-slide PowerPoint deck I can brief from: a notional end-of-quarter recap of a national awareness campaign aimed at 17- to 24-year-olds.
+
+<span class="k">INFO:</span> The audience is senior leaders in a marketing office. It's a 10-minute brief that ends in a decision. Use only these notional numbers: impressions 48 million (goal 40 million); site visits 1.2 million; leads 18,400 (goal 20,000); cost per lead $62 (goal $55); best channel: short-form video; weakest channel: display ads.
+
+<span class="k">SHAPE:</span>
+Slide 1: title and a one-sentence bottom line.
+Slide 2: bottom line up front: three results and the one decision needed.
+Slide 3: results against goals, as a table marked green or red.
+Slide 4: what worked: the top three channels, ranked, with one chart.
+Slide 5: what didn't work and why, in three bullets.
+Slide 6: next quarter: three recommendations, each with its cost and risk.
+Slide 7: decisions needed.
+Add speaker notes of under 60 words to every slide.
+Style: bold and high-contrast. Black (#121011) backgrounds, gold (#FFCC01) headlines and accents, tan (#D6CEB5) secondary text, white body text. Heavy condensed all-caps headlines, one big number per slide where it fits, plenty of empty space, simple line icons. Put a gray box labeled PHOTO wherever a photo would go.
+
+<span class="k">TRAPS:</span> No Army logos, seals, emblems or slogans. No real names, PII or non-public data. Don't invent numbers: if something is missing, write [TBD] and list it at the end. No more than four bullets a slide, no bullet longer than 12 words, and no jargon.
+
+Before you build, ask me up to three questions if anything is unclear. Then build the .pptx file for me to download.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-o1" data-o="26" data-tool="chatgpt" data-g="content" data-k="try first" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg><span class="pt"><i class="tt" style="--t:var(--chatgpt)">ChatGPT Mil</i><b>Social posts in three lengths</b><span>Start a new chat. Set reasoning to Medium.</span></span><span class="demo keep">Try first</span><span class="pc"></span></summary><div class="pb"><pre>Write social posts announcing a notional career-day booth at a college football game this Saturday, 10 a.m. to 2 p.m., at Gate C. The audience is students aged 18 to 24 and their parents. Give me three versions: a 40-word post, a 120-word post and a three-line caption for a short video. Each needs a clear call to action and suggested alt text for the image. Keep it plain and upbeat, with no slang that will age badly. Flag any claim I should verify before posting.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-k9" data-o="19" data-tool="grok" data-g="content" data-k="content ideas topics trends research" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg><span class="pt"><i class="tt" style="--t:var(--grok)">Grok &middot; Web on</i><b>Topic ideas with sources</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When you need post ideas people are talking about now.</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">Turn the Web switch on first.</p><pre><span class="k">GOAL:</span> Content ideas on [topic, for example: first jobs and paying for college] for [audience].
+
+<span class="k">INFO:</span> Search the web for news, research and discussion from the last [30] days.
+
+<span class="k">SHAPE:</span>
+1. Five trends you found, each with its source and date.
+2. Two post ideas per trend: a title and a two-line summary.
+3. Mark the three ideas most likely to earn attention, and say why.
+
+<span class="k">TRAPS:</span> Public sources only, and a source for every trend. Leave out anything older than [30] days. No political topics. If you're unsure, say so.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 27.</p></div></details>
+    <details class="prow" id="pr-o8" data-o="33" data-tool="chatgpt" data-g="content" data-k="hook first line social post headline" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="3"/><path d="M12 22V8M5 12H2a10 10 0 0 0 20 0h-3"/></svg><span class="pt"><i class="tt" style="--t:var(--chatgpt)">ChatGPT Mil</i><b>Ten openers for a post</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When the post is good but nobody stops scrolling.</span></span><span class="pc"></span></summary><div class="pb"><pre><span class="k">GOAL:</span> Ten opening lines for my post.
+
+<span class="k">INFO:</span> Audience: [who].
+[paste your post]
+
+<span class="k">SHAPE:</span> Ten openers, two of each type: a number, a contrast, a tiny story, a blunt claim and a surprising fact. Make some one line and some three. Rank them, and say in one line why the winner works.
+
+<span class="k">TRAPS:</span> Plain words a 12-year-old would get. No clickbait, and no promise the post doesn't keep. Skip tired openers like "Here's the thing."</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 29.</p></div></details>
+    <details class="prow" id="pr-o9" data-o="34" data-tool="chatgpt" data-g="content" data-k="content calendar viral post analyzer social week" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span class="pt"><i class="tt" style="--t:var(--chatgpt)">ChatGPT Mil</i><b>Learn from our best posts, then plan a week</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When you want more posts like the ones that worked.</span></span><span class="pc"></span></summary><div class="pb"><pre><span class="k">GOAL:</span> Work out why our best posts worked, then plan next week's posts.
+
+<span class="k">INFO:</span> Our audience: [who]. Our best-performing posts, with their results: [paste two of your own here]. Next week's events or themes: [list].
+
+<span class="k">SHAPE:</span>
+1. A table, one row per post: topic, problem it solved, hook, strongest line, why it worked.
+2. Three patterns the posts share.
+3. A Monday-to-Friday calendar: topic, hook, format, call to action, and which pattern it uses.
+
+<span class="k">TRAPS:</span> Strip names and personal details from the posts before you paste them. Reuse the patterns, not the words.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompts 31 and 32.</p></div></details>
+    <details class="prow" id="pr-o15" data-o="40" data-tool="chatgpt" data-g="content" data-k="tagline slogan line copy" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></svg><span class="pt"><i class="tt" style="--t:var(--chatgpt)">ChatGPT Mil</i><b>Campaign line options</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When a campaign needs a line people remember.</span></span><span class="pc"></span></summary><div class="pb"><pre><span class="k">GOAL:</span> Fifteen line options for a notional campaign.
+
+<span class="k">INFO:</span> The campaign in one sentence: [line]. Audience: [who]. Three facts that make it true: [list]. Tone: [for example: direct, confident, no hype]. Lines we've liked before: [paste two of your own here].
+
+<span class="k">SHAPE:</span> Fifteen options in three groups of five: plain, bold and unexpected. Under five words where you can. Pick your top two and say why in one line each.
+
+<span class="k">TRAPS:</span> Notional lines only. Don't reuse or echo any real Army or recruiting slogan, or any other brand's line. No promises we can't keep. Flag anything that needs legal or public affairs review.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 24.</p></div></details>
+    <details class="prow" id="pr-a12" data-o="53" data-tool="all" data-g="content" data-k="faq questions answers web page event scqa" style="--c:var(--gold)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></svg><span class="pt"><i class="tt" style="--t:var(--gold)">All four</i><b>An FAQ for an event or program</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When the same questions keep landing in your inbox.</span></span><span class="pc"></span></summary><div class="pb"><pre><span class="k">GOAL:</span> Write an FAQ for [event or program, for example: a notional career-day booth at a college football game].
+
+<span class="k">INFO:</span> Audience: [for example: students aged 18 to 24 and their parents]. Confirmed facts: [paste them: date, place, what to bring, contact by role].
+
+<span class="k">SHAPE:</span> Ten questions people really ask, in their words. Answer each in the Situation, Complication, Question, Answer pattern, with the answer in two sentences or fewer.
+
+<span class="k">TRAPS:</span> Use only my facts. If a likely question isn't covered, list it at the end as [needs an answer]. No promises about pay, benefits or eligibility.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 37.</p></div></details>
+    <details class="prow" id="pr-c2" data-o="1" data-tool="copilot" data-g="write" style="--c:var(--copilot)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="pt"><i class="tt" style="--t:var(--copilot)">Copilot</i><b>Tighten a note to an agency team</b><span>Paste your draft into Copilot in Teams or Outlook.</span></span><span class="pc"></span></summary><div class="pb"><pre>Rewrite my draft below so it is shorter, clearer, and polite but firm. Put the ask in the first sentence. Keep it under 100 words. Give me two versions: a formal email and a short Teams message.
+
+Draft: Hi team, thanks for round two of the creative, we have some feedback, overall it's moving in the right direction but leadership felt the headline on concept B is a little confusing and the call to action isn't clear, also we need the 15-second cut by the 20th instead of the 27th because of the event, can you let us know if that works or if we need to talk timeline.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-o10" data-o="35" data-tool="chatgpt" data-g="write" data-k="rewrite rhythm edit plain clear" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><span class="pt"><i class="tt" style="--t:var(--chatgpt)">ChatGPT Mil</i><b>Rewrite for easy reading</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When a draft is correct but hard to read.</span></span><span class="pc"></span></summary><div class="pb"><pre><span class="k">GOAL:</span> Rewrite my text so it reads easily, even out loud.
+
+<span class="k">INFO:</span> It's for [audience] and will appear in [where].
+[paste your text]
+
+<span class="k">SHAPE:</span>
+1. The main point in one sentence.
+2. A rewrite that mixes short, medium and longer sentences, so it has rhythm.
+3. Three bullets on what you changed.
+
+<span class="k">TRAPS:</span> Keep every fact and number. Same length or shorter. No new claims and no buzzwords.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 42.</p></div></details>
+    <details class="prow" id="pr-o11" data-o="36" data-tool="chatgpt" data-g="write" data-k="plain language editor ai words human tone" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 21-4.3-4.3a1 1 0 0 1 0-1.4l10-10a1 1 0 0 1 1.4 0l5.6 5.6a1 1 0 0 1 0 1.4L13 19"/><path d="M22 21H7M5 11l9 9"/></svg><span class="pt"><i class="tt" style="--t:var(--chatgpt)">ChatGPT Mil</i><b>Strip the AI-sounding words</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When a draft sounds like a chatbot wrote it.</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">Use it daily? Save it as a custom GPT.</p><pre><span class="k">GOAL:</span> Make this sound like a person wrote it.
+
+<span class="k">INFO:</span> Type: [email, post, memo]. Audience: [who]. Must keep: [facts, dates, program names].
+[paste your text]
+
+<span class="k">SHAPE:</span> The new version only, then one line listing the words you took out.
+
+<span class="k">TRAPS:</span> Write the way a busy colleague talks. Remove words people only see in AI text (delve, tapestry, robust, seamless, leverage, elevate), plus hype and padding. Use periods and commas, not dashes. Cut warm-up openers and wrap-up closers. Check with me before any fact changes.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 102.</p></div></details>
+    <details class="prow" id="pr-a6" data-o="47" data-tool="all" data-g="write" data-k="critique feedback judge review grade" style="--c:var(--gold)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20 9.5 4h1L16 20M6.5 14h7M18 7v6M15 10h6"/></svg><span class="pt"><i class="tt" style="--t:var(--gold)">All four</i><b>Grade it, don't rewrite it</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When you want an honest grade before it goes up the chain.</span></span><span class="pc"></span></summary><div class="pb"><pre><span class="k">GOAL:</span> Critique my draft. Don't rewrite it.
+
+<span class="k">INFO:</span> It's a [creative brief, email, talking points] for [audience]. It needs to get them to [action].
+[paste your draft]
+
+<span class="k">SHAPE:</span>
+1. Will it work? Yes, partly or no, in one line.
+2. A letter grade for each section, with the reason.
+3. The three lines doing the least work, quoted, with what's wrong with each.
+4. The spot where a busy reader gives up.
+5. The one thing to add.
+
+<span class="k">TRAPS:</span> Be direct and skip the praise. You're the grader, not the editor: change no words.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 56.</p></div></details>
+    <details class="prow" id="pr-o2" data-o="27" data-tool="chatgpt" data-g="write" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M12 7v4M8 16h.01M16 16h.01"/><circle cx="12" cy="5" r="2"/></svg><span class="pt"><i class="tt" style="--t:var(--chatgpt)">ChatGPT Mil &middot; Custom GPT</i><b>Custom GPT: a brand-voice checker</b><span>Paste into the custom GPT&rsquo;s instructions. Add your unclassified style guide as a file.</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">Keep it on &ldquo;Only me&rdquo; until you&rsquo;ve removed anything not everyone should see.</p><pre>You check draft copy for a marketing office. Compare each draft against the attached, unclassified brand and writing guidelines, and say which guideline each comment comes from. Reply with a one-line verdict, then up to five fixes (tone, reading level, clarity of the call to action, inclusive language), then a revised version. If the guidelines don't cover something, say so and don't guess. Never store or repeat names or personal information.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-k6" data-o="16" data-tool="grok" data-g="write" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg><span class="pt"><i class="tt" style="--t:var(--grok)">Grok &middot; Skill</i><b>Teach it your format once</b><span>Skill creator. Attach one good, unclassified example first.</span></span><span class="pc"></span></summary><div class="pb"><pre>Help me build a skill called "Our Brief Format." Use the attached example as the template: copy its headings, order, length and tone exactly. When I give it rough notes, it fills in that format, keeps every fact from my notes, marks anything missing as TBD, and adds nothing I didn't provide. Ask me any questions you need before you build it.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-o3" data-o="28" data-tool="chatgpt" data-g="write" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="pt"><i class="tt" style="--t:var(--chatgpt)">ChatGPT Mil</i><b>Talking points and tough questions</b><span>For a public panel, career fair or industry day.</span></span><span class="pc"></span></summary><div class="pb"><pre>I'm speaking for five minutes on a public industry panel about reaching young audiences. Write five talking points in plain English, each under 25 words. Then list the eight toughest questions the audience might ask, with a short, honest answer to each. Mark anything I should confirm with public affairs before I say it.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-o12" data-o="37" data-tool="chatgpt" data-g="write" data-k="speech talk presentation ted briefing training" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10a7 7 0 0 1-14 0M12 17v5"/></svg><span class="pt"><i class="tt" style="--t:var(--chatgpt)">ChatGPT Mil</i><b>A short talk for a briefing or training</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When you have five to ten minutes in front of a room.</span></span><span class="pc"></span></summary><div class="pb"><pre><span class="k">GOAL:</span> Structure a [5]-minute talk for [event, for example: our quarterly training day] on [topic].
+
+<span class="k">INFO:</span> Audience: [who, and what they already know]. What I want them to do afterward: [one action].
+
+<span class="k">SHAPE:</span> A one-page run sheet, not a script:
+- The single takeaway, in one sentence.
+- Three ways to open, so I can pick one.
+- Three points, each paired with an example from our work.
+- One picture or prop that makes the point stick.
+- The ask I end on.
+- Minutes for each part.
+
+<span class="k">TRAPS:</span> Plain English. No made-up statistics or quotes: write [find a source] instead.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 51.</p></div></details>
+    <details class="prow" id="pr-o16" data-o="41" data-tool="chatgpt" data-g="write" data-k="translate translation spanish localize" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 8 6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"/></svg><span class="pt"><i class="tt" style="--t:var(--chatgpt)">ChatGPT Mil</i><b>A Spanish version of your copy</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When event copy needs to reach Spanish-speaking families.</span></span><span class="pc"></span></summary><div class="pb"><pre><span class="k">GOAL:</span> A Spanish version of my copy that reads as if it were written in Spanish.
+
+<span class="k">INFO:</span> Audience: [for example: Spanish-speaking parents of high-school seniors in the U.S.]. Where it runs: [flyer, post, email].
+[paste the English text]
+
+<span class="k">SHAPE:</span> The Spanish text, then a short table of places where you changed the wording instead of translating word for word, and why.
+
+<span class="k">TRAPS:</span> Keep every fact, date and number. Use neutral Spanish for a U.S. audience unless I say otherwise. Flag any idiom that doesn't carry over. A native speaker checks it before it goes out.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 52.</p></div></details>
+    <details class="prow" id="pr-g4" data-o="7" data-tool="gemini" data-g="write" style="--c:var(--gemini)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><span class="pt"><i class="tt" style="--t:var(--gemini)">Gemini</i><b>Event notes to an after-action review</b><span>Upload your notes. A photo of handwritten notes works too.</span></span><span class="pc"></span></summary><div class="pb"><pre>Turn the attached event notes into an after-action review I can download as a Word document. Use these headings: event and purpose, what happened, sustain (three things), improve (three things), metrics (leads, conversations, cost) and recommendations for next time, each with an owner by role. Use only what's in my notes, mark missing details as TBD, and leave out names and personal information.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-a10" data-o="51" data-tool="all" data-g="think" data-k="red team blind spots critique risk" style="--c:var(--gold)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><span class="pt"><i class="tt" style="--t:var(--gold)">All four</i><b>Red-team my plan</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>Before you brief a plan, let it get attacked.</span></span><span class="pc"></span></summary><div class="pb"><pre><span class="k">GOAL:</span> Red-team my plan before I brief it.
+
+<span class="k">INFO:</span>
+[paste the plan or a summary]. Who decides: [role]. What I'm already worried about: [optional].
+
+<span class="k">SHAPE:</span>
+1. The three weakest points, ranked by how much damage they could do.
+2. What I'm underestimating or avoiding.
+3. The two questions a skeptical leader will ask, and what a good answer needs.
+4. What to fix first.
+
+<span class="k">TRAPS:</span> Be blunt and specific, with no praise. Attack the plan, not the people.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 86.</p></div></details>
+    <details class="prow" id="pr-a8" data-o="49" data-tool="all" data-g="think" data-k="pareto 80/20 priorities focus" style="--c:var(--gold)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><span class="pt"><i class="tt" style="--t:var(--gold)">All four</i><b>The few actions that matter (80/20)</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When the to-do list is longer than the week.</span></span><span class="pc"></span></summary><div class="pb"><pre><span class="k">GOAL:</span> Find the 20 percent of actions that will get 80 percent of [goal, for example: doubling sign-ups from our event booths next quarter].
+
+<span class="k">INFO:</span> Why it matters: [one line]. Limits: [people, budget, time]. What we do now: [list].
+
+<span class="k">SHAPE:</span> A table of 10 to 15 possible actions, each scored 1 to 5 for impact and 1 to 5 for effort, sorted by impact for the effort.
+Mark the top three. For each one, say why it outweighs the rest and what I do first, this week.
+List what we should stop doing to make room.
+
+<span class="k">TRAPS:</span> No generic tips. Where a score is a guess, say what data would firm it up.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 65.</p></div></details>
+    <details class="prow" id="pr-a7" data-o="48" data-tool="all" data-g="think" data-k="swot strengths weaknesses opportunities threats" style="--c:var(--gold)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span class="pt"><i class="tt" style="--t:var(--gold)">All four</i><b>Strengths and gaps (SWOT)</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When you need strengths, gaps, risks and openings on one page.</span></span><span class="pc"></span></summary><div class="pb"><pre><span class="k">GOAL:</span> A SWOT for [program or campaign, for example: our notional campus-event program], ending in actions.
+
+<span class="k">INFO:</span> Interview me first, one question at a time: what we're known for; what slows us down; who else competes for our audience's attention; what's changing outside that we could use; what could hurt us in the next year.
+
+<span class="k">SHAPE:</span> Then a 2x2 SWOT table with three bullets per box, followed by five actions. Each action names the box it draws on, an owner by role and a date.
+
+<span class="k">TRAPS:</span> Use only my answers, and label anything you add as an assumption. No names.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 74.</p></div></details>
+    <details class="prow" id="pr-g6" data-o="9" data-tool="gemini" data-g="think" data-k="pestel environment scan political economic social technological legal" style="--c:var(--gemini)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg><span class="pt"><i class="tt" style="--t:var(--gemini)">Gemini &middot; Deep Research</i><b>Scan what's changing around a plan</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>Before a big plan, when you need the environment on one page.</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">Choose Deep Research, then paste this.</p><pre><span class="k">GOAL:</span> A PESTEL scan for [our campaign or program] over the next [12 to 18] months.
+
+<span class="k">INFO:</span> What we do: [two lines]. Audience: [who]. Search recent public sources.
+
+<span class="k">SHAPE:</span>
+Six short sections (Political, Economic, Social, Technological, Environmental, Legal), each with the three factors that matter most, with source and date.
+Then a table: the top five factors, their likely effect on us, and what to do about each.
+End with the few actions that cover most of the risk.
+
+<span class="k">TRAPS:</span> Facts, not opinions, and cite everything. Note where sources disagree. No partisan language.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 72.</p></div></details>
+    <details class="prow" id="pr-a9" data-o="50" data-tool="all" data-g="think" data-k="scenario planning sensitivity analysis future risk" style="--c:var(--gold)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v12"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg><span class="pt"><i class="tt" style="--t:var(--gold)">All four</i><b>Three futures for a plan</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When a plan has to survive an uncertain year.</span></span><span class="pc"></span></summary><div class="pb"><pre><span class="k">GOAL:</span> Test my plan against three different futures.
+
+<span class="k">INFO:</span> The plan: [paste or summarize it]. Time frame: [for example: the next 12 months]. What worries us: [for example: a budget cut, a platform changing its rules, a shift in how young adults use video].
+
+<span class="k">SHAPE:</span>
+1. Three plausible scenarios: a short name, the drivers behind each, and early warning signs.
+2. How the plan does in each: holds, bends or breaks.
+3. The two assumptions the plan is most sensitive to, and what happens if each swings a lot.
+4. Three changes that help the plan hold in all three.
+
+<span class="k">TRAPS:</span> Plausible, not dramatic. Don't invent statistics; mark estimates as estimates.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 84.</p></div></details>
+    <details class="prow" id="pr-o5" data-o="30" data-tool="chatgpt" data-g="think" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg><span class="pt"><i class="tt" style="--t:var(--chatgpt)">ChatGPT Mil</i><b>Shape an idea into a one-page concept</b><span>Set reasoning to High first.</span></span><span class="pc"></span></summary><div class="pb"><pre>Help me turn a rough idea into a one-page concept for my boss. The idea: a shared, unclassified calendar so every regional team can see upcoming events, campaign launches and asset deadlines in one place. Use these headings: Problem, Proposed solution, Who uses it, What success looks like in 90 days, Risks, and Decisions needed. Ask me up to three questions first if something important is missing.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-a1" data-o="43" data-tool="all" data-g="think" style="--c:var(--gold)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg><span class="pt"><i class="tt" style="--t:var(--gold)">All four</i><b>Twenty ideas, ranked by how obvious they are</b><span>Works in any tool. Replace the brackets with your problem.</span></span><span class="pc"></span></summary><div class="pb"><pre>Give me 20 ideas for [your problem, for example: reaching young adults who have never considered public service]. For each idea, estimate the percent chance that a typical AI assistant would suggest it, from 0 to 100 percent. Sort the list from most likely to least likely. At least eight ideas should be under 10 percent. Then pick the two low-percentage ideas you think are most worth trying, and tell me in one sentence each why.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-g1" data-o="4" data-tool="gemini" data-g="data" data-k="try first" style="--c:var(--gemini)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span class="pt"><i class="tt" style="--t:var(--gemini)">Gemini</i><b>Audience research with sources</b><span>A public topic, so the search can help.</span></span><span class="demo keep">Try first</span><span class="pc"></span></summary><div class="pb"><pre>Find the most recent public research (from the last two years) on how 17- to 24-year-olds in the U.S. discover and trust information about careers: which platforms, which messengers, and what turns them off. Summarize it in six bullets I can put in a creative brief. Give the source and date for each bullet, and tell me which points you could not confirm.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-k12" data-o="22" data-tool="grok" data-g="data" data-k="market research pain points frustrations audience" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="pt"><i class="tt" style="--t:var(--grok)">Grok &middot; Web on</i><b>Find your audience's pain points</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When you need to know what frustrates your audience.</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">Turn the Web switch on. Can Grok on genai.mil search posts on X? <span class="unk">? Not in the training I watched</span>, so this prompt uses web search.</p><pre><span class="k">GOAL:</span> The most common frustrations and unmet needs that [audience] have about [topic, for example: figuring out what to do after high school].
+
+<span class="k">INFO:</span> Search public forums, reviews, news and research from the last [12] months. Ignore ads.
+
+<span class="k">SHAPE:</span> Up to eight themes, ranked by how often they come up. For each: a one-line summary, how common it seems, two paraphrased examples, and sources with dates. End with three message ideas that answer the top themes.
+
+<span class="k">TRAPS:</span> Themes, not individuals: no account names, handles or quotes from people. Only themes backed by more than one source. Public sources only.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 108.</p></div></details>
+    <details class="prow" id="pr-k13" data-o="23" data-tool="grok" data-g="data" data-k="public opinion debate views sentiment" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="m5 7-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></svg><span class="pt"><i class="tt" style="--t:var(--grok)">Grok &middot; Web on</i><b>Where opinion splits</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When you need to know where people disagree before you message.</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">Turn the Web switch on. Can Grok on genai.mil search posts on X? <span class="unk">? Not in the training I watched</span>, so this prompt uses web search.</p><pre><span class="k">GOAL:</span> Map how people talk about [topic, for example: whether a gap year helps or hurts], and where views split.
+
+<span class="k">INFO:</span> Search public news, forums and research from the last [6] months.
+
+<span class="k">SHAPE:</span> A table with three columns (for, against, mixed): the main arguments, roughly how common each is, and sources with dates. Then what all sides agree on, and two message angles that respect both.
+
+<span class="k">TRAPS:</span> No political or policy topics. Themes, not individuals: no account names, handles or quotes from people. Neutral wording. Public sources only.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 109.</p></div></details>
+    <details class="prow" id="pr-k11" data-o="21" data-tool="grok" data-g="data" data-k="trend spotting news this week current" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg><span class="pt"><i class="tt" style="--t:var(--grok)">Grok &middot; Web on</i><b>What's new this week</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When you need what changed, not what's always true.</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">Turn the Web switch on. Want it every Monday? Use the <a href="#pr-k3">trade-press automation</a> instead.</p><pre><span class="k">GOAL:</span> What changed this week in [topic, for example: how 18- to 24-year-olds use short-form video].
+
+<span class="k">INFO:</span> Search news, trade press and research from the last seven days. Today is [date].
+
+<span class="k">SHAPE:</span> Up to eight items, newest first: a headline, two lines on what happened, source and date, and one line on why it matters to a marketing office.
+
+<span class="k">TRAPS:</span> Only items from the last seven days. Specific news, not evergreen advice. Nothing without a source.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 79.</p></div></details>
+    <details class="prow" id="pr-k4" data-o="14" data-tool="grok" data-g="data" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18M7 16v-4M12 16V8M17 16v-7"/></svg><span class="pt"><i class="tt" style="--t:var(--grok)">Grok &middot; Expert</i><b>Analyze a campaign spreadsheet</b><span>Switch to Expert mode and upload an unclassified Excel or CSV file. It may take a few minutes.</span></span><span class="pc"></span></summary><div class="pb"><pre>Analyze the attached campaign spreadsheet. Tell me in three sentences what it shows. Then list the three biggest trends or outliers with the numbers behind them, build one chart of the most important trend, and give me a cleaned-up Excel file to download. List any data problems you found, such as blanks or duplicates.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-k10" data-o="20" data-tool="grok" data-g="data" data-k="csv survey form responses analysis excel data" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg><span class="pt"><i class="tt" style="--t:var(--grok)">Grok &middot; Expert</i><b>Make sense of survey or form results</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When form or survey responses are piling up.</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">Switch to Expert mode and upload an unclassified CSV or Excel file.</p><pre><span class="k">GOAL:</span> Tell me what our [event survey or sign-up form] results show and what to do next.
+
+<span class="k">INFO:</span> Attached is an unclassified CSV of [what it is, how many responses, which dates]. We want to know: [your questions].
+
+<span class="k">SHAPE:</span>
+1. The dataset in three sentences: rows, columns, gaps.
+2. The five most important findings, each with the number behind it, and one chart.
+3. The top themes in the free-text answers, with counts.
+4. Two small tests we could run to check the findings.
+5. A cleaned Excel file to download.
+
+<span class="k">TRAPS:</span> Before you upload, delete names, emails, phone numbers and any free text that could identify a person. Flag data problems. Don't overstate small samples.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 57.</p></div></details>
+    <details class="prow" id="pr-g2" data-o="5" data-tool="gemini" data-g="data" style="--c:var(--gemini)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span class="pt"><i class="tt" style="--t:var(--gemini)">Gemini &middot; Deep Research</i><b>Compare monthly reports: what changed?</b><span>Choose Deep Research, attach several unclassified reports, then run this.</span></span><span class="pc"></span></summary><div class="pb"><pre>Read the attached monthly performance reports. In a table, show how leads, cost per lead and conversion rate changed month to month, and which channel drove each change. Cite the report and page for every number. End with three questions I should ask the analytics team before the next review.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-k5" data-o="15" data-tool="grok" data-g="data" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="m5 7-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></svg><span class="pt"><i class="tt" style="--t:var(--grok)">Grok &middot; Expert</i><b>Design an A/B test</b><span>Expert mode. Good for anyone who isn&rsquo;t an analyst.</span></span><span class="pc"></span></summary><div class="pb"><pre>Help me design an A/B test for a paid social ad. The notional goal is more sign-ups for information about part-time service. Give me: the hypothesis, two variants (what changes and what stays the same), the one metric that decides the winner, how long to run it and roughly how many people each variant needs, and what result would mean "no real difference." Explain it so someone who isn't an analyst can follow.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-g7" data-o="10" data-tool="gemini" data-g="learn" data-k="summarize summary read-ahead report long text" style="--c:var(--gemini)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg><span class="pt"><i class="tt" style="--t:var(--gemini)">Gemini</i><b>Summarize a long document</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When the read-ahead is 80 pages and the meeting is in an hour.</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">Attach the unclassified document. Gemini reads big files whole.</p><pre><span class="k">GOAL:</span> A summary of the attached [report] I can read in five minutes.
+
+<span class="k">INFO:</span> I'm reading it to [purpose, for example: prepare for the quarterly review].
+
+<span class="k">SHAPE:</span> One page. A three-sentence bottom line, then the five points that matter, each with its page number. Close with what it means for us and three questions to ask.
+
+<span class="k">TRAPS:</span> Only what's in the document. Mark your own inferences as inferences. Give page numbers.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 94.</p></div></details>
+    <details class="prow" id="pr-a11" data-o="52" data-tool="all" data-g="learn" data-k="learn topic 80/20 basics key ideas" style="--c:var(--gold)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg><span class="pt"><i class="tt" style="--t:var(--gold)">All four</i><b>Get smart fast (80/20 learning)</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When you need to sound sharp on a topic by Thursday.</span></span><span class="pc"></span></summary><div class="pb"><pre><span class="k">GOAL:</span> Get me up to speed on [topic, for example: how media mix modeling works].
+
+<span class="k">INFO:</span> My background: [one line]. Why I need it: [for example: I review an agency report next week].
+
+<span class="k">SHAPE:</span> The most important 20 percent of the topic as five to seven key ideas, each in two sentences with a marketing example. Then five terms I'll hear and three questions to ask an expert.
+
+<span class="k">TRAPS:</span> Plain English. If something is contested or changing fast, say so.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 97.</p></div></details>
+    <details class="prow" id="pr-o13" data-o="38" data-tool="chatgpt" data-g="learn" data-k="test yourself quiz questions learning check" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span class="pt"><i class="tt" style="--t:var(--chatgpt)">ChatGPT Mil</i><b>Quiz me on what I just read</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>Right after you read something you need to remember.</span></span><span class="pc"></span></summary><div class="pb"><pre><span class="k">GOAL:</span> Test me on [topic, or the text I paste].
+
+<span class="k">INFO:</span>
+[paste the reading, or name the topic]. My level: [new, or working knowledge].
+
+<span class="k">SHAPE:</span> Ask me ten questions one at a time, easy to hard, and wait for each answer. Tell me if I'm right, fill any gap in two sentences, then ask the next. At the end, list my three weakest areas.
+
+<span class="k">TRAPS:</span> If I gave you a text, ask only about what's in it. Don't give the answer before I try.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 101.</p></div></details>
+    <details class="prow" id="pr-o14" data-o="39" data-tool="chatgpt" data-g="learn" data-k="learn skill plan 30 days development" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><span class="pt"><i class="tt" style="--t:var(--chatgpt)">ChatGPT Mil</i><b>A 30-day skill plan</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When you want to be competent at something in a month.</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">Run it inside a Project so ChatGPT Mil remembers your progress.</p><pre><span class="k">GOAL:</span> In 30 days, at 30 minutes a day, get me to working level at [skill, for example: reading web analytics dashboards].
+
+<span class="k">INFO:</span> Where I'm starting: [one line]. The job I need it for: [for example: checking our agency's monthly report myself]. I learn best by [reading, doing, watching, a mix].
+
+<span class="k">SHAPE:</span> A table with a row for each day, grouped into four weekly themes. Columns: the task (done on my own work, not a textbook case), the time it takes, and a one-question self-check. Star the five days to keep if the month gets busy.
+
+<span class="k">TRAPS:</span> Three to five resources in total. Every task must be something I can finish and show; nothing vague like "read up on it."</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 99.</p></div></details>
+    <details class="prow" id="pr-k14" data-o="24" data-tool="grok" data-g="learn" data-k="course training class outline lesson teach" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span class="pt"><i class="tt" style="--t:var(--grok)">Grok &middot; Word + PowerPoint</i><b>A training outline for your team</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When you have to teach your team something next week.</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">Turn the Web switch on, and add the Word and PowerPoint skills.</p><pre><span class="k">GOAL:</span> A one-hour training on [topic, for example: writing a creative brief], as a Word document and a six-slide PowerPoint.
+
+<span class="k">INFO:</span> Audience: [team and level]. Time: [60] minutes. Search the web for public guidance from universities, professional associations and government sites.
+
+<span class="k">SHAPE:</span>
+Word document: learning objectives, a minute-by-minute plan, one hands-on exercise, a five-question check, and a source table (source, title, key point).
+Slides: one per block of the plan.
+
+<span class="k">TRAPS:</span> Public sources only, each linked. Half the time should be hands-on. No names; use notional examples.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 104.</p></div></details>
+    <details class="prow" id="pr-k7" data-o="17" data-tool="grok" data-g="learn" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg><span class="pt"><i class="tt" style="--t:var(--grok)">Grok</i><b>See why web search matters</b><span>Ask this twice: once with the Web switch off, then on. Compare.</span></span><span class="pc"></span></summary><div class="pb"><pre>What is today's date, who is the current President of the United States, and what is the most recent date your information covers?</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-a2" data-o="44" data-tool="all" data-g="learn" style="--c:var(--gold)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="18" rx="1"/></svg><span class="pt"><i class="tt" style="--t:var(--gold)">All four</i><b>Same prompt, side by side</b><span>Run this in each tool and compare the answers.</span></span><span class="pc"></span></summary><div class="pb"><pre>In 120 words or less, explain to a new staff officer what CUI is, what it is not, and one common mistake people make when handling it. End with one question I should ask my security manager.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-c1" data-o="0" data-tool="copilot" data-g="week" data-k="try first" style="--c:var(--copilot)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 2 2 4-4M3 7l2 2 4-4M13 6h8M13 12h8M13 18h8"/></svg><span class="pt"><i class="tt" style="--t:var(--copilot)">Copilot</i><b>Turn a meeting into taskers</b><span>Copilot tab in Teams, after a recorded meeting. Or paste your notes.</span></span><span class="demo keep">Try first</span><span class="pc"></span></summary><div class="pb"><pre>Recap the [meeting name] meeting for my director. Start with a three-sentence bottom line. Then give me: decisions made, a table of taskers (task, owner by role, due date) and open questions. Flag any tasker with no owner or no date. Keep it under 200 words.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-c4" data-o="3" data-tool="copilot" data-g="week" data-k="follow-up email meeting recap agency" style="--c:var(--copilot)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><span class="pt"><i class="tt" style="--t:var(--copilot)">Copilot</i><b>A meeting follow-up note</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>Right after the meeting, while it's fresh.</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">In Teams, open the recorded meeting and ask Copilot. Or paste your notes into Copilot in Outlook.</p><pre><span class="k">GOAL:</span> A follow-up email from the [meeting name] meeting with [for example: our agency team].
+
+<span class="k">INFO:</span> Use the meeting recap or my notes. What I need from them: [the ask, and by when].
+
+<span class="k">SHAPE:</span> Under 150 words: one line of thanks, three bullets on what we agreed, the ask with a date, and the next meeting. Then a shorter version for a Teams message.
+
+<span class="k">TRAPS:</span> Only what was said in the meeting; flag anything you're unsure of. Polite but firm. No commitments I didn't make.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 92.</p></div></details>
+    <details class="prow" id="pr-c3" data-o="2" data-tool="copilot" data-g="week" style="--c:var(--copilot)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span class="pt"><i class="tt" style="--t:var(--copilot)">Copilot</i><b>Catch up on a long email thread</b><span>In Outlook, open the thread, then ask Copilot.</span></span><span class="pc"></span></summary><div class="pb"><pre>Summarize this email thread in five bullets: what's been decided, what's still open, and what's being asked of me, and by when. Then draft a two-sentence reply that answers the ask.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-k3" data-o="13" data-tool="grok" data-g="week" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="pt"><i class="tt" style="--t:var(--grok)">Grok &middot; Automations</i><b>A weekly trade-press read-ahead</b><span>Open a project, choose Automations, and use this as the task.</span></span><span class="pc"></span></summary><div class="pb"><pre>Every Monday at 0700, search the web for public news and trade-press stories from the last seven days about recruitment marketing, advertising to Gen Z, and major changes on social media platforms. Write a one-page read-ahead: a two-sentence bottom line, then up to six bullets, each with its source and date, then one line on what this could mean for a marketing office like ours. Use public sources only.</pre><button class="copy" type="button">Copy prompt</button></div></details>
+    <details class="prow" id="pr-k15" data-o="25" data-tool="grok" data-g="week" data-k="weekly planner check-in goals schedule automation" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="pt"><i class="tt" style="--t:var(--grok)">Grok &middot; Automations</i><b>A Monday, Wednesday, Friday check-in</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>When you want something to keep your week on track.</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">Only two tools can check in on their own: Grok (Automations) and Gemini (the Schedule tab in Agent Designer). Can you pick the days? <span class="unk">? Not in the training I watched</span>. If not, set up three weekly automations.</p><pre><span class="k">GOAL:</span> Keep my week on track with three check-ins.
+
+<span class="k">INFO:</span> My role: [one line]. Standing events this week: [list].
+
+<span class="k">SHAPE:</span>
+Monday 0800: get this week's three priorities from me and name the first task for each.
+Wednesday 1200: show me the three priorities, ask which one is at risk, and help me unstick that one.
+Friday 1400: get a status for each (done, partly, not started), then write a five-line week in review: done, slipped, one lesson, and what carries over to Monday.
+
+<span class="k">TRAPS:</span> Keep each check-in under 100 words. Unclassified tasks only, and no names or personal information.</pre><button class="copy" type="button">Copy prompt</button><p class="src">Adapted from How to AI prompt 78.</p></div></details>
+  </div>
+  <p class="nores" id="nores" hidden>No prompt matches that. Try one short word, such as &ldquo;brief&rdquo; or &ldquo;email&rdquo;. <button type="button" class="linkbtn" id="pclear">Clear the search</button></p>
+  <p class="fw">Other prompt frameworks, such as RISE, CRAFT and TAP, are in the <a href="https://home.how-to-ai.co/c/prompt-library/chatgpt-gemini-claude-grok-prompts" rel="noopener">source library</a>. You don&rsquo;t need them: <a href="#gist">GIST</a> covers the same ground.</p>
+</div>
+</section>
+
+<div class="stats"><div class="wrap">
+  <div class="stat"><b>54</b><span>Prompts for our work</span></div>
+  <div class="stat"><b>8</b><span>Task groups</span></div>
+  <div class="stat"><b>4</b><span>AI tools on your computer</span></div>
+  <div class="stat"><b>8</b><span>Rules for better answers</span></div>
+</div></div>
+
 <!-- START -->
 <section class="sec" id="start">
 <div class="wrap">
-  <div class="sec-head"><span class="sec-n">00 / Start</span><h2>Where are you starting?</h2><p>Every level is the right level. Pick the one that sounds like you and follow the path.</p></div>
+  <div class="sec-head"><span class="sec-n">02 / Start</span><h2>Where are you starting?</h2><p>Every level is the right level. Pick the one that sounds like you and follow the path.</p></div>
   <div class="levels">
     <div class="lvl rv" style="--i:0">
       <span class="tag">Level 1</span><h3>New to this</h3>
@@ -408,7 +881,7 @@ footer b{color:var(--tan)}
       <ol>
         <li><a href="#where">Find the tools</a><span>Two places, one CAC sign-in.</span></li>
         <li><a href="#tools">Take the 3-question quiz</a><span>It picks a tool and a prompt for you.</span></li>
-        <li><a href="#prompts">Copy one prompt and run it</a><span>Then change one thing and run it again.</span></li>
+        <li><a href="#pr-a4" data-open>Run Ask &rarr; decide &rarr; do</a><span>The one most of us use daily. Then change one thing and run it again.</span></li>
       </ol>
       <span class="time">About 10 minutes</span>
     </div>
@@ -418,7 +891,7 @@ footer b{color:var(--tan)}
       <ol>
         <li><a href="#rules">Read my 8 rules</a><span>Small habits that fix most bad answers.</span></li>
         <li><a href="#gist">Learn the GIST</a><span>Goal, Info, Shape, Traps.</span></li>
-        <li><a href="#prompts">Try the four live-demo prompts</a><span>One per tool, built for our office.</span></li>
+        <li><a href="#prompts" data-q="try first">Try the four &ldquo;Try first&rdquo; prompts</a><span>One per tool, built for our office.</span></li>
       </ol>
       <span class="time">About 20 minutes</span>
     </div>
@@ -440,7 +913,7 @@ footer b{color:var(--tan)}
 <!-- TAKE -->
 <section class="sec" id="take">
 <div class="wrap">
-  <div class="sec-head"><span class="sec-n">01 / My take</span><h2>Seven ideas</h2><p>My opinion, one idea at a time. Each one is a sentence to remember, then the why.</p></div>
+  <div class="sec-head"><span class="sec-n">03 / My take</span><h2>Seven ideas</h2><p>My opinion, one idea at a time. Each one is a sentence to remember, then the why.</p></div>
   <div class="intro2">
     <div class="rv"><b>New things are a risk.</b>Changing how you work takes effort, and you don&rsquo;t know how it will turn out. Expect to try, adjust and try again.</div>
     <div class="rv" style="--i:1"><b>This is a starting point.</b>There are more AI tips out there than anyone can use. This page narrows it to the tools we can actually open.</div>
@@ -469,7 +942,7 @@ footer b{color:var(--tan)}
 <!-- RULES -->
 <section class="sec tan" id="rules">
 <div class="wrap">
-  <div class="sec-head"><span class="sec-n">02 / My rules</span><h2>Eight rules</h2><p>Short habits that get a better answer the first time.</p></div>
+  <div class="sec-head"><span class="sec-n">04 / My rules</span><h2>Eight rules</h2><p>Short habits that get a better answer the first time.</p></div>
   <ol class="rgrid">
     <li class="rcard rv" style="--i:0"><div class="top"><span class="rn">1</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><b>One goal per prompt</b><p>Give the goal and the context, then tell it to ask you questions before it starts.</p></li>
     <li class="rcard rv" style="--i:1"><div class="top"><span class="rn">2</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"/></svg></div><b>Say what &ldquo;done&rdquo; looks like</b><p>Length, format and audience. Otherwise it guesses.</p></li>
@@ -487,7 +960,7 @@ footer b{color:var(--tan)}
 <!-- TOOLS -->
 <section class="sec" id="tools">
 <div class="wrap">
-  <div class="sec-head"><span class="sec-n">03 / Pick a tool</span><h2>Pick your tool</h2><p>Four tools, each with a strength. Not sure? Let the quiz choose.</p></div>
+  <div class="sec-head"><span class="sec-n">05 / Pick a tool</span><h2>Pick your tool</h2><p>Four tools, each with a strength. Not sure? Let the quiz choose.</p></div>
   <div class="where2" id="where">
     <div class="rv"><span class="big">genai.mil</span><p>Sign in with your CAC on a government computer. Pick <b>Gemini</b>, <b>Grok</b> or <b>ChatGPT Mil</b>. Start with the Training tab.</p></div>
     <div class="rv" style="--i:1"><span class="big">Teams</span><p><b>Copilot</b> isn&rsquo;t on genai.mil. Click the Copilot tab on the far left of Teams. It&rsquo;s in Outlook too.</p></div>
@@ -526,86 +999,10 @@ footer b{color:var(--tan)}
 </div>
 </section>
 
-<!-- PROMPTS -->
-<section class="sec" id="prompts">
-<div class="wrap">
-  <div class="sec-head"><span class="sec-n">04 / Prompts</span><h2>Prompts for our work</h2><p>Written for a marketing office. Every detail is notional, so swap in your own unclassified facts, never names or PII.</p></div>
-  <div class="tabs" role="tablist" aria-label="Pick a tool">
-    <button role="tab" type="button" id="tab-copilot" aria-controls="p-copilot" aria-selected="true" style="--c:var(--copilot)"><svg class="logo" aria-hidden="true"><use href="#lg-copilot"/></svg>Copilot<span class="n">3</span></button>
-    <button role="tab" type="button" id="tab-gemini" aria-controls="p-gemini" aria-selected="false" tabindex="-1" style="--c:var(--gemini)"><svg class="logo" aria-hidden="true"><use href="#lg-gemini"/></svg>Gemini<span class="n">4</span></button>
-    <button role="tab" type="button" id="tab-grok" aria-controls="p-grok" aria-selected="false" tabindex="-1" style="--c:var(--grok)"><svg class="logo" aria-hidden="true"><use href="#lg-grok"/></svg>Grok<span class="n">7</span></button>
-    <button role="tab" type="button" id="tab-chatgpt" aria-controls="p-chatgpt" aria-selected="false" tabindex="-1" style="--c:var(--chatgpt)"><svg class="logo" aria-hidden="true"><use href="#lg-chatgpt"/></svg>ChatGPT Mil<span class="n">5</span></button>
-    <button role="tab" type="button" id="tab-all" aria-controls="p-all" aria-selected="false" tabindex="-1" style="--c:var(--gold)"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>All four<span class="n">2</span></button>
-  </div>
-
-  <div class="panel" role="tabpanel" id="p-copilot" aria-labelledby="tab-copilot">
-    <details class="prow" id="pr-c1" style="--c:var(--copilot)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 2 2 4-4M3 7l2 2 4-4M13 6h8M13 12h8M13 18h8"/></svg><span class="pt"><b>Turn a meeting into taskers</b><span>Copilot tab in Teams, after a recorded meeting. Or paste your notes.</span></span><span class="demo keep">Live demo</span><span class="pc"></span></summary><div class="pb"><pre>Recap the [meeting name] meeting for my director. Start with a three-sentence bottom line. Then give me: decisions made, a table of taskers (task, owner by role, due date) and open questions. Flag any tasker with no owner or no date. Keep it under 200 words.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-    <details class="prow" id="pr-c2" style="--c:var(--copilot)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="pt"><b>Tighten a note to an agency team</b><span>Paste your draft into Copilot in Teams or Outlook.</span></span><span class="pc"></span></summary><div class="pb"><pre>Rewrite my draft below so it is shorter, clearer, and polite but firm. Put the ask in the first sentence. Keep it under 100 words. Give me two versions: a formal email and a short Teams message.
-
-Draft: Hi team, thanks for round two of the creative, we have some feedback, overall it's moving in the right direction but leadership felt the headline on concept B is a little confusing and the call to action isn't clear, also we need the 15-second cut by the 20th instead of the 27th because of the event, can you let us know if that works or if we need to talk timeline.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-    <details class="prow" id="pr-c3" style="--c:var(--copilot)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span class="pt"><b>Catch up on a long email thread</b><span>In Outlook, open the thread, then ask Copilot.</span></span><span class="pc"></span></summary><div class="pb"><pre>Summarize this email thread in five bullets: what's been decided, what's still open, and what's being asked of me, and by when. Then draft a two-sentence reply that answers the ask.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-  </div>
-
-  <div class="panel" role="tabpanel" id="p-gemini" aria-labelledby="tab-gemini" hidden>
-    <details class="prow" id="pr-g1" style="--c:var(--gemini)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span class="pt"><b>Audience research with sources</b><span>A public topic, so the search can help.</span></span><span class="demo keep">Live demo</span><span class="pc"></span></summary><div class="pb"><pre>Find the most recent public research (from the last two years) on how 17- to 24-year-olds in the U.S. discover and trust information about careers: which platforms, which messengers, and what turns them off. Summarize it in six bullets I can put in a creative brief. Give the source and date for each bullet, and tell me which points you could not confirm.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-    <details class="prow" id="pr-g2" style="--c:var(--gemini)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span class="pt"><b>Compare monthly reports: what changed?</b><span>Choose Deep Research, attach several unclassified reports, then run this.</span></span><span class="pc"></span></summary><div class="pb"><pre>Read the attached monthly performance reports. In a table, show how leads, cost per lead and conversion rate changed month to month, and which channel drove each change. Cite the report and page for every number. End with three questions I should ask the analytics team before the next review.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-    <details class="prow" id="pr-g3" style="--c:var(--gemini)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M12 7v4M8 16h.01M16 16h.01"/><circle cx="12" cy="5" r="2"/></svg><span class="pt"><b>Build an agent: Creative Brief Builder</b><span>Paste into Agent Designer&rsquo;s description box. Test it in Preview before you share it.</span></span><span class="pc"></span></summary><div class="pb"><pre>Create an agent called "Creative Brief Builder." When I give it rough, unclassified notes about a marketing need, it writes a one-page creative brief with these headings: Objective, Audience, Key insight, Single-minded message, Proof points, Deliverables, Mandatories, Timeline, and How we'll measure it. It uses only what I provide, marks gaps as TBD, asks up to three questions when the objective or audience is unclear, and never includes names or personal information.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-    <details class="prow" id="pr-g4" style="--c:var(--gemini)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><span class="pt"><b>Event notes to an after-action review</b><span>Upload your notes. A photo of handwritten notes works too.</span></span><span class="pc"></span></summary><div class="pb"><pre>Turn the attached event notes into an after-action review I can download as a Word document. Use these headings: event and purpose, what happened, sustain (three things), improve (three things), metrics (leads, conversations, cost) and recommendations for next time, each with an owner by role. Use only what's in my notes, mark missing details as TBD, and leave out names and personal information.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-  </div>
-
-  <div class="panel" role="tabpanel" id="p-grok" aria-labelledby="tab-grok" hidden>
-    <details class="prow feat" id="pr-k1" style="--c:var(--gold)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span class="pt"><b>Build a full campaign-recap deck</b><span><span class="gistbadge" aria-label="GIST complete"><i>G</i><i>I</i><i>S</i><i>T</i></span>A finished 7-slide PowerPoint in a bold black-and-gold style.</span></span><span class="demo keep">Live demo</span><span class="pc"></span></summary><div class="pb">
-      <ol class="steps4">
-        <li><b>Step 1</b>Open Grok on genai.mil and start a new chat.</li>
-        <li><b>Step 2</b>Click + in the chat box and add the PowerPoint skill.</li>
-        <li><b>Step 3</b>Paste the prompt. Answer its questions.</li>
-        <li><b>Step 4</b>Download the file. Then refine it: &ldquo;Make slide 4 a bar chart.&rdquo;</li>
-      </ol>
-<pre><span class="k">GOAL:</span> Build a finished 7-slide PowerPoint deck I can brief from: a notional end-of-quarter recap of a national awareness campaign aimed at 17- to 24-year-olds.
-
-<span class="k">INFO:</span> The audience is senior leaders in a marketing office. It's a 10-minute brief that ends in a decision. Use only these notional numbers: impressions 48 million (goal 40 million); site visits 1.2 million; leads 18,400 (goal 20,000); cost per lead $62 (goal $55); best channel: short-form video; weakest channel: display ads.
-
-<span class="k">SHAPE:</span>
-Slide 1: title and a one-sentence bottom line.
-Slide 2: bottom line up front: three results and the one decision needed.
-Slide 3: results against goals, as a table marked green or red.
-Slide 4: what worked: the top three channels, ranked, with one chart.
-Slide 5: what didn't work and why, in three bullets.
-Slide 6: next quarter: three recommendations, each with its cost and risk.
-Slide 7: decisions needed.
-Add speaker notes of under 60 words to every slide.
-Style: bold and high-contrast. Black (#121011) backgrounds, gold (#FFCC01) headlines and accents, tan (#D6CEB5) secondary text, white body text. Heavy condensed all-caps headlines, one big number per slide where it fits, plenty of empty space, simple line icons. Put a gray box labeled PHOTO wherever a photo would go.
-
-<span class="k">TRAPS:</span> No Army logos, seals, emblems or slogans. No real names, PII or non-public data. Don't invent numbers: if something is missing, write [TBD] and list it at the end. No more than four bullets a slide, no bullet longer than 12 words, and no jargon.
-
-Before you build, ask me up to three questions if anything is unclear. Then build the .pptx file for me to download.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-    <details class="prow" id="pr-k2" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 2 2 4-4M3 7l2 2 4-4M13 6h8M13 12h8M13 18h8"/></svg><span class="pt"><b>Build a GIST Check skill</b><span>Turn on Skill creator and paste this. Then end any prompt with &ldquo;GIST check.&rdquo;</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">In ChatGPT Mil, you can paste this into Custom instructions instead.</p><pre>Help me build a skill called "GIST Check." Use it whenever my prompt includes the words "GIST check." Before doing any work, check my prompt for four parts: Goal (what exactly I want done), Info (the background, including who it's for), Shape (the format and length, such as one page, a table or five slides) and Traps (what to avoid). Reply first with a short table that lists each part as Clear or Missing, with one line on what's missing, such as "no audience" or "no length." Then ask me up to three questions to fill the gaps, and show a better version of my prompt with the gaps marked [like this]. Don't start the task until I answer or say "go." If all four parts are clear, say "GIST complete" and do the task. Ask me any questions you need before you build it.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-    <details class="prow" id="pr-k3" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="pt"><b>A weekly trade-press read-ahead</b><span>Open a project, choose Automations, and use this as the task.</span></span><span class="pc"></span></summary><div class="pb"><pre>Every Monday at 0700, search the web for public news and trade-press stories from the last seven days about recruitment marketing, advertising to Gen Z, and major changes on social media platforms. Write a one-page read-ahead: a two-sentence bottom line, then up to six bullets, each with its source and date, then one line on what this could mean for a marketing office like ours. Use public sources only.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-    <details class="prow" id="pr-k4" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18M7 16v-4M12 16V8M17 16v-7"/></svg><span class="pt"><b>Analyze a campaign spreadsheet</b><span>Switch to Expert mode and upload an unclassified Excel or CSV file. It may take a few minutes.</span></span><span class="pc"></span></summary><div class="pb"><pre>Analyze the attached campaign spreadsheet. Tell me in three sentences what it shows. Then list the three biggest trends or outliers with the numbers behind them, build one chart of the most important trend, and give me a cleaned-up Excel file to download. List any data problems you found, such as blanks or duplicates.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-    <details class="prow" id="pr-k5" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="m5 7-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></svg><span class="pt"><b>Design an A/B test</b><span>Expert mode. Good for anyone who isn&rsquo;t an analyst.</span></span><span class="pc"></span></summary><div class="pb"><pre>Help me design an A/B test for a paid social ad. The notional goal is more sign-ups for information about part-time service. Give me: the hypothesis, two variants (what changes and what stays the same), the one metric that decides the winner, how long to run it and roughly how many people each variant needs, and what result would mean "no real difference." Explain it so someone who isn't an analyst can follow.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-    <details class="prow" id="pr-k6" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg><span class="pt"><b>Teach it your format once</b><span>Skill creator. Attach one good, unclassified example first.</span></span><span class="pc"></span></summary><div class="pb"><pre>Help me build a skill called "Our Brief Format." Use the attached example as the template: copy its headings, order, length and tone exactly. When I give it rough notes, it fills in that format, keeps every fact from my notes, marks anything missing as TBD, and adds nothing I didn't provide. Ask me any questions you need before you build it.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-    <details class="prow" id="pr-k7" style="--c:var(--grok)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg><span class="pt"><b>See why web search matters</b><span>Ask this twice: once with the Web switch off, then on. Compare.</span></span><span class="pc"></span></summary><div class="pb"><pre>What is today's date, who is the current President of the United States, and what is the most recent date your information covers?</pre><button class="copy" type="button">Copy prompt</button></div></details>
-  </div>
-
-  <div class="panel" role="tabpanel" id="p-chatgpt" aria-labelledby="tab-chatgpt" hidden>
-    <details class="prow" id="pr-o1" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg><span class="pt"><b>Social posts in three lengths</b><span>Start a new chat. Set reasoning to Medium.</span></span><span class="demo keep">Live demo</span><span class="pc"></span></summary><div class="pb"><pre>Write social posts announcing a notional career-day booth at a college football game this Saturday, 10 a.m. to 2 p.m., at Gate C. The audience is students aged 18 to 24 and their parents. Give me three versions: a 40-word post, a 120-word post and a three-line caption for a short video. Each needs a clear call to action and suggested alt text for the image. Keep it plain and upbeat, with no slang that will age badly. Flag any claim I should verify before posting.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-    <details class="prow" id="pr-o2" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M12 7v4M8 16h.01M16 16h.01"/><circle cx="12" cy="5" r="2"/></svg><span class="pt"><b>Custom GPT: a brand-voice checker</b><span>Paste into the custom GPT&rsquo;s instructions. Add your unclassified style guide as a file.</span></span><span class="pc"></span></summary><div class="pb"><p class="ptip">Keep it on &ldquo;Only me&rdquo; until you&rsquo;ve removed anything not everyone should see.</p><pre>You check draft copy for a marketing office. Compare each draft against the attached, unclassified brand and writing guidelines, and say which guideline each comment comes from. Reply with a one-line verdict, then up to five fixes (tone, reading level, clarity of the call to action, inclusive language), then a revised version. If the guidelines don't cover something, say so and don't guess. Never store or repeat names or personal information.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-    <details class="prow" id="pr-o3" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="pt"><b>Talking points and tough questions</b><span>For a public panel, career fair or industry day.</span></span><span class="pc"></span></summary><div class="pb"><pre>I'm speaking for five minutes on a public industry panel about reaching young audiences. Write five talking points in plain English, each under 25 words. Then list the eight toughest questions the audience might ask, with a short, honest answer to each. Mark anything I should confirm with public affairs before I say it.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-    <details class="prow" id="pr-o4" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg><span class="pt"><b>Set your custom instructions once</b><span>Settings, then Personalization, then Custom instructions.</span></span><span class="pc"></span></summary><div class="pb"><pre>I work in a marketing office. Write in plain English for busy leaders. Always start with a one- or two-sentence bottom line. Use short numbered points instead of long paragraphs. When I ask for copy, give me two options. If you're not sure about something, tell me instead of guessing, and list what I should check.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-    <details class="prow" id="pr-o5" style="--c:var(--chatgpt)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg><span class="pt"><b>Shape an idea into a one-page concept</b><span>Set reasoning to High first.</span></span><span class="pc"></span></summary><div class="pb"><pre>Help me turn a rough idea into a one-page concept for my boss. The idea: a shared, unclassified calendar so every regional team can see upcoming events, campaign launches and asset deadlines in one place. Use these headings: Problem, Proposed solution, Who uses it, What success looks like in 90 days, Risks, and Decisions needed. Ask me up to three questions first if something important is missing.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-  </div>
-
-  <div class="panel" role="tabpanel" id="p-all" aria-labelledby="tab-all" hidden>
-    <details class="prow" id="pr-a1" style="--c:var(--gold)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg><span class="pt"><b>Twenty ideas, ranked by how obvious they are</b><span>Works in any tool. Replace the brackets with your problem.</span></span><span class="pc"></span></summary><div class="pb"><pre>Give me 20 ideas for [your problem, for example: reaching young adults who have never considered public service]. For each idea, estimate the percent chance that a typical AI assistant would suggest it, from 0 to 100 percent. Sort the list from most likely to least likely. At least eight ideas should be under 10 percent. Then pick the two low-percentage ideas you think are most worth trying, and tell me in one sentence each why.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-    <details class="prow" id="pr-a2" style="--c:var(--gold)"><summary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="18" rx="1"/></svg><span class="pt"><b>Same prompt, side by side</b><span>Run this in each tool and compare the answers.</span></span><span class="pc"></span></summary><div class="pb"><pre>In 120 words or less, explain to a new staff officer what CUI is, what it is not, and one common mistake people make when handling it. End with one question I should ask my security manager.</pre><button class="copy" type="button">Copy prompt</button></div></details>
-  </div>
-</div>
-</section>
-
 <!-- COMPARE -->
 <section class="sec" id="compare">
 <div class="wrap">
-  <div class="sec-head"><span class="sec-n">05 / Compare</span><h2>Side by side</h2><p>The features that matter most first. Open the full chart for every detail.</p></div>
+  <div class="sec-head"><span class="sec-n">06 / Compare</span><h2>Side by side</h2><p>The features that matter most first. Open the full chart for every detail.</p></div>
   <div class="tablewrap" id="ftable">
   <table>
     <thead><tr><th>Feature</th><th><svg class="logo" aria-hidden="true"><use href="#lg-copilot"/></svg>Copilot</th><th><svg class="logo" aria-hidden="true"><use href="#lg-chatgpt"/></svg>ChatGPT Mil</th><th><svg class="logo" aria-hidden="true"><use href="#lg-gemini"/></svg>Gemini</th><th><svg class="logo" aria-hidden="true"><use href="#lg-grok"/></svg>Grok</th></tr></thead>
@@ -620,7 +1017,7 @@ Before you build, ask me up to three questions if anything is unclear. Then buil
 <!-- MORE -->
 <section class="sec" id="more">
 <div class="wrap">
-  <div class="sec-head"><span class="sec-n">06 / Learn more</span><h2>Keep going</h2><p>Free training on genai.mil, and the words you&rsquo;ll hear.</p></div>
+  <div class="sec-head"><span class="sec-n">07 / Learn more</span><h2>Keep going</h2><p>Free training on genai.mil, and the words you&rsquo;ll hear.</p></div>
   <div class="more">
     <div><h3>Free training</h3><ol class="path"><li style="--i:0"><span class="step-n">Step 1</span><b>Sign in</b><span>Open genai.mil and sign in with your CAC.</span></li><li style="--i:1"><span class="step-n">Step 2</span><b>Click Training</b><span>Pick a tool for self-paced courses, videos and quick references.</span></li><li style="--i:2"><span class="step-n">Step 3</span><b>Open the help pages</b><span>help.openai.mil for ChatGPT Mil, docs.grok.genai.mil for Grok. Government network only.</span></li><li style="--i:3"><span class="step-n">Step 4</span><b>Click Events</b><span>Register for a live workshop or office hours.</span></li><li style="--i:4"><span class="step-n">Step 5</span><b>Explore</b><span>Spend ten minutes clicking around. Most of this page is there too.</span></li></ol></div>
     <div><h3>Words you&rsquo;ll hear</h3><dl class="terms"><div class="term"><dt>Prompt</dt><dd>What you type to the AI. Say who it's for, what you want and the format.</dd></div><div class="term"><dt>AI model</dt><dd>The engine behind the chat box. Gemini, GPT and Grok are models from three different companies.</dd></div><div class="term"><dt>Agent</dt><dd>An assistant that carries out several steps on its own, such as reading notes and drafting a summary.</dd></div><div class="term"><dt>Custom GPT</dt><dd>Your own version of ChatGPT, set up once with instructions and files for one job. Only ChatGPT Mil has these.</dd></div><div class="term"><dt>Skill</dt><dd>A saved recipe for one kind of job, such as &ldquo;make a PowerPoint,&rdquo; that the AI follows the same way every time.</dd></div><div class="term"><dt>Automation</dt><dd>A task the AI runs by itself on a schedule, such as every weekday at 0700.</dd></div><div class="term"><dt>Deep research</dt><dd>The AI spends several minutes searching and reading, then writes a long report with citations.</dd></div><div class="term"><dt>Hallucination</dt><dd>When the AI states something false with confidence. That's why a person checks every output.</dd></div><div class="term"><dt>Training cutoff</dt><dd>The date the AI stopped learning. Turn on web search for anything newer.</dd></div><div class="term"><dt>CUI and IL5</dt><dd>CUI is sensitive but unclassified information. IL5 is the security level genai.mil is approved for: it covers CUI, not classified.</dd></div></dl>
@@ -647,8 +1044,8 @@ Before you build, ask me up to three questions if anything is unclear. Then buil
 </main>
 
 <footer><div class="wrap">
-  <p><b>Open-source summary as of 11 November 2026. Unofficial.</b> Check current local IT/G6 policy and official GenAI.mil guidance before use. Not affiliated with or endorsed by DoD or any vendor.</p>
-  <p>The genai.mil front page, training, and the Copilot, ChatGPT Mil and Grok details come from a hands-on walkthrough on 10 Nov 2026. More ChatGPT Mil details come from a ChatGPT Mil training session in Nov 2026 and OpenAI&rsquo;s description of ChatGPT on GenAI.mil. Gemini details come from a GenAI.mil Gemini training video viewed Nov 2026; image generation was seen on screen. More Grok details come from a Grok on GenAI.mil training video viewed Nov 2026. Copilot capabilities reflect the author&rsquo;s own use in Nov 2026; Word, PowerPoint and Excel features depend on each office&rsquo;s license. Other sources: DoD CTO office, GenAI.mil launch (9 Dec 2025) and Agent Designer launch (Mar 2026); DefenseScoop, 10 Mar and 31 Aug 2026; Military Times, 31 Aug 2026; ExecutiveGov, 1 Sep 2026; Defense One, 23 Sep 2026; Microsoft Tech Community (2025). Prompt scenarios are notional and draw on public descriptions of Army marketing work on army.mil.</p>
+  <p><b>Open-source summary as of 16 November 2026. Unofficial.</b> Check current local IT/G6 policy and official GenAI.mil guidance before use. Not affiliated with or endorsed by DoD or any vendor.</p>
+  <p>The genai.mil front page, training, and the Copilot, ChatGPT Mil and Grok details come from a hands-on walkthrough on 10 Nov 2026. More ChatGPT Mil details come from a ChatGPT Mil training session in Nov 2026 and OpenAI&rsquo;s description of ChatGPT on GenAI.mil. Gemini details come from a GenAI.mil Gemini training video viewed Nov 2026; image generation was seen on screen. More Grok details come from a Grok on GenAI.mil training video viewed Nov 2026. Copilot capabilities reflect the author&rsquo;s own use in Nov 2026; Word, PowerPoint and Excel features depend on each office&rsquo;s license. Other sources: DoD CTO office, GenAI.mil launch (9 Dec 2025) and Agent Designer launch (Mar 2026); DefenseScoop, 10 Mar and 31 Aug 2026; Military Times, 31 Aug 2026; ExecutiveGov, 1 Sep 2026; Defense One, 23 Sep 2026; Microsoft Tech Community (2025). Prompt scenarios are notional and draw on public descriptions of Army marketing work on army.mil. Many prompts are adapted from Ruben Hassid&rsquo;s How to AI prompt library (<a href="https://home.how-to-ai.co/c/prompt-library/chatgpt-gemini-claude-grok-prompts" rel="noopener">home.how-to-ai.co</a>, viewed 16 Nov 2026), rewritten around GIST with notional scenarios.</p>
 </div></footer>
 
 <script>
@@ -678,18 +1075,50 @@ Before you build, ask me up to three questions if anything is unclear. Then buil
   all.addEventListener('click',function(){while(shown<builds.length){reveal(shown);shown++}upd();});
   upd();
 
-  // tabs
-  var tabs=$$('[role=tab]');
-  function sel(t,focus){tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;$('#'+x.getAttribute('aria-controls')).hidden=!on});if(focus)t.focus();}
+  // prompt library: view by task or tool, search, open by id
+  var list=$('#plist'), rows=$$('details.prow',list), chips=$$('.chip'), tabs=$$('[role=tab]'),
+      q=$('#pq'), st=$('#pstatus'), nores=$('#nores'), lib=$('#prompts'),
+      GN={daily:'Daily drivers',plan:'Plan a campaign',content:'Make content',write:'Write and edit',think:'Think it through',data:'Data and research',learn:'Learn and teach',week:'Run the week',all:'All prompts'},
+      TN={copilot:'Copilot',gemini:'Gemini',grok:'Grok',chatgpt:'ChatGPT Mil',all:'All four'},
+      S={view:'task',g:'daily',t:'copilot',q:''};
+  var taskOrder=rows.slice(), toolOrder=rows.slice().sort(function(a,b){return a.getAttribute('data-o')-b.getAttribute('data-o')});
+  rows.forEach(function(r){r._h=(r.textContent+' '+(r.getAttribute('data-k')||'')+' '+GN[r.getAttribute('data-g')]+' '+TN[r.getAttribute('data-tool')]).toLowerCase().replace(/\s+/g,' ')});
+  function apply(){
+    var terms=S.q.toLowerCase().split(/\s+/).filter(Boolean), n=0;
+    rows.forEach(function(r){
+      var on = terms.length ? terms.every(function(t){return r._h.indexOf(t)>-1})
+             : S.view==='task' ? (S.g==='all'||r.getAttribute('data-g')===S.g) : r.getAttribute('data-tool')===S.t;
+      r.hidden=!on; if(on)n++; else r.open=false;
+    });
+    chips.forEach(function(c){c.setAttribute('aria-pressed',c.getAttribute('data-g')===S.g)});
+    tabs.forEach(function(x){var on=x.getAttribute('data-t')===S.t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1});
+    $('#chips').hidden=S.view!=='task'; $('#tooltabs').hidden=S.view!=='tool';
+    $$('.viewsw button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-view')===S.view)});
+    lib.classList.toggle('searching',!!terms.length);
+    nores.hidden=n>0;
+    st.innerHTML = terms.length ? '<b>'+n+'</b> '+(n===1?'prompt matches':'prompts match')+' &ldquo;'+esc(S.q.trim())+'&rdquo; across all tasks'
+      : S.view==='task' ? GN[S.g]+': <b>'+n+'</b> prompts' : TN[S.t]+': <b>'+n+'</b> prompts';
+  }
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function setView(v){ if(S.view===v) return; S.view=v; (v==='task'?taskOrder:toolOrder).forEach(function(r){list.appendChild(r)}); apply(); }
+  chips.forEach(function(c){c.addEventListener('click',function(){S.g=c.getAttribute('data-g');S.q='';q.value='';apply()})});
+  $$('.viewsw button').forEach(function(b){b.addEventListener('click',function(){S.q='';q.value='';setView(b.getAttribute('data-view'))})});
+  function sel(t,focus){S.t=t.getAttribute('data-t');S.q='';q.value='';apply();if(focus)t.focus();}
   tabs.forEach(function(t,i){t.addEventListener('click',function(){sel(t)});
     t.addEventListener('keydown',function(e){var k=e.key, j=k==='ArrowRight'?i+1:k==='ArrowLeft'?i-1:-9; if(j!==-9){e.preventDefault();sel(tabs[(j+tabs.length)%tabs.length],true)}})});
+  q.addEventListener('input',function(){S.q=q.value;apply()});
+  q.addEventListener('keydown',function(e){if(e.key==='Escape'){q.value='';S.q='';apply()}});
+  $('#pclear').addEventListener('click',function(){q.value='';S.q='';apply();q.focus()});
+  apply();
 
-  // open a prompt by id: switch tab, open, scroll
+  // open a prompt by id: show its group (or tool), open, scroll
   function openPrompt(id){
     var el=$('#'+id); if(!el) return false;
     if(id==='gist'){ $('.stack-all').click(); el.scrollIntoView({behavior:'smooth'}); return true; }
     if(!el.matches('details.prow')) return false;
-    var p=el.closest('[role=tabpanel]'); sel($('[aria-controls="'+p.id+'"]'));
+    S.q=''; q.value='';
+    if(S.view==='task') S.g=el.getAttribute('data-g'); else S.t=el.getAttribute('data-tool');
+    apply();
     el.open=true; setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'start'})},30); return true;
   }
   d.addEventListener('click',function(e){
@@ -697,13 +1126,16 @@ Before you build, ask me up to three questions if anything is unclear. Then buil
     var id=a.getAttribute('href').slice(1);
     if(id==='gist'){e.preventDefault();openPrompt('gist');history.replaceState(null,'','#gist');return;}
     if(id.indexOf('pr-')===0 && openPrompt(id)){e.preventDefault();history.replaceState(null,'','#'+id);}
+    var dq=a.getAttribute('data-q'); if(dq!==null){q.value=dq;S.q=dq;apply();}
+    if(a.hasAttribute('data-focus') && window.matchMedia('(hover:hover) and (pointer:fine)').matches){e.preventDefault();lib.scrollIntoView({behavior:'smooth'});setTimeout(function(){q.focus({preventScroll:true});var b=q.getBoundingClientRect();if(b.top<0||b.bottom>window.innerHeight)q.scrollIntoView({block:'center'});},450);}
     var tool=a.getAttribute('data-tool'); if(tool){var c=$('#pick-'+tool); if(c){c.classList.remove('flash');void c.offsetWidth;c.classList.add('flash')}}
   });
   if(location.hash.indexOf('#pr-')===0) openPrompt(location.hash.slice(1));
+  window.addEventListener('hashchange',function(){if(location.hash.indexOf('#pr-')===0) openPrompt(location.hash.slice(1));});
 
   // copy
   $$('.copy').forEach(function(b){b.addEventListener('click',function(){
-    var t=b.previousElementSibling.innerText;
+    var pre=b.previousElementSibling, t=pre.innerText||pre.textContent;
     function ok(){b.textContent='Copied ✓';b.classList.add('done');setTimeout(function(){b.textContent='Copy prompt';b.classList.remove('done')},1800)}
     if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(ok,fb)}else fb();
     function fb(){var ta=d.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';d.body.appendChild(ta);ta.select();try{d.execCommand('copy');ok()}catch(_){}d.body.removeChild(ta)}
@@ -716,9 +1148,9 @@ Before you build, ask me up to three questions if anything is unclear. Then buil
   // quiz
   var TOOLS={
     copilot:{n:'Copilot',c:'var(--copilot)',why:'Your material already lives in Teams and Outlook, and Copilot can read it there. Open the Copilot tab in Teams.',once:'pr-c1',build:'pr-c1',bwhy:' Copilot can’t save a reusable tool yet. For a weekly job, also look at a ChatGPT Mil custom GPT.'},
-    gemini:{n:'Gemini',c:'var(--gemini)',why:'Gemini handles big stacks of files and long research with sources. Open it on genai.mil.',once:'pr-g1',build:'pr-g3',bwhy:' Since it’s weekly, build an agent once and reuse it.'},
+    gemini:{n:'Gemini',c:'var(--gemini)',why:'Gemini handles big stacks of files and long research with sources. Open it on genai.mil.',once:'pr-g7',build:'pr-g3',bwhy:' Since it’s weekly, build an agent once and reuse it.'},
     grok:{n:'Grok',c:'var(--grok)',why:'Grok builds the real file: a deck, a document or a spreadsheet. Open it on genai.mil.',once:'pr-k1',build:'pr-k6',bwhy:' Since it’s weekly, teach it your format once as a skill.'},
-    chatgpt:{n:'ChatGPT Mil',c:'var(--chatgpt)',why:'ChatGPT Mil is the strongest writer of the four, and it can start from a blank page. Open it on genai.mil.',once:'pr-o1',build:'pr-o2',bwhy:' Since it’s weekly, save it as a custom GPT your team can share.'}
+    chatgpt:{n:'ChatGPT Mil',c:'var(--chatgpt)',why:'ChatGPT Mil is the strongest writer of the four, and it can start from a blank page. Open it on genai.mil.',once:'pr-a4',build:'pr-o2',bwhy:' Since it’s weekly, save it as a custom GPT your team can share.'}
   };
   var qs=$$('.q'), dots=$$('.dots i'), res=$('#res'), score, first, step;
   function reset(){score={copilot:0,gemini:0,grok:0,chatgpt:0};first=null;step=0;qs.forEach(function(q,i){q.classList.toggle('cur',i===0)});dots.forEach(function(x,i){x.classList.toggle('on',i===0)});res.classList.remove('cur');}
